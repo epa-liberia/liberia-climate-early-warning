@@ -101,8 +101,11 @@
 @media (prefers-color-scheme: dark) { .lm-info summary .lm-more { color: #8fb3ff; } }
 .lm-partners { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); }
 .lm-partners span { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 10px; font-size: var(--cds-font-size-caption); background: var(--color-panel); }
-.lm-foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); border-top: 3px solid var(--lr-blue); margin-top: 12px; padding-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-.lm-foot h4 { margin: 0 0 6px; font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg); }
+.lm-foot { font-size: 13px; color: var(--color-fg-muted); margin-top: 12px; display: grid; grid-template-columns: minmax(240px, 1.6fr) repeat(4, minmax(150px, 1fr)); gap: 28px 32px; }
+@media (max-width: 1100px) { .lm-foot { grid-template-columns: repeat(3, minmax(0, 1fr)); } .lm-foot .lm-foot-brand { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .lm-foot { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .lm-foot { grid-template-columns: 1fr; } }
+.lm-foot h4 { margin: 0 0 12px; font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg); }
 .lm-foot p { margin: 0; line-height: 1.6; }
 .lm a { color: var(--lr-blue); }
 @media (prefers-color-scheme: dark) { .lm a { color: #8fb3ff; } }
@@ -157,10 +160,14 @@
 .lm-foot h4 { color: #fff; }
 .lm-foot a { color: #fff; }
 .lm-foot .lm-foot-base { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.18); padding-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12px; }
-.lm-foot .lm-foot-credit { grid-column: 1 / -1; margin-top: -6px; font-size: 12px; color: rgba(255,255,255,.72); }
-.lm-foot .lm-foot-credit b { color: #fff; font-weight: var(--cds-font-weight-medium); }
-.lm-foot .lm-foot-brand { display: flex; gap: 10px; align-items: flex-start; }
-.lm-foot .lm-foot-brand img { width: 40px; background: #fff; border-radius: 8px; padding: 2px; }
+.lm-foot .lm-foot-brand img { width: 56px; background: #fff; border-radius: 10px; padding: 3px; display: block; margin-bottom: 12px; }
+.lm-foot .lm-foot-brand .lm-foot-name { text-transform: none; letter-spacing: 0; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
+.lm-foot .lm-foot-brand p { max-width: 36ch; }
+.lm-foot-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; line-height: 1.45; }
+.lm-foot-list a { color: #fff; text-decoration: none; }
+.lm-foot-list a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.lm-foot-plain, .lm-foot-plain li { color: rgba(255,255,255,.78); }
+.lm-foot .lm-foot-base b { color: #fff; font-weight: var(--cds-font-weight-medium); }
 
 .lm-cat-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
 .lm-cat-head .lm-btn { text-decoration: none; white-space: nowrap; }
@@ -643,12 +650,30 @@
   </section>
 
   <footer class="lm-foot">
-    <div class="lm-foot-brand"><img src="/_blob/4eb17e335402b27d0e7debfd176f5a11" alt="EPA Liberia logo"><div><h4>Environmental Protection Agency of Liberia</h4><p>Liberia El Niño Early Warning Platform: monitoring the 2026–27 El Niño and preparing for its hazards, county by county.</p></div></div>
-    <div><h4>Platform</h4><p><a href="#overview" data-goto="overview">Overview</a> · <a href="#elnino" data-goto="elnino">El Niño &amp; Climate</a> · <a href="#hazards" data-goto="hazards">Hazard Map</a> · <a href="#drought" data-goto="drought">Drought &amp; Crops</a> · <a href="#prepare" data-goto="prepare">Preparedness</a> · <a href="#bulletins" data-goto="bulletins">Bulletins</a> · <a href="#about" data-goto="about">About &amp; Data</a></p></div>
-    <div><h4>Collaborating institutions</h4><p>National Disaster Management Agency · Liberia Meteorological Service · Liberia Hydrological Service · Ministry of Agriculture · National Public Health Institute · LISGIS</p></div>
-    <div><h4>Contact</h4><p>Environmental Protection Agency of Liberia, Monrovia</p></div>
-    <div class="lm-foot-base"><span>© 2026 Environmental Protection Agency of Liberia. Levels shown are EPA working assessments, not official LiMet or NDMA warnings.</span><span>Data: NOAA · NASA · FAO · JRC Copernicus · WorldPop · Global Wind Atlas · LISGIS</span></div>
-    <div class="lm-foot-credit">Developed by <b>Berexford Saylee Jallah</b> · EPA Geospatial Information Services and Environmental Statistics Unit</div>
+    <div class="lm-foot-brand">
+      <img src="/_blob/4eb17e335402b27d0e7debfd176f5a11" alt="EPA Liberia logo">
+      <h4 class="lm-foot-name">Environmental Protection Agency of Liberia</h4>
+      <p>Liberia El Niño Early Warning Platform: monitoring the 2026–27 El Niño and preparing for its hazards, county by county.</p>
+    </div>
+    <div><h4>Platform</h4><ul class="lm-foot-list">
+      <li><a href="#overview" data-goto="overview">Overview</a></li><li><a href="#elnino" data-goto="elnino">El Niño &amp; Climate</a></li><li><a href="#hazards" data-goto="hazards">Hazard Map</a></li><li><a href="#drought" data-goto="drought">Drought &amp; Crops</a></li><li><a href="#prepare" data-goto="prepare">Preparedness</a></li><li><a href="#bulletins" data-goto="bulletins">Bulletins</a></li><li><a href="#about" data-goto="about">About &amp; Data</a></li>
+    </ul></div>
+    <div><h4>Collaborating institutions</h4><ul class="lm-foot-list lm-foot-plain">
+      <li>National Disaster Management Agency</li><li>Liberia Meteorological Service</li><li>Liberia Hydrological Service</li><li>Ministry of Agriculture</li><li>National Public Health Institute</li><li>LISGIS</li>
+    </ul></div>
+    <div><h4>Data</h4><ul class="lm-foot-list">
+      <li><a href="#about" data-goto="about">Sources and method notes</a></li>
+      <li><a href="https://github.com/epa-liberia/liberia-climate-early-warning/tree/main/docs/data" target="_blank" rel="noopener">Download all data ↗</a></li>
+      <li class="lm-foot-plain">NOAA · NASA · FAO · JRC Copernicus · WorldPop · Global Wind Atlas · LISGIS</li>
+      <li class="lm-foot-plain">Updates automatically: NASA and NOAA daily, FAO weekly</li>
+    </ul></div>
+    <div><h4>Contact</h4><ul class="lm-foot-list lm-foot-plain">
+      <li>Environmental Protection Agency of Liberia</li><li>Monrovia, Liberia</li>
+    </ul></div>
+    <div class="lm-foot-base">
+      <span>© 2026 Environmental Protection Agency of Liberia. Levels shown are EPA working assessments, not official LiMet or NDMA warnings.</span>
+      <span>Developed by <b>Berexford Saylee Jallah</b> · EPA Geospatial Information Services and Environmental Statistics Unit</span>
+    </div>
   </footer>
 </div>
 
