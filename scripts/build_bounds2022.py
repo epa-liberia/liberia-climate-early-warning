@@ -3,7 +3,8 @@
 Usage: python3 scripts/build_bounds2022.py SRC_DIR   (from the repository root)
 SRC_DIR holds LISGIS geo-counties-2022.geojson, geo-districts-2022.geojson and geo-clans-2022.geojson.
 Writes docs/data/counties.json, districts.json, clans.json (simplified for the web, lon/lat, wound for d3)
-and docs/data/district_pop.json (2022 census by district, from scripts/data/census2022_districts.csv).
+and docs/data/district_pop.json (2022 census by district: LISGIS table scripts/data/census2022_districts_lisgis.csv,
+checked against census2022_counties_lisgis.csv; census2022_districts.csv holds the figures read from the June 2023 report).
 Also writes docs/data/clan_pop.json from the census clan tables (scripts/data/census2022_clans.csv)."""
 import csv, json, pathlib, re, sys, glob
 from shapely.geometry import shape, mapping
@@ -88,6 +89,18 @@ for cty in sorted(totals):
     unused = {k for k in census.get(cty, {}) if (cty, k) not in used} - {"(not listed)"}
     if unused: report.append(f"{cty}: census entries with no boundary: {sorted(unused)}")
 
+# LISGIS district table (by code) is the authority: it equals the sum of the clan table and the county table.
+DT = {r["district_code"]: r for r in csv.DictReader(open(root / "scripts" / "data" / "census2022_districts_lisgis.csv", encoding="utf-8-sig"))}
+for r in dpop:
+    t = DT.get(r["code"])
+    if not t: report.append(f"no LISGIS district row for {r['code']} {r['district']}"); continue
+    old = r["pop2022"]; r["pop2022"] = int(t["total"]); r["male"] = int(t["male"]); r["female"] = int(t["female"]); r["households2022"] = int(t["households"])
+    r["pop2022_method"] = "2022 census (LISGIS district table)"
+    if old is not None and round(old) != r["pop2022"]: report.append(f"{r['county']}/{r['district']}: report {round(old):,} -> LISGIS table {r['pop2022']:,}")
+CT = {r["county_code"]: r for r in csv.DictReader(open(root / "scripts" / "data" / "census2022_counties_lisgis.csv", encoding="utf-8-sig"))}
+for code, t in CT.items():
+    cty = cname[code]; s_ = sum(r["pop2022"] for r in dpop if r["county"] == cty)
+    if s_ != int(t["population"]): report.append(f"{cty}: districts {s_:,} vs county table {int(t['population']):,}")
 # Clan population: census clan tables; a clan with no figure gets its district total minus the other clans.
 cpop = []
 for f in K:
@@ -97,7 +110,11 @@ for f in K:
            "area_km2": km2(shape(f["geometry"])), "pop2022": tot, "male": r.get("male"), "female": r.get("female"), "households": r.get("households"), "pop2022_method": "2022 census (clan tables)"}
     if tot is None:
         drow = next(x for x in dpop if x["code"] == p["parent_code"])
-        row["pop2022"] = int(round(drow["pop2022"])) - clansum.get(p["parent_code"], 0); row["pop2022_method"] = "estimated: district total minus its other clans (no clan figure)"
+        sib = [CL[c] for c in CL if c[:4] == p["parent_code"] and CL[c]["total"] is not None]
+        row["pop2022"] = int(round(drow["pop2022"])) - clansum.get(p["parent_code"], 0)
+        for k, dk in (("male", "male"), ("female", "female"), ("households", "households2022")):
+            if drow.get(dk) is not None: row[k] = drow[dk] - sum(x[k] or 0 for x in sib)
+        row["pop2022_method"] = "2022 census: district table minus the other clans (no row in the clan table)"
         report.append(f"{cty}/{dist}: clan {row['clan']} has no figure; set to {row['pop2022']:,} (district minus other clans)")
     row["density"] = round(row["pop2022"] / row["area_km2"], 1) if row["area_km2"] else None
     cpop.append(row)
@@ -105,7 +122,6 @@ hh = {}
 for r in cpop:
     if r["households"]: hh[r["key"].split(":")[2] + "|" + r["county"]] = hh.get(r["key"].split(":")[2] + "|" + r["county"], 0) + r["households"]
 for r in dpop:
-    r["households2022"] = hh.get(r["district"] + "|" + r["county"])
     cs = [x for x in cpop if x["county"] == r["county"] and x["district"] == r["district"]]
     r["clans"] = len(cs); r["clan_pop_sum"] = sum(x["pop2022"] for x in cs)
 cfeat = [{"type": "Feature", "properties": {"county": f["properties"]["name"], "code": f["properties"]["code"]}, "geometry": web(shape(f["geometry"]), 0.002)} for f in C]
