@@ -209,6 +209,19 @@
 .lm-about-host img { width: 48px; background: #fff; border-radius: 10px; padding: 3px; border: 1px solid var(--color-border-line); }
 .lm-about-v { font-size: 16px; } .lm-about-v b { font-weight: var(--cds-font-weight-medium); }
 .lm-about-s { font-size: 13px; color: var(--color-fg-muted); margin-top: 2px; }
+
+/* Full-width header, government strip and footer: the background runs edge to edge, the content stays on the page column. */
+html, body { overflow-x: clip; }
+.lm { --bleed: calc(50vw - 50%); }
+.lm-gov { margin-inline: calc(-1 * var(--bleed)); padding: 7px var(--bleed); background: var(--color-panel); border-bottom: 1px solid var(--color-border-line); margin-bottom: calc(-1 * var(--cds-gap-lg)); }
+.lm-top { padding-top: 0; box-shadow: 0 0 0 100vmax var(--color-bg); clip-path: inset(0 -100vmax); }
+.lm-top.lm-compact { box-shadow: 0 0 0 100vmax var(--color-bg), 0 6px 12px -8px rgba(0,0,0,.25); clip-path: inset(0 -100vmax -20px); }
+.lm-band { margin-inline: calc(-1 * var(--bleed)); padding-inline: var(--bleed); border-radius: 0; box-shadow: none; }
+.lm-band-inner, .lm-top.lm-compact .lm-band-inner { padding-inline: 0; }
+.lm-band .lm-stripe { margin-inline: calc(-1 * var(--bleed)); }
+.lm-foot { margin-inline: calc(-1 * var(--bleed)); border-radius: 0; padding: 40px var(--bleed) 22px; margin-top: 24px; }
+.lm-foot .lm-foot-base { margin-top: 8px; }
+@media (max-width: 640px) { .lm-foot { padding: 28px var(--bleed) 18px; } }
 </style>
 
 <div class="lm">
