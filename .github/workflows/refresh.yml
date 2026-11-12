@@ -1,0 +1,61 @@
+name: Refresh data
+
+on:
+  schedule:
+    - cron: "35 5 * * *"    # NASA ocean and rain maps, daily 05:35 (Monrovia = UTC)
+    - cron: "55 17 * * *"   # NOAA El Niño data, daily 17:55
+    - cron: "23 7 * * 1"    # FAO drought data and 1 km crop stress map, Mondays 07:23
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Which refresh to run: ocean, noaa, fao or all"
+        default: "all"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow numpy rasterio affine
+      - name: Pick which refresh to run
+        id: pick
+        run: |
+          J="${{ github.event.inputs.job }}"
+          case "${{ github.event.schedule }}" in
+            "35 5 * * *") J=ocean ;;
+            "55 17 * * *") J=noaa ;;
+            "23 7 * * 1") J=fao ;;
+          esac
+          echo "job=${J:-all}" >> "$GITHUB_OUTPUT"
+      - name: NASA ocean and rain maps
+        if: steps.pick.outputs.job == 'ocean' || steps.pick.outputs.job == 'all'
+        run: python3 scripts/build_ocean.py docs/data 30
+      - name: NOAA El Niño data
+        if: steps.pick.outputs.job == 'noaa' || steps.pick.outputs.job == 'all'
+        run: python3 scripts/build_noaa.py docs/data
+      - name: FAO drought data and crop stress map
+        if: steps.pick.outputs.job == 'fao' || steps.pick.outputs.job == 'all'
+        run: |
+          python3 scripts/build_fao.py docs/data
+          python3 scripts/build_fao_map.py docs/data docs/data 12
+      - name: Check data and stamp what changed
+        run: python3 scripts/update_manifest.py
+      - name: Rebuild the page
+        run: python3 scripts/build_site.py
+      - name: Save changes
+        run: |
+          git config user.name "liberia-elnino-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs
+          git diff --cached --quiet || (git commit -m "Data refresh: ${{ steps.pick.outputs.job }}" && git push)

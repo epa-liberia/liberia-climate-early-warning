@@ -1,0 +1,156 @@
+{
+ "clans": {
+  "file": "data/clans.json",
+  "title": "Liberia clan boundaries",
+  "description": "LISGIS 2007 clan boundaries (edition 14, 816 clans), reprojected and simplified; each tagged with its district by location. Names pending the clan attribute table.",
+  "updated": "2026-11-11T23:30:00Z",
+  "sha": "466b2dc9148f3a66"
+ },
+ "counties": {
+  "file": "data/counties.json",
+  "title": "Liberia county boundaries",
+  "description": "Liberia's 15 counties, formed by merging LISGIS 2007 district boundaries (edition 14), simplified for web maps.",
+  "updated": "2026-11-11T23:30:00Z",
+  "sha": "bb20742fa7678f87"
+ },
+ "county_watch": {
+  "file": "data/county_watch.json",
+  "title": "County hazard watch",
+  "description": "Dryness level per county from FAO's Agricultural Stress Index (Warning at 25%+ of cropland stressed, Watch at 10–25%); flood and heat levels are Claude's reading of NOAA/FEWS NET and AGRHYMET bulletins.",
+  "updated": "2026-11-12T02:25:00Z",
+  "sha": "33dc20e3276a250b"
+ },
+ "district_pop": {
+  "file": "data/district_pop.json",
+  "title": "District population",
+  "description": "Population by district from the LISGIS 2008 census (people, households) and LISGIS 2014 projection, with area in km².",
+  "updated": "2026-11-11T23:30:00Z",
+  "sha": "13e4ddfb187538da"
+ },
+ "districts": {
+  "file": "data/districts.json",
+  "title": "Liberia district boundaries",
+  "description": "LISGIS 2007 district boundaries (edition 14, 136 districts), reprojected from UTM 29N and simplified, with 2008 census and 2014 projected population.",
+  "updated": "2026-11-11T23:30:00Z",
+  "sha": "4f5771e4c44f8c82"
+ },
+ "enso_status": {
+  "file": "data/enso_status.json",
+  "title": "NOAA ENSO status",
+  "description": "ENSO alert status, synopsis and dates from CPC's latest monthly ENSO Diagnostic Discussion, with the latest RONI season and weekly reading dates.",
+  "updated": "2026-11-12T02:45:00Z",
+  "sha": "5824c4fa75ba6182"
+ },
+ "fao_asi_annual": {
+  "file": "data/fao_asi_annual.json",
+  "title": "FAO seasonal drought stress since 1984",
+  "description": "Seasonal Agricultural Stress Index per county (and ALL for Liberia) for each year since 1984, from FAO ASIS annual summaries.",
+  "updated": "2026-11-12T02:25:00Z",
+  "sha": "1d2d8b4f451de6f6"
+ },
+ "fao_county": {
+  "file": "data/fao_county.json",
+  "title": "FAO drought indicators by county",
+  "description": "Latest FAO ASIS Agricultural Stress Index, Vegetation Health Index and satellite rainfall (since 1 March and last 30 days, vs long-term average) for each county.",
+  "updated": "2026-11-12T02:25:00Z",
+  "sha": "affb73e3acae5f1e"
+ },
+ "fao_map": {
+  "file": "data/fao_map.json",
+  "title": "FAO crop stress map (1 km)",
+  "description": "FAO ASIS Agricultural Stress Index for Liberia's cropland at 1 km, last 12 ten-day periods, plus Historic Agricultural Drought Frequency (1984–2025), as images built from FAO's map service.",
+  "updated": "2026-11-12T03:10:00Z",
+  "sha": "986864f4247302e9"
+ },
+ "fao_map_areas": {
+  "file": "data/fao_map_areas.json",
+  "title": "Crop stress by county, district and clan (estimated)",
+  "description": "Estimated from FAO's 1 km map for the latest 10 days: cropland in season, share stressed (25%+ class), average stress class, and drought frequency since 1984, per LISGIS county, district and clan.",
+  "updated": "2026-11-12T03:10:00Z",
+  "sha": "3bbbc1c1f7cf4b13"
+ },
+ "fao_rain": {
+  "file": "data/fao_rain.json",
+  "title": "FAO rainfall every 10 days, 2026",
+  "description": "Satellite rainfall estimate per county for each 10-day period of the current year, with the long-term average, from FAO ASIS.",
+  "updated": "2026-11-12T02:25:00Z",
+  "sha": "f7f61ec9e56562d6"
+ },
+ "liberia_hazards": {
+  "file": "data/liberia_hazards.json",
+  "title": "Liberia hazard bulletins",
+  "description": "Bulletins naming Liberia from NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026) and AGRHYMET's July 2026 seasonal update, summarised by Claude.",
+  "updated": "2026-11-11T19:50:00Z",
+  "sha": "1f6898a749e10a64"
+ },
+ "nino_monthly": {
+  "file": "data/nino_monthly.json",
+  "title": "Monthly Niño anomalies this year",
+  "description": "Monthly Niño 1+2, 3, 3.4 and 4 anomalies this year (OISST, 1991–2020 base), from CPC's sstoi.indices.",
+  "updated": "2026-11-12T02:45:00Z",
+  "sha": "6ec1ebc5f7942b4f"
+ },
+ "nino_regions": {
+  "file": "data/nino_regions.json",
+  "title": "Weekly Niño region anomalies",
+  "description": "Latest weekly sea-surface temperature anomaly per Niño region (OISST v2.1, 1991–2020 base), from CPC's wksst9120.for.",
+  "updated": "2026-11-12T02:45:00Z",
+  "sha": "be294fca42b768be"
+ },
+ "ocean_pacific": {
+  "file": "data/ocean_pacific.json",
+  "title": "Ocean warmth, Pacific to Gulf of Guinea",
+  "description": "Last 30 days of NASA GHRSST MUR sea-surface temperature anomaly images (120°E–20°E, 25°S–25°N) with a 1° grid of values decoded from NASA's colour table.",
+  "updated": "2026-11-12T01:50:00Z",
+  "sha": "0c47472c3040886b"
+ },
+ "ocean_wafrica": {
+  "file": "data/ocean_wafrica.json",
+  "title": "Ocean warmth, Liberia and Gulf of Guinea",
+  "description": "Last 30 days of NASA GHRSST MUR sea-surface temperature anomaly images (25°W–15°E, 5°S–20°N) with a 0.25° grid of values decoded from NASA's colour table.",
+  "updated": "2026-11-12T01:50:00Z",
+  "sha": "0d30b6f4d775c9c1"
+ },
+ "outlook": {
+  "file": "data/outlook.json",
+  "title": "NOAA official ENSO outlook",
+  "description": "Chance of El Niño, neutral and La Niña, and of strong and very strong El Niño, for the next nine 3-month seasons, from CPC's official probability and strength tables.",
+  "updated": "2026-11-12T02:45:00Z",
+  "sha": "e2708454bf51b0ee"
+ },
+ "rain_wafrica": {
+  "file": "data/rain_wafrica.json",
+  "title": "Rainfall, Liberia and Gulf of Guinea",
+  "description": "Last 30 days of NASA GPM IMERG daily precipitation-rate images (25°W–15°E, 5°S–20°N) with a 0.25° grid of values decoded from NASA's colour table.",
+  "updated": "2026-11-12T01:50:00Z",
+  "sha": "0c66188bf04628aa"
+ },
+ "roni": {
+  "file": "data/roni.json",
+  "title": "RONI by season: 1997, 2015, 2023, 2026",
+  "description": "NOAA CPC Relative Oceanic Niño Index (ERSST.v6) by 3-month season, from CPC's RONI.ascii.txt.",
+  "updated": "2026-11-12T02:45:00Z",
+  "sha": "a39385177195d0d2"
+ },
+ "wind_zones": {
+  "file": "data/wind_zones.json",
+  "title": "Average wind by county, district and clan",
+  "description": "Global Wind Atlas 3 mean wind speed and power density at 10, 50 and 100 m, averaged by Claude over each LISGIS county, district and clan; long-term averages, not storm gusts.",
+  "updated": "2026-11-11T23:58:00Z",
+  "sha": "d415ae145fb1a9f3"
+ },
+ "windstorm_event_counties": {
+  "file": "data/windstorm_event_counties.json",
+  "title": "Windstorm events by county",
+  "description": "Each recorded windstorm event split by county, with the county figures and district each source gives.",
+  "updated": "2026-11-12T00:20:00Z",
+  "sha": "7558feee61eb3782"
+ },
+ "windstorm_events": {
+  "file": "data/windstorm_events.json",
+  "title": "Windstorm events",
+  "description": "Damaging windstorms in Liberia since 2024, compiled by Claude from NDMA (via allAfrica), IFRC DREF MDRLR010 and news reports; a partial record.",
+  "updated": "2026-11-12T00:20:00Z",
+  "sha": "0c4142474009cef2"
+ }
+}

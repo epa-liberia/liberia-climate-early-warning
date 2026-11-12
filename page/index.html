@@ -1,0 +1,1634 @@
+<meta name="dash-one-writer">
+<style>
+.lm { --lr-blue: #002868; --lr-red: #BF0A30; --lr-white: #ffffff; --lv-warn: #BF0A30; --lv-watch: #E3A008; --lv-low: #9aa5b8;
+  display: flex; flex-direction: column; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.lm-band { background: var(--lr-blue); color: var(--lr-white); border-radius: var(--cds-radius); overflow: hidden; }
+.lm-band-inner { display: flex; align-items: center; gap: var(--cds-gap-md); padding: var(--cds-pad-md) var(--cds-pad-lg); flex-wrap: wrap; }
+.lm-band img { width: 56px; height: auto; background: #fff; border-radius: 8px; padding: 3px; }
+.lm-band svg.lm-flag { width: 72px; height: auto; border: 1px solid rgba(255,255,255,.6); }
+.lm-band-text { flex: 1 1 260px; min-width: 0; }
+.lm-band h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; color: #fff; }
+.lm-band p { margin: 2px 0 0; font-size: var(--cds-font-size-caption); color: rgba(255,255,255,.85); }
+.lm-stripe { height: 6px; background: repeating-linear-gradient(90deg, var(--lr-red) 0 40px, #fff 40px 80px); }
+.lm-tabs { display: flex; gap: 4px; overflow-x: auto; border-bottom: 2px solid var(--lr-red); padding-bottom: 0; }
+.lm-tabs button { flex: 0 0 auto; border: 1px solid var(--color-border-line); border-bottom: none; background: var(--color-panel); color: var(--color-fg); padding: 8px 14px; border-radius: var(--cds-radius) var(--cds-radius) 0 0; font: inherit; font-size: var(--cds-font-size-body); cursor: pointer; }
+.lm-tabs button[aria-selected=true] { background: var(--lr-blue); color: #fff; border-color: var(--lr-blue); }
+.lm-page { display: flex; flex-direction: column; gap: var(--cds-gap-lg); }
+.lm-lede { font-size: var(--cds-font-size-heading); line-height: 1.45; margin: 0; max-width: 64ch; }
+.lm-lede b { font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; }
+.lm-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--cds-gap-md); }
+.lm-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.lm-card.lm-accent { border-top: 4px solid var(--lr-blue); }
+.lm-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-sm); }
+.lm-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.3rem; line-height: 1.1; font-variant-numeric: tabular-nums; display: block; min-height: 2.5rem; }
+.lm-mid { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 1.45rem; line-height: 1.2; display: block; min-height: 1.8rem; }
+.lm-tile-foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-sm) 0 0; }
+.lm-good { color: var(--color-ok); } .lm-warn { color: var(--color-warn); } .lm-bad { color: var(--color-bad); }
+.lm-section h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.lm-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-md); max-width: 72ch; line-height: 1.5; }
+.lm-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-md); }
+.lm-mapgrid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr); gap: var(--cds-gap-md); align-items: start; }
+@media (max-width: 760px) { .lm-mapgrid { grid-template-columns: 1fr; } }
+.lm-chart { position: relative; min-height: 240px; }
+.lm-chart svg { display: block; overflow: visible; }
+.lm-chart text { font-size: var(--cds-font-size-caption); fill: var(--cds-text-secondary); font-family: var(--font-anthropic-sans); }
+.lm-chart .tick text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+.lm-chart .lm-val { fill: var(--color-fg); font-variant-numeric: tabular-nums; }
+.lm-map path.lm-area { stroke: var(--color-bg); stroke-width: 1; cursor: pointer; }
+.lm-map path.lm-area:hover { stroke: var(--color-fg); stroke-width: 1.5; }
+.lm-map path.lm-sel { stroke: var(--color-fg); stroke-width: 2.5; }
+.lm-map text.lm-maplabel { fill: var(--color-fg); font-size: 10px; pointer-events: none; paint-order: stroke; stroke: var(--color-bg); stroke-width: 3px; }
+.lm-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0 0 var(--cds-gap-sm); padding: 0; list-style: none; }
+.lm-legend span { display: inline-block; width: 14px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.lm-legend span.lm-line { height: 3px; }
+.lm-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; font-variant-numeric: tabular-nums; color: var(--color-fg); }
+.lm-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; margin: 0 0 var(--cds-gap-sm); }
+.lm-btn { border: 1px solid var(--color-border-line); background: var(--color-panel); color: var(--color-fg); border-radius: var(--cds-radius); padding: 6px 12px; font: inherit; font-size: var(--cds-font-size-caption); cursor: pointer; }
+.lm-btn:hover { border-color: var(--lr-blue); }
+.lm-level { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); color: #fff; }
+.lm-panel h3 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 1.5rem; margin: 0 0 var(--cds-gap-sm); }
+.lm-panel dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--cds-gap-sm) var(--cds-gap-md); margin: 0; font-size: var(--cds-font-size-body); }
+.lm-panel dd { margin: 0; color: var(--color-fg-muted); }
+.lm-panel dt { font-weight: var(--cds-font-weight-medium); }
+.lm-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--cds-gap-sm); }
+.lm-chips span { font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); border-radius: 999px; padding: 2px 8px; }
+.lm-tablewrap { overflow-x: auto; }
+.lm-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); }
+.lm-table th { text-align: left; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.lm-table td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.lm-nowrap { white-space: nowrap; }
+.lm-table td.lm-detail { min-width: 260px; color: var(--color-fg-muted); }
+.lm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--cds-gap-md); }
+.lm-cards h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.lm-cards p, .lm-cards li { margin: 0; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); line-height: 1.5; }
+.lm-cards ul { margin: var(--cds-gap-xs) 0 0; padding-left: 18px; }
+.lm-hz-head { display: flex; align-items: center; gap: 8px; margin-bottom: var(--cds-gap-sm); }
+.lm-hz-head h3 { margin: 0; font-size: var(--cds-font-size-heading); }
+.lm-hz-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.lm-draft { border-left: 4px solid var(--lv-watch); padding: var(--cds-pad-sm) var(--cds-pad-md); background: var(--color-panel); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); border-radius: 0 var(--cds-radius) var(--cds-radius) 0; }
+.lm-partners { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); }
+.lm-partners span { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 10px; font-size: var(--cds-font-size-caption); background: var(--color-panel); }
+.lm-foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
+.lm a { color: var(--lr-blue); }
+@media (prefers-color-scheme: dark) { .lm a { color: #8fb3ff; } }
+[data-dash-source-state=refreshing] { opacity: .5; }
+.lm-btn[aria-pressed=true] { background: var(--lr-blue); color: #fff; border-color: var(--lr-blue); }
+.lm-seg { display: inline-flex; }
+.lm-seg .lm-btn { border-radius: 0; }
+.lm-seg .lm-btn:first-child { border-radius: var(--cds-radius) 0 0 var(--cds-radius); }
+.lm-seg .lm-btn:last-child { border-radius: 0 var(--cds-radius) var(--cds-radius) 0; border-left: none; }
+.lm-check { display: inline-flex; align-items: center; gap: 6px; font-size: var(--cds-font-size-caption); color: var(--color-fg); }
+</style>
+
+<div class="lm">
+  <header class="lm-band" id="top">
+    <div class="lm-band-inner">
+      <img src="data:image/png;base64,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" alt="Environmental Protection Agency of Liberia logo">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAACACAYAAAAvZ8aYAABsNklEQVR42u29d5hdVfXH/dmn3N6m90zJZNJJrwRCSSgBKdKkd6SqFEWwoojoT0VARUEQpAsCoZMQIJDeE9JnMpnJJNPb7eWU/f5xJ0OoUi3v+54850ly77mn7HXW2mt913etLfgf3I477ricadOmlRYUFFR6vd5Kt9s9xOVylTmdziJN03J1XQ9qmuZVFMWtqqpTCKEpiqICihBCyPc2U0pp2radNk0zZVlWzDTNiGEYvZlMpjOdTu+Lx+MtyWRyd0dHx553331331NPPdX7vzZe4n/hHn/+859XVVRUTM/Ly5sRCAQO8vl81R6PJ9/j8Xh8Ph9utxun04mUElVV3/djKSVCfPgxP+pz27ZRFAUA0zTJZDKkUini8TjxeDyZTCa7Y7FYUzgcfre/v395S0vLinQ63XjLLbfY/80DqP23S/jEE08MHnLIIW+MGzeuyufzoWnvv2XLsujr66O1tZXi4mKWLVtGW1sbQgj8fj9f+9rXWLt2LX/729+YPXs2e/bsYdy4cUyaNIk77riD/Px8AoEAY8aMYdq0aWzduhXDMCgtLcXn85Gbm0tubi6AG6gAKkzTPCQej1+5YcOGpjvuuGMC0P//aSGXlJR4vvWtbw0rLS0d7ff7hzmdzhJFUXyKomBZVsY0zZhhGL2pVKojHo+39Pf371m9evXe/WZx/vz5iR//+Md6KBQimUyydu1aIpEIhxxyCC6Xi1gsxpVXXkkwGOSuu+5i586d/Pa3v+XJJ5/kmGOOYenSpQwbNoznnnuO008/Ha/XSzqdJj8/n0WLFnHqqaeSSCQ444wzqK+v58knnyQnJ4fHHnuME088kcmTJ9Pb24uUkrlz5yKEIBAIEAwGcTqd0fnz579PwKeddlruxIkTK4qKiqq8Xm+lw+EocTgcuaqqeoQQwjTNeCqVao/FYg3t7e1bHn300R2bNm2K/y8K2fnHP/5xdmVl5SmFhYWHBYPBmvz8fM3r9aJp2qBJlVJiWRamaWIYBolEgnA4bM6ZM6f76quvru/r61vZ0NCwNJPJWADpdJpbbrmF8vJyjjzySACCwSAjR46ksbERt9vNmDFjSKVSPPXUUxx88MEUFRWhqip+v5/77ruPOXPmcMEFFwCgKAqbN2+mqamJm266CVVVufzyy1myZAlut5szzzyTnp4eMpkMl1xyCcuXL+eHP/whl156KYcffjiRSGTXaaedVjB37txpRUVFhwaDwamBQKDO6/UWhkIh1ePx4HA4UFUVIQRCCGzbxjRNEokE3d3d1uGHH97U1dW1eM+ePf/82c9+9lZbW1viv94hevTRR69etmzZhubmZpnJZOSBm2VZMpPJyGg0KiORiEyn0/KTtnQ6LXfu3ClXrFhhm6YppZTyd7/7nZw7d+7g+UzTlPfff7+cPXu2lFLKdevWyeLiYrlnzx45depUecstt0jDMGRlZaVcsmSJXLBggXzwwQellFLW1dXJhQsXyq997WvywQcfHLyfn/70p/Lss88evI9kMiknTZokr7nmGrly5UoppZSxWEy+/PLLHWvXrm1vbW2VqVRKft7NMAzZ0tIily9fvvnxxx+/7rTTTiv4b9Rk99///vcLRowYcd2wYcNqQ6HQ+7588803KS8v5/XXX2fevHncfvvtHHHEEbS3t3PllVeiqiqbNm2ir6+P6dOn43Q6AXA4HOTn5xMOh4Vt26iqyvjx4/nTn/4EwNtvv42Ukvz8fBobG2lvb6e7u5tgMMj8+fOprKzk6KOPZufOncyYMYOdO3fS2dlJZWUlDQ0NjBkzhu7ubmbMmMETTzzBEUccgd/vZ8WKFQwfPnzQOXO5XBQVFZGTk8PUqVPZb1UKCwsLx48fP+is7d9isRh79+7F6XSybt06cnNzKS4uZs2aNeTn5zNkyBDeffddRo4cSU1NDX6/n/LycsrLy0ePGjXqt7W1td86+eSTf3/77bff92WY8i/sXd99991Hjxs37uejRo2akpeXN/j57t27WbBgARMmTOCll14ikUhw8sknM2PGDM455xzy8vL41re+xdChQ3njjTe49957OfXUU9m5cyeHHHII69atY8qUKQwZMoT29nbGjRuHw+Fg/fr1fP3rX+e2225j27ZtHHfccZimSWdnJ+PHj0fXddLpNIZh4Pf7EUIQi8XQdd1Kp9NSURSpqqowTVM4HA7FNE3hdrtJpVIUFhYSjUZZv349lmVx1FFH4Xa72b59OyeccAK33XYbp556KgBdXV00NTUxduxYUqkUTU1NrFq1ivLycnbt2kVfXx/BYJBYLMa5557LU089RV1dHXV1dWzatIkdO3YQj8eZPHky69ev5xvf+AZjxowZHL++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eOIJ7rvvPnp7e3n22Wfp7u7mzjvv5Oc///l+ehL79u1jwoQJCCF48803aW9v58gjj6ShoYH29nZM02T69On09/dTUFBAcXHx+6DPCy+8ECklDz74II8//jgul4t77rmHq666ihEjRpBMJrd3dnbO37Zt24uPPfbYpo8I7/7/7TNs7r///e/HrFix4om33347ctddd8nW1lZ51llnyccff1xKKWU6nZaRSGTQO+3o6JBr1qyRUkr5/PPPy7PPPluuXr1annbaafKvf/2rPPXUU+Vjjz0mm5qa5IYNG2RbW9uHPNy1a9fKgoIC+eqrr8of/OAHcsGCBXLjxo3xt99+++n777//+JKSEs//wuAp/yNCTp533nmvTp8+/RvLly+fMmrUqNt7enr2XnTRRbS2trJkyRJef/11/H7/R5L5GhoayMnJYejQoYP/3g9aVFZWfmgREt5jqnLeeedhGAYnnXRSu5TytwsWLJhy6KGHnnrxxRe/2NbWlvhfGDz1f02lX3/99Z6///3vi6LR6KN1dXVtRUVFVaqq5s+YMeN9NVvxeJxIJEJRURHDhg1j48aNbN68mXnz5hEKhejt7eWiiy5CCEFHRweBQIAP4vHJZJLq6upd8Xj8188999yVV1999TMLFy7s+l8bM8H/+Hb22WcHTjnllDNKSkquGTp06NiCggIAwuEwK1asIBgMEgqFpMvlEqqqUlZWRjgcJplMEo1GrXA4rPb29jJ16lT2p/Z6e3upr6/fvnPnzj8++eSTj7700kt9/8tj9D8v5P1bSUmJ57bbbju9rq7umpqamom5ubl0dnbS1tbGmjVrHrRt+2/5+flVDoejQkqZDofD9YZhHD1u3LgrSkpKKC4uJhKJ0NDQsKWhoeHue+6557Fly5ZF/3936L9wKyoq8j700ENXLlmyZPOGDRvCS5cu3XD33Xcf9lHH3nnnnTOXLFmyduC4HQ8//PB358yZE/x/25j8Py6aRZR7OhV4AAAAAElFTkSuQmCC" alt="Seal of the Republic of Liberia">
+      <svg class="lm-flag" viewBox="0 0 190 100" role="img" aria-label="Flag of Liberia">
+        <rect width="190" height="100" fill="#BF0A30"/>
+        <g fill="#ffffff"><rect y="9.09" width="190" height="9.09"/><rect y="27.27" width="190" height="9.09"/><rect y="45.45" width="190" height="9.09"/><rect y="63.64" width="190" height="9.09"/><rect y="81.82" width="190" height="9.09"/></g>
+        <rect width="45.45" height="45.45" fill="#002868"/>
+        <polygon fill="#ffffff" points="22.73,8.5 26.1,18.9 37.0,18.9 28.2,25.3 31.5,35.7 22.73,29.3 13.9,35.7 17.3,25.3 8.5,18.9 19.4,18.9"/>
+      </svg>
+      <div class="lm-band-text">
+        <h1>Liberia El Niño Early Warning Platform</h1>
+        <p>Environmental Protection Agency of Liberia · Climate hazard monitoring and preparedness · Updated automatically from NOAA, NASA and FAO</p>
+      </div>
+    </div>
+    <div class="lm-stripe"></div>
+  </header>
+
+  <nav class="lm-tabs" role="tablist" aria-label="Platform sections">
+    <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+    <button role="tab" data-tab="elnino" aria-selected="false">El Niño &amp; Climate</button>
+    <button role="tab" data-tab="hazards" aria-selected="false">Hazard Map</button>
+    <button role="tab" data-tab="drought" aria-selected="false">Drought &amp; Crops</button>
+    <button role="tab" data-tab="prepare" aria-selected="false">Preparedness</button>
+    <button role="tab" data-tab="bulletins" aria-selected="false">Bulletins</button>
+    <button role="tab" data-tab="about" aria-selected="false">About &amp; Data</button>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <section class="lm-page" id="overview" role="tabpanel">
+    <p class="lm-lede" data-read lang="en">El Niño is <b data-draw="strength_word" data-source="roni_latest" data-field="category" data-row="0">—</b> and still strengthening. <b data-draw="warn_count" data-source="county_counts" data-field="counties" data-where="level=Warning">—</b> of Liberia's 15 counties are under a dryness warning, home to about <b data-draw="exposed_word" data-source="exposed_pop" data-field="pop2014" data-where="hazard=dryness&amp;level=Warning">—</b> people (2014 projection), and every county is on heat watch as the dry season begins.</p>
+    <div class="lm-tiles">
+      <div class="lm-card lm-accent" id="tile-roni">
+        <p class="lm-tile-label">El Niño strength (3-month RONI)</p>
+        <span class="lm-big" data-draw="tile_roni" data-source="roni_latest" data-field="roni_c" data-row="0">—</span>
+        <p class="lm-tile-foot"><span data-draw="tile_roni_change" data-source="roni_latest" data-field="change_c" data-row="0">—</span> vs previous season · <span data-draw="tile_roni_season" data-source="roni_latest" data-field="season" data-row="0">—</span></p>
+      </div>
+      <div class="lm-card lm-accent" id="tile-n34">
+        <p class="lm-tile-label">Weekly Niño 3.4 anomaly</p>
+        <span class="lm-big" data-draw="tile_n34" data-source="nino_regions" data-field="anomaly_c" data-where="region=Niño 3.4">—</span>
+        <p class="lm-tile-foot">Week of <span data-draw="tile_n34_week" data-source="nino_regions" data-field="week" data-where="region=Niño 3.4">—</span> · El Niño threshold +0.5 °C</p>
+      </div>
+      <div class="lm-card lm-accent" id="tile-warn">
+        <p class="lm-tile-label">Counties under dryness warning</p>
+        <span class="lm-big" data-draw="tile_warn" data-source="county_counts" data-field="counties" data-where="level=Warning">—</span>
+        <p class="lm-tile-foot">Of 15 · FAO Agricultural Stress Index</p>
+      </div>
+      <div class="lm-card lm-accent" id="tile-exposed">
+        <p class="lm-tile-label">People in dryness-warning counties</p>
+        <span class="lm-big" style="font-size:1.9rem" data-draw="tile_exposed" data-source="exposed_pop" data-field="pop2014" data-where="hazard=dryness&amp;level=Warning">—</span>
+        <p class="lm-tile-foot"><span data-draw="tile_exposed_share" data-source="exposed_pop" data-field="share" data-where="hazard=dryness&amp;level=Warning">—</span> of Liberia · LISGIS 2014 projection</p>
+      </div>
+      <div class="lm-card lm-accent" id="tile-lib">
+        <p class="lm-tile-label">Latest bulletin for Liberia</p>
+        <span class="lm-mid" data-draw="tile_lib" data-source="latest_hazard" data-field="hazard" data-row="0">—</span>
+        <p class="lm-tile-foot"><span data-draw="tile_lib_area" data-source="latest_hazard" data-field="area" data-row="0">—</span> · <span data-draw="tile_lib_period" data-source="latest_hazard" data-field="period" data-row="0">—</span></p>
+      </div>
+    </div>
+    <div class="lm-grid2">
+      <div class="lm-card lm-section" id="overview-map">
+        <h2>Dryness watch by county</h2>
+        <p class="lm-note">Click a county to open its details on the Hazard Map.</p>
+        <ul class="lm-legend" aria-hidden="true"><li><span data-level="Warning"></span>Warning</li><li><span data-level="Watch"></span>Watch</li><li><span data-level="Low"></span>Low</li></ul>
+        <div class="lm-chart lm-map" data-draw="overview_map" data-source="counties county_watch" style="min-height:300px"></div>
+      </div>
+      <div class="lm-card lm-section" id="overview-next">
+        <h2>What to watch next</h2>
+        <div class="lm-cards" style="grid-template-columns:1fr">
+          <div><h3>12 Nov 2026 · NOAA monthly ENSO update</h3><p>New El Niño strength odds and October index values.</p></div>
+          <div><h3>Weekly · NOAA/FEWS NET Africa hazards</h3><p>Whether the dryness area in central and eastern Liberia grows or eases.</p></div>
+          <div><h3>Dec 2026 – Feb 2027 · Peak of El Niño</h3><p>NOAA expects peak strength around this period, with effects on West Africa often lagging into the 2027 planting season.</p></div>
+          <div><h3>Mar – Apr 2027 · Windstorm risk</h3><p>Both recorded multi-community windstorms (2024, 2026) struck in March. Roof-strengthening should be done before then.</p></div>
+          <div><h3>Mar – May 2027 · Rainy season onset</h3><p>Late or erratic onset is the main risk for rice and cassava planting.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL NINO & CLIMATE -->
+  <section class="lm-page" id="elnino" role="tabpanel" hidden>
+    <p class="lm-lede" data-read lang="en">The Pacific is <b data-draw="n34_word" data-source="nino_regions" data-field="anomaly_c" data-where="region=Niño 3.4">—</b> warmer than normal in the Niño 3.4 region, and NOAA puts the chance of a very strong El Niño (+2.0 °C or more) at <b data-draw="hist_word" data-source="outlook" data-field="very_strong_pct" data-where="order=3">—</b> for <b data-draw="hist_season" data-source="outlook" data-field="label" data-where="order=3">—</b>.</p>
+    <div class="lm-card lm-section" id="noaa-status">
+      <p class="lm-tile-label">NOAA El Niño status · Climate Prediction Center</p>
+      <p style="margin:0;font-size:var(--cds-font-size-body)"><span class="lm-level" style="background:var(--lv-warn)" data-draw="enso_alert" data-source="enso_status" data-field="alert" data-row="0">—</span> <span data-draw="enso_synopsis" data-source="enso_status" data-field="synopsis" data-row="0">—</span></p>
+      <p class="lm-tile-foot">Monthly discussion of <span data-draw="enso_disc" data-source="enso_status" data-field="discussion_date" data-row="0">—</span> · next due <span data-draw="enso_next" data-source="enso_status" data-field="next_date" data-row="0">—</span> · weekly readings to <span data-draw="enso_week" data-source="enso_status" data-field="weekly_week" data-row="0">—</span>. Checked daily.</p>
+    </div>
+    <div class="lm-card lm-section" id="ocean-map">
+      <h2>Ocean and rain monitor</h2>
+      <p class="lm-note">NASA satellite data, refreshed daily. Ocean warmth is the sea-surface temperature anomaly (GHRSST MUR, °C above or below normal); rain is daily satellite rainfall (GPM IMERG). Click or hover for a value, scroll or pinch to zoom, drag to move.</p>
+      <div class="lm-controls">
+        <div class="lm-seg" role="group" aria-label="Map view">
+          <button type="button" class="lm-btn" data-ocean-view="pacific" aria-pressed="true">Pacific to Gulf of Guinea</button>
+          <button type="button" class="lm-btn" data-ocean-view="wafrica" aria-pressed="false">Liberia &amp; Gulf of Guinea</button>
+        </div>
+        <div class="lm-seg" role="group" aria-label="Map layer">
+          <button type="button" class="lm-btn" data-ocean-layer="ocean" aria-pressed="true">Ocean warmth</button>
+          <button type="button" class="lm-btn" data-ocean-layer="rain" aria-pressed="false">Rain</button>
+        </div>
+        <label class="lm-check"><input type="checkbox" id="ocean-regions" checked> El Niño regions</label>
+      </div>
+      <div class="lm-chart" data-draw="ocean_map" data-source="ocean_pacific" style="min-height:160px"></div>
+      <div class="lm-controls" style="margin-top:var(--cds-gap-sm)">
+        <button type="button" class="lm-btn" id="ocean-play" aria-pressed="false"><span class="lm-play-on">▶ Play 30 days</span><span class="lm-play-off" hidden>❚❚ Pause</span></button>
+        <div data-draw="ocean_time" data-source="ocean_pacific" style="flex:1 1 220px;min-width:0">—</div>
+      </div>
+      <div data-draw="ocean_legend" data-source="ocean_pacific" style="margin-top:var(--cds-gap-sm)"></div>
+      <p class="lm-note" style="margin-top:var(--cds-gap-sm)">Dashed boxes: the Pacific Niño regions NOAA uses to measure El Niño, and the Atlantic Niño region (ATL3), whose warmth affects West African rain. Rain is only available in the Liberia view. Values are NASA's 0.1 °C colour classes (±0.05 °C), read at 0.25° (about 28 km) in the Liberia view and 1° in the wide view.</p>
+    </div>
+    <div class="lm-card lm-section" id="roni-history">
+      <h2>How this El Niño compares with the great events of 1997 and 2015</h2>
+      <p class="lm-note">Relative Oceanic Niño Index (RONI) by overlapping 3-month season. Above +0.5 °C is El Niño; +2.5 °C would be a new record. 2026 runs to August–October, the latest NOAA has published.</p>
+      <ul class="lm-legend" aria-hidden="true"><li><span class="lm-line" data-series="2026"></span>2026</li><li><span class="lm-line" data-series="1997"></span>1997 (super El Niño)</li><li><span class="lm-line" data-series="2015"></span>2015 (super El Niño)</li><li><span class="lm-line" data-series="2023"></span>2023 (strong El Niño)</li></ul>
+      <div class="lm-chart" data-draw="roni_chart" data-source="roni" style="min-height:280px"></div>
+    </div>
+    <div class="lm-grid2">
+      <div class="lm-card lm-section" id="regions">
+        <h2>Warmest water is in the eastern Pacific</h2>
+        <p class="lm-note">Latest weekly sea surface temperature anomaly by Niño region, °C above the 1991–2020 average.</p>
+        <div class="lm-chart" data-draw="regions_chart" data-source="nino_regions" style="min-height:200px"></div>
+      </div>
+      <div class="lm-card lm-section" id="outlook-sec">
+        <h2>How long will El Niño stay very strong?</h2>
+        <p class="lm-note">NOAA's official outlook (issued <span data-draw="outlook_issued" data-source="outlook" data-field="issued" data-row="0">—</span>): chance of El Niño in each 3-month season, and of a very strong one (+2.0 °C or more).</p>
+        <ul class="lm-legend" aria-hidden="true"><li><span style="background:var(--lm-c3)"></span>Any El Niño</li><li><span style="background:#BF0A30"></span>Very strong El Niño</li></ul>
+        <div class="lm-chart" data-draw="outlook_chart" data-source="outlook" style="min-height:200px"></div>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="monthly">
+      <h2>Month by month: Niño region temperatures this year</h2>
+      <p class="lm-note">Monthly sea-surface temperature anomaly, °C above the 1991–2020 average (NOAA CPC, OISST). These are conventional anomalies, so they run higher than the relative index (RONI) above.</p>
+      <ul class="lm-legend" aria-hidden="true"><li><span class="lm-line" data-series="Niño 1+2"></span>Niño 1+2</li><li><span class="lm-line" data-series="Niño 3"></span>Niño 3</li><li><span class="lm-line" data-series="Niño 3.4"></span>Niño 3.4</li><li><span class="lm-line" data-series="Niño 4"></span>Niño 4</li></ul>
+      <div class="lm-chart" data-draw="monthly_chart" data-source="nino_monthly" style="min-height:220px"></div>
+    </div>
+    <div class="lm-card lm-section" id="westafrica">
+      <h2>How El Niño reaches Liberia</h2>
+      <div class="lm-cards">
+        <div><h3>Usually drier and hotter</h3><p>El Niño tends to weaken the West African monsoon, bringing longer dry spells and higher temperatures to coastal West Africa.</p></div>
+        <div><h3>But not always</h3><p>In 2023–24, El Niño plus a positive Indian Ocean Dipole kept rain falling unusually long on Liberia's coast. A positive dipole is active again now, so floods remain possible.</p></div>
+        <div><h3>The Atlantic decides a lot</h3><p>Gulf of Guinea sea temperatures shape Liberia's rainfall as much as the Pacific. AGRHYMET noted cooling there this season, which limits coastal rain.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HAZARD MAP -->
+  <section class="lm-page" id="hazards" role="tabpanel" hidden>
+    <div class="lm-draft">Dryness levels come from FAO's satellite Agricultural Stress Index for each county (see the Drought &amp; Crops tab). Flood and heat levels are EPA's working reading of NOAA/FEWS NET and AGRHYMET regional bulletins. None of these is an official LiMet or NDMA warning. Click a county, then a district, to drill down to clan level; district and clan areas inherit their county's level until local data is added.</div>
+    <div class="lm-controls">
+      <label for="hz-select" style="font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)">Hazard</label>
+      <select id="hz-select" class="dash-select" aria-label="Hazard">
+        <option value="dryness">Dryness / drought</option>
+        <option value="flood">Flooding</option>
+        <option value="heat">Heat</option>
+        <option value="windstorm">Windstorm (recorded events)</option>
+        <optgroup label="Context layers (not hazard levels)">
+          <option value="ws100">Average wind speed, 100 m</option>
+          <option value="ws50">Average wind speed, 50 m</option>
+          <option value="ws10">Average wind speed, 10 m</option>
+          <option value="pd100">Average wind power, 100 m</option>
+          <option value="pd50">Average wind power, 50 m</option>
+          <option value="pd10">Average wind power, 10 m</option>
+        </optgroup>
+      </select>
+      <button type="button" class="lm-btn" id="hz-reset">Show all of Liberia</button>
+      <button type="button" class="lm-btn" id="hz-up">Up one level</button>
+      <ul class="lm-legend" id="hz-legend" aria-hidden="true" style="margin:0"><li><span data-level="Warning"></span>Warning</li><li><span data-level="Watch"></span>Watch</li><li><span data-level="Low"></span>Low</li></ul>
+    </div>
+    <div class="lm-mapgrid">
+      <div class="lm-card">
+        <div class="lm-chart lm-map" data-draw="hazard_map" data-source="counties districts clans county_watch wind_zones windstorm_by_county" style="min-height:420px"></div>
+      </div>
+      <div class="lm-card lm-panel" id="county-panel" data-draw="county_panel" data-source="county_watch district_pop county_pop districts clans wind_zones windstorm_events windstorm_event_counties" style="min-height:300px">—</div>
+    </div>
+    <div class="lm-draft" id="ws-note" hidden>Windstorm shows recorded damaging events since 2024, not a forecast: darker counties have had more events. The record is partial (three events from NDMA, IFRC and news reports); NDMA's full incident records would complete it. Where a source names a town, the matching district is outlined.</div>
+    <div class="lm-draft" id="wind-note" hidden>Average wind is long-term mean wind from the Global Wind Atlas, not a windstorm hazard. Damaging windstorms in Liberia are short thunderstorm gusts that these averages do not capture: NDMA recorded storms in Bong, Gbarpolu and Nimba, which show low average wind. Values at 10 m are very low over forest because of how the model treats tall canopy; 100 m is more reliable for comparing areas.</div>
+    <div class="lm-card lm-section" id="exposure">
+      <h2 data-draw="exposure_title" data-source="exposed_pop">—</h2>
+      <p class="lm-note">Population by hazard level of the county they live in, LISGIS 2014 projection from the 2008 census. A first exposure measure; farmland, health facilities and schools come next.</p>
+      <div class="lm-chart" data-draw="exposure_chart" data-source="exposed_pop" style="min-height:150px"></div>
+    </div>
+    <div class="lm-card lm-section" id="county-table">
+      <h2>All counties</h2>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="county_watch" data-row-key="county">
+          <thead><tr><th data-field="county">County</th><th data-field="dryness">Dryness</th><th data-field="flood">Flooding</th><th data-field="heat">Heat</th><th data-field="confidence">Confidence</th><th data-field="pop2014" data-source="county_pop">Population (2014)</th></tr></thead>
+          <tbody data-draw="county_rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DROUGHT & CROPS -->
+  <section class="lm-page" id="drought" role="tabpanel" hidden>
+    <p class="lm-lede" data-read lang="en">FAO's satellite drought index shows <b data-draw="fao_warn_n" data-source="fao_summary" data-field="warn_count" data-row="0">—</b> of Liberia's 15 counties with a quarter or more of their cropland under drought stress in the 10 days to <b data-draw="fao_date" data-source="fao_summary" data-field="asi_date" data-row="0">—</b>. The driest county this season is <b data-draw="fao_dry_county" data-source="fao_summary" data-field="driest_county" data-row="0">—</b>, with <b data-draw="fao_dry_pct" data-source="fao_summary" data-field="driest_pct" data-row="0">—</b> of its normal rainfall since 1 March.</p>
+    <div class="lm-draft">Source: FAO Agricultural Stress Index System (ASIS), from satellite vegetation health and rainfall estimates, by county every 10 days. FAO's official county figures run several weeks behind; the 1 km map below is more current. Both refresh automatically.</div>
+    <div class="lm-card lm-section" id="fao-map">
+      <h2>Crop stress map, 1 km detail</h2>
+      <p class="lm-note">FAO's Agricultural Stress Index at 1 km for Liberia's cropland, every 10 days (latest: 10 days from <b data-draw="faomap_latest" data-source="fao_map">—</b>). Click any spot for its reading and its district and clan estimate. Scroll or pinch to zoom.</p>
+      <div class="lm-controls">
+        <div class="lm-seg" role="group" aria-label="Map layer">
+          <button type="button" class="lm-btn" data-faomap-layer="asi" aria-pressed="true">Crop stress now</button>
+          <button type="button" class="lm-btn" data-faomap-layer="hdf" aria-pressed="false">Drought frequency 1984–2025</button>
+        </div>
+        <label class="lm-check"><input type="checkbox" id="faomap-districts" checked> District boundaries</label>
+      </div>
+      <div class="lm-mapgrid">
+        <div>
+          <div class="lm-chart" data-draw="faomap" data-source="fao_map counties districts" style="min-height:300px"></div>
+          <div data-draw="faomap_time" data-source="fao_map" style="margin-top:var(--cds-gap-sm)">—</div>
+        </div>
+        <div>
+          <ul class="lm-legend" id="faomap-legend-asi" style="flex-direction:column;gap:4px" aria-label="Legend: share of cropland under drought stress">
+            <li><span style="background:rgb(47,205,0)"></span>Under 10%</li><li><span style="background:rgb(154,231,19)"></span>10–25%</li><li><span style="background:rgb(255,255,48)"></span>25–40%</li><li><span style="background:rgb(255,186,32)"></span>40–55%</li><li><span style="background:rgb(255,117,16)"></span>55–70%</li><li><span style="background:rgb(255,42,2)"></span>70–85%</li><li><span style="background:rgb(196,0,0)"></span>85% or more</li><li><span style="background:rgb(102,102,255)"></span>Off season (crops not growing)</li><li><span style="background:rgb(40,40,40)"></span>No data (cloud)</li><li><span style="background:rgb(226,226,222);border:1px solid var(--color-border-line)"></span>Not cropland</li>
+          </ul>
+          <ul class="lm-legend" id="faomap-legend-hdf" hidden style="flex-direction:column;gap:4px" aria-label="Legend: share of years since 1984 with severe drought">
+            <li><span style="background:rgb(47,205,0)"></span>Severe drought in under 5% of years</li><li><span style="background:rgb(154,231,19)"></span>5–10% of years</li><li><span style="background:rgb(255,255,48)"></span>10–15%</li><li><span style="background:rgb(255,186,32)"></span>15–20%</li><li><span style="background:rgb(255,117,16)"></span>20–25%</li><li><span style="background:rgb(255,42,2)"></span>25–30%</li><li><span style="background:rgb(196,0,0)"></span>Over 30% of years</li><li><span style="background:rgb(226,226,222);border:1px solid var(--color-border-line)"></span>Not cropland</li>
+          </ul>
+          <div class="lm-panel" data-draw="faomap_info" data-source="fao_map_areas districts clans" style="margin-top:var(--cds-gap-md)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="fao-districts">
+      <h2>Districts with the most crop stress now</h2>
+      <p class="lm-note">Estimated from FAO's 1 km map for the latest 10 days, for districts with at least 100 km² of cropland in season. Stress index is the average class value (0–100); FAO's official county figures above are calculated differently and run behind.</p>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="fao_map_areas" data-row-key="key">
+          <thead><tr><th data-field="district">District</th><th data-field="county">County</th><th data-field="index_est">Stress index (est.)</th><th data-field="stressed_pct">Cropland stressed (est.)</th><th>Cropland in season (approx. km²)</th><th data-field="hdf_pct">Drought years since 1984</th></tr></thead>
+          <tbody data-draw="faomap_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="lm-grid2">
+      <div class="lm-card lm-section" id="asi-by-county">
+        <h2>Share of cropland under drought stress</h2>
+        <p class="lm-note">Agricultural Stress Index: % of each county's cropland with poor vegetation health. Warning at 25% or more, Watch at 10–25%.</p>
+        <div class="lm-chart" data-draw="asi_chart" data-source="fao_county" style="min-height:360px"></div>
+      </div>
+      <div class="lm-card lm-section" id="rain-by-county">
+        <h2>Rainfall since 1 March, as % of normal</h2>
+        <p class="lm-note">Satellite rainfall estimate for each county's cropland, compared with its long-term average for the same period.</p>
+        <div class="lm-chart" data-draw="rain_pct_chart" data-source="fao_county" style="min-height:360px"></div>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="county-drought">
+      <h2>County drought record</h2>
+      <div class="lm-controls">
+        <label for="fao-county" style="font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)">County</label>
+        <select id="fao-county" class="dash-select" aria-label="County" data-draw="fao_county_select" data-source="fao_county"></select>
+      </div>
+      <h3 style="font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-md) 0 var(--cds-gap-xs)">Rainfall every 10 days this year, against normal</h3>
+      <ul class="lm-legend" aria-hidden="true"><li><span data-series="2026"></span>2026</li><li><span class="lm-line" style="background:var(--color-fg-muted)"></span>Long-term average</li></ul>
+      <div class="lm-chart" data-draw="fao_rain_chart" data-source="fao_rain" style="min-height:220px"></div>
+      <h3 style="font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-lg) 0 var(--cds-gap-xs)">Drought stress each season since 1984</h3>
+      <p class="lm-note">Seasonal Agricultural Stress Index. Red bars are years when El Niño was developing (1987, 1991, 1997, 2002, 2009, 2015, 2023). The 2026 season is not finished, so it is not shown here.</p>
+      <div class="lm-chart" data-draw="fao_hist_chart" data-source="fao_asi_annual" style="min-height:200px"></div>
+    </div>
+    <div class="lm-card lm-section" id="fao-table">
+      <h2>All counties</h2>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="fao_county" data-row-key="county">
+          <thead><tr><th data-field="county">County</th><th data-field="asi_pct">Cropland under stress</th><th data-field="level">Level</th><th data-field="vhi">Vegetation health (0–1)</th><th data-field="rain_season_pct">Rain since 1 Mar</th><th data-field="rain_30d_pct">Rain, last 30 days</th></tr></thead>
+          <tbody data-draw="fao_rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREPAREDNESS -->
+  <section class="lm-page" id="prepare" role="tabpanel" hidden>
+    <div class="lm-draft">Draft for EPA review: suggested actions based on standard El Niño early-action practice in West Africa. Lead agencies are proposed and need confirmation with each institution.</div>
+    <div class="lm-cards">
+      <div class="lm-card">
+        <div class="lm-hz-head"><span class="lm-hz-dot" data-level="Warning"></span><h3>Dryness &amp; drought</h3></div>
+        <p>Likely impacts: reduced lowland rice and cassava yields, falling well and creek levels, more bush fires, higher food prices.</p>
+        <ul>
+          <li>Promote early-maturing and drought-tolerant seed for 2027 planting (MOA).</li>
+          <li>Map and protect community water points; plan water trucking for Monrovia's dry months (LWSC).</li>
+          <li>Bush-fire awareness and burning controls in Bong, Nimba and Lofa (EPA, FDA).</li>
+          <li>Monitor river levels for hydropower and water supply (Hydrological Service).</li>
+        </ul>
+      </div>
+      <div class="lm-card">
+        <div class="lm-hz-head"><span class="lm-hz-dot" data-level="Watch"></span><h3>Flooding</h3></div>
+        <p>Likely impacts: flash floods in Greater Monrovia, displacement in low-lying communities, waterborne disease.</p>
+        <ul>
+          <li>Clear drains and waterways in flood-prone communities (MCC, EPA).</li>
+          <li>Pre-position relief stocks for at-risk communities (NDMA).</li>
+          <li>Issue flood alerts from LiMet heavy-rain forecasts (LiMet, NDMA).</li>
+        </ul>
+      </div>
+      <div class="lm-card">
+        <div class="lm-hz-head"><span class="lm-hz-dot" data-level="Watch"></span><h3>Heat</h3></div>
+        <p>Likely impacts: heat stress for outdoor workers, children and the elderly; higher electricity demand; livestock stress.</p>
+        <ul>
+          <li>Public heat-health messaging on hydration and shade (MOH, NPHIL).</li>
+          <li>Adjust school and market hours during heat peaks (MOE, local authorities).</li>
+        </ul>
+      </div>
+      <div class="lm-card">
+        <div class="lm-hz-head"><span class="lm-hz-dot" data-level="Warning"></span><h3>Windstorm</h3></div>
+        <p>Likely impacts: roofs torn off and houses destroyed, displacement to host families, damaged schools and hand pumps. Recorded events in 2024 and 2026 both struck in March, in Nimba, Lofa, Bong and Gbarpolu.</p>
+        <ul>
+          <li>Before March: promote roof tie-downs (tie wire, strapping) and safe-shelter awareness in Nimba, Lofa, Bong and Gbarpolu (NDMA, Red Cross).</li>
+          <li>Check school and clinic roofs before the transition season (MOE, MOH).</li>
+          <li>Pre-position zinc, nails, timber and tarpaulins with county authorities (NDMA).</li>
+          <li>Relay LiMet severe-thunderstorm warnings through community radio (LiMet).</li>
+        </ul>
+      </div>
+      <div class="lm-card">
+        <div class="lm-hz-head"><span class="lm-hz-dot" data-level="Low"></span><h3>Health</h3></div>
+        <p>Likely impacts: cholera and diarrhoea after floods or with water shortages; changing malaria patterns.</p>
+        <ul>
+          <li>Strengthen disease surveillance in hazard-affected counties (NPHIL).</li>
+          <li>Stock oral rehydration salts and water treatment supplies (MOH).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="triggers">
+      <h2>Proposed early-action triggers</h2>
+      <p class="lm-note">Thresholds that would move a county from watch to action. These are proposals to agree with partners, not adopted policy.</p>
+      <div class="lm-tablewrap">
+        <table class="lm-table">
+          <thead><tr><th>Trigger</th><th>Action</th><th>Lead</th></tr></thead>
+          <tbody>
+            <tr><td>NOAA El Niño strength odds stay above 80% for two months</td><td>Convene inter-agency El Niño task force; brief county authorities</td><td class="lm-nowrap">EPA, NDMA</td></tr>
+            <tr><td>County named under abnormal dryness for 3+ consecutive weeks</td><td>Activate drought watch: water-point checks, fire warnings, seed planning</td><td class="lm-nowrap">EPA, MOA, LWSC</td></tr>
+            <tr><td>Rainfall below 75% of normal over 90 days</td><td>Drought warning: agricultural advisory, water rationing plans</td><td class="lm-nowrap">LiMet, MOA</td></tr>
+            <tr><td>LiMet forecasts more than 50 mm in 24 hours</td><td>Flood alert to at-risk communities; NDMA on standby</td><td class="lm-nowrap">LiMet, NDMA</td></tr>
+            <tr><td>Late rainy-season onset (more than 2 weeks)</td><td>Advise delayed or staggered planting; seed support</td><td class="lm-nowrap">MOA</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BULLETINS -->
+  <section class="lm-page" id="bulletins" role="tabpanel" hidden>
+    <div class="lm-card lm-section" id="liberia-hazards">
+      <h2>Hazard bulletins naming Liberia</h2>
+      <p class="lm-note">Newest first. Rows summarise the source bulletins; check the originals before quoting them.</p>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="liberia_hazards" data-row-key="id">
+          <thead><tr><th data-field="period">Period</th><th data-field="area">Area</th><th data-field="hazard">Hazard</th><th data-field="detail">Detail</th><th data-field="source">Source</th></tr></thead>
+          <tbody data-draw="hazard_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="windstorm-record">
+      <h2>Windstorm event record</h2>
+      <p class="lm-note">Damaging windstorms reported since 2024. Both multi-community events struck in March, before the main rains; NDMA's incident database would fill the gaps.</p>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="windstorm_events" data-row-key="id">
+          <thead><tr><th data-field="start">Date</th><th data-field="counties">Counties</th><th data-field="people_affected">People affected</th><th data-field="houses_damaged">Houses damaged</th><th data-field="summary">What happened</th><th data-field="source">Source</th></tr></thead>
+          <tbody data-draw="ws_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="source-links">
+      <h2>Original sources</h2>
+      <div class="lm-cards">
+        <div><h3>NOAA Climate Prediction Center</h3><ul><li><a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml" target="_blank" rel="noopener">Monthly ENSO discussion</a></li><li><a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/lanina/enso_evolution-status-fcsts-web.pdf" target="_blank" rel="noopener">Weekly ENSO update (PDF)</a></li></ul></div>
+        <div><h3>NOAA CPC / FEWS NET</h3><ul><li><a href="https://www.cpc.ncep.noaa.gov/products/international/africa/africa_hazard.pdf" target="_blank" rel="noopener">Africa Hazards Outlook (PDF)</a></li><li><a href="https://www.cpc.ncep.noaa.gov/products/international/globalweatherhazard/Current.pdf" target="_blank" rel="noopener">Global Weather Hazards (PDF)</a></li></ul></div>
+        <div><h3>Live ocean maps</h3><ul><li><a href="https://worldview.earthdata.nasa.gov/?l=GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,Coastlines_15m&amp;v=110,-40,30,30" target="_blank" rel="noopener">NASA Worldview: sea-temperature anomaly (interactive)</a></li><li><a href="https://www.elninolive.com/map" target="_blank" rel="noopener">ElNinoLive: daily El Niño map</a></li></ul></div>
+        <div><h3>AGRHYMET / CILSS</h3><ul><li><a href="https://agrhymet.cilss.int/wp-content/uploads/2026/08/Note_technique_AGRHYMET_MAJ-prevision2026_English.pdf" target="_blank" rel="noopener">2026 seasonal forecast update (PDF)</a></li><li><a href="https://ict.cilss.int/en/node/521" target="_blank" rel="noopener">El Niño technical note</a></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="lm-page" id="about" role="tabpanel" hidden>
+    <div class="lm-card lm-section">
+      <h2>About this platform</h2>
+      <p class="lm-note" style="margin:0">Hosted by the Environmental Protection Agency of Liberia to monitor the 2026–27 El Niño and coordinate preparedness. Phase 1 covers monitoring, county hazard mapping, preparedness and bulletins. District population is now included; farmland, infrastructure, vulnerability and sector impact estimates follow in later phases.</p>
+    </div>
+    <div class="lm-card lm-section">
+      <h2>Collaborating institutions</h2>
+      <div class="lm-partners"><span>National Disaster Management Agency (NDMA)</span><span>Liberia Meteorological Service</span><span>Liberia Hydrological Service</span><span>Ministry of Agriculture</span><span>National Public Health Institute (NPHIL)</span><span>LISGIS</span></div>
+    </div>
+    <div class="lm-card lm-section">
+      <h2>Definitions</h2>
+      <div class="lm-cards">
+        <div><h3>Niño 3.4</h3><p>Sea temperature anomaly in the central-east equatorial Pacific, the main region used to track El Niño.</p></div>
+        <div><h3>RONI</h3><p>NOAA's official index since Feb 2026: Niño 3.4 minus tropical-average warming, as a 3-month mean. El Niño is +0.5 °C or more. Weak 0.5–0.9, moderate 1.0–1.4, strong 1.5–1.9, very strong 2.0+.</p></div>
+        <div><h3>Warning / Watch / Low</h3><p>Warning: the county is inside an area a regional bulletin flags for that hazard now. Watch: signals point to elevated risk. Low: no current signal.</p></div>
+      </div>
+    </div>
+    <div class="lm-card lm-section">
+      <h2>Data sources</h2>
+      <ul class="lm-note" style="padding-left:18px">
+        <li>El Niño indices and outlooks: NOAA Climate Prediction Center data files (RONI table, weekly and monthly Niño indices, official ENSO probability and strength tables, monthly ENSO discussion), checked daily by a scheduled task.</li>
+        <li>Liberia hazards: NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026); AGRHYMET seasonal update (30 Jul 2026).</li>
+        <li>Boundaries: LISGIS 2007 district (136) and clan (816) boundaries, edition 14; counties are formed from the districts. Clan names are pending the clan attribute table.</li><li>Population: LISGIS 2008 National Population and Housing Census, with LISGIS 2014 projections, by district.</li><li>Ocean and rain monitor: NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task.</li><li>Crop stress map: FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map.</li><li>Drought and crops: FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates.</li><li>Windstorm events: NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026).</li><li>Wind: Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan.</li>
+        <li>Updates: NOAA's monthly ENSO discussion comes out on the second Thursday of each month; the hazards outlook weekly. The platform updates itself automatically: NASA maps daily, NOAA El Niño data daily, FAO drought data weekly.</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="lm-foot">Liberia El Niño Early Warning Platform · Environmental Protection Agency of Liberia · Figures update automatically from NOAA, NASA and FAO; see About &amp; Data.</p>
+</div>
+
+<style>
+.lm { --lm-c1: #002868; --lm-c2: #BF0A30; --lm-c3: #8a94a6; }
+@media (prefers-color-scheme: dark) { #dash-root:not([data-theme="light"]) .lm { --lm-c1: #7ea2f0; --lm-c2: #ff6b81; --lm-c3: #9aa5b8; } }
+#dash-root[data-theme="dark"] .lm { --lm-c1: #7ea2f0; --lm-c2: #ff6b81; --lm-c3: #9aa5b8; }
+</style>
+<script>
+window.LM = {
+  state: { county: null, district: null, hazard: 'dryness' },
+  fmtC: (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + ' °C',
+  fmtDate: (s) => d3.utcFormat('%-d %b %Y')(new Date(s + 'T00:00:00Z')),
+  series: { '2026': 'var(--lm-c2)', '2015': 'var(--lm-c1)', '1997': '#E3A008', '2023': 'var(--lm-c3)', 'Niño 1+2': 'var(--lm-c2)', 'Niño 3': '#E3A008', 'Niño 3.4': 'var(--lm-c1)', 'Niño 4': 'var(--lm-c3)' },
+  levelColor: { Warning: 'var(--lv-warn)', Watch: 'var(--lv-watch)', Low: 'var(--lv-low)' },
+  isEvents: (h) => h === 'windstorm',
+  evColor: (n) => !n ? 'var(--color-border-line)' : n === 1 ? '#f2a3b0' : n === 2 ? '#df5871' : '#BF0A30',
+  hazardName: { dryness: 'Dryness / drought', flood: 'Flooding', heat: 'Heat', windstorm: 'Windstorm (recorded events)', ws100: 'Average wind speed, 100 m', ws50: 'Average wind speed, 50 m', ws10: 'Average wind speed, 10 m', pd100: 'Average wind power, 100 m', pd50: 'Average wind power, 50 m', pd10: 'Average wind power, 10 m' },
+  isWind: (h) => /^(ws|pd)(10|50|100)$/.test(h),
+  windFmt: (h, v) => v == null ? 'no data' : h.startsWith('pd') ? (Number(v) < 10 ? Number(v).toFixed(1) : Math.round(v)) + ' W/m²' : Number(v).toFixed(2) + ' m/s',
+  windKey: (p, level) => level === 'county' ? 'county:' + p.county : level === 'district' ? 'district:' + p.county + ':' + p.district : 'clan:' + p.county + ':' + p.district + ':' + p.clan_id,
+  lvlCls: (l) => l === 'warn' ? 'lm-bad' : l === 'watch' ? 'lm-warn' : null,
+  RECORD: 2.5,
+  THRESHOLD: 0.5,
+  tip(el) {
+    let t = el.querySelector(':scope > .lm-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'lm-tip'; t.hidden = true; el.appendChild(t); }
+    return t;
+  },
+  placeTip(el, t, x, y) {
+    const w = t.offsetWidth, W = el.clientWidth;
+    t.style.left = Math.max(0, Math.min(W - w, x + 12)) + 'px';
+    t.style.top = Math.max(0, y - 10) + 'px';
+  },
+  setText(el, status, text, cls) {
+    el.classList.toggle('dash-skeleton', status === 'loading');
+    el.textContent = status === 'ok' && text != null ? text : '—';
+    ['lm-good', 'lm-warn', 'lm-bad'].forEach((c) => el.classList.toggle(c, c === cls));
+  },
+  openTab(id) {
+    let found = false;
+    document.querySelectorAll('.lm-tabs button[data-tab]').forEach((b) => { if (b.getAttribute('data-tab') === id) found = true; });
+    if (!found) return;
+    document.querySelectorAll('.lm-tabs button[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === id)));
+    document.querySelectorAll('.lm > section.lm-page').forEach((s) => { s.hidden = s.id !== id; });
+    dash.setLink(id);
+  },
+  selectCounty(name) {
+    LM.state.county = name; LM.state.district = null;
+    dash.draw('hazard_map'); dash.draw('county_panel'); dash.draw('county_rows');
+  }
+};
+
+dash.calc('roni_latest', {
+  title: 'Latest RONI and change',
+  description: 'The most recent 2026 RONI season, its change from the season before, and NOAA strength category.',
+  inputs: ['roni'],
+  fn: (roni) => {
+    const y = roni.filter((r) => String(r.year) === '2026').sort((a, b) => Number(a.order) - Number(b.order));
+    if (!y.length) return [];
+    const last = y[y.length - 1], prev = y[y.length - 2];
+    const v = Math.round(Number(last.roni_c) * 10) / 10;
+    const category = v >= 2 ? 'very strong' : v >= 1.5 ? 'strong' : v >= 1 ? 'moderate' : v >= 0.5 ? 'weak' : v > -0.5 ? 'not present (neutral)' : 'absent (La Niña)';
+    return [{ season: last.season + ' 2026', roni_c: v, change_c: prev ? Math.round((v - Number(prev.roni_c)) * 10) / 10 : null, category }];
+  }
+});
+
+dash.calc('latest_hazard', {
+  title: 'Latest Liberia bulletin',
+  description: 'The most recently issued hazard bulletin that names Liberia.',
+  inputs: ['liberia_hazards'],
+  fn: (hazards) => hazards.slice().sort((a, b) => String(b.issued).localeCompare(String(a.issued))).slice(0, 1)
+});
+
+dash.calc('county_counts', {
+  title: 'Counties by dryness level',
+  description: 'Number of counties at each dryness level in the county hazard watch.',
+  inputs: ['county_watch'],
+  fn: (counties) => ['Warning', 'Watch', 'Low'].map((level) => ({ level, counties: counties.filter((c) => c.dryness === level).length }))
+});
+
+dash.calc('county_pop', {
+  title: 'Population by county',
+  description: 'District populations (LISGIS 2008 census and 2014 projection) summed to counties.',
+  inputs: ['district_pop'],
+  fn: (districts) => {
+    const by = new Map();
+    districts.forEach((d) => {
+      const c = by.get(d.county) || { county: d.county, pop2014: 0, pop2008: 0, households2008: 0, districts: 0 };
+      c.pop2014 += Number(d.pop2014); c.pop2008 += Number(d.pop2008); c.households2008 += Number(d.households2008); c.districts += 1;
+      by.set(d.county, c);
+    });
+    return Array.from(by.values()).sort((a, b) => a.county.localeCompare(b.county));
+  }
+});
+
+dash.calc('windstorm_by_county', {
+  title: 'Recorded windstorm events by county',
+  description: 'Number of recorded damaging windstorm events per county since 2024, with the districts sources name.',
+  inputs: ['windstorm_event_counties'],
+  fn: (records) => {
+    const by = new Map();
+    records.forEach((r) => {
+      const c = by.get(r.county) || { county: r.county, events: 0, districts: '' };
+      c.events += 1;
+      if (r.district && !c.districts.split(', ').includes(r.district)) c.districts = c.districts ? c.districts + ', ' + r.district : r.district;
+      by.set(r.county, c);
+    });
+    return Array.from(by.values()).sort((a, b) => b.events - a.events || a.county.localeCompare(b.county));
+  }
+});
+
+dash.calc('exposed_pop', {
+  title: 'People by hazard level',
+  description: 'Population (LISGIS 2014 projection) living in counties at each level of each hazard, and its share of Liberia.',
+  inputs: ['county_watch', 'district_pop'],
+  fn: (counties, districts) => {
+    const total = districts.reduce((s, d) => s + Number(d.pop2014), 0);
+    const level = new Map(counties.map((c) => [c.county, c]));
+    const out = [];
+    ['dryness', 'flood', 'heat'].forEach((hazard) => ['Warning', 'Watch', 'Low'].forEach((lv) => {
+      const pop = districts.filter((d) => level.get(d.county) && level.get(d.county)[hazard] === lv).reduce((s, d) => s + Number(d.pop2014), 0);
+      out.push({ hazard, level: lv, pop2014: Math.round(pop), share: total ? Math.round(pop / total * 100) : 0 });
+    }));
+    return out;
+  }
+});
+
+(function initTabs() {
+  document.querySelectorAll('.lm-tabs button[data-tab]').forEach((b) => b.addEventListener('click', () => LM.openTab(b.getAttribute('data-tab'))));
+  const h = (location.hash || '').replace('#', '');
+  if (h) LM.openTab(h);
+  document.querySelectorAll('#hz-select').forEach((s) => s.addEventListener('change', () => {
+    LM.state.hazard = s.value;
+    const w = LM.isWind(s.value), ev = LM.isEvents(s.value);
+    document.querySelectorAll('#hz-legend').forEach((e) => { e.hidden = w || ev; });
+    document.querySelectorAll('#wind-note').forEach((e) => { e.hidden = !w; });
+    document.querySelectorAll('#ws-note').forEach((e) => { e.hidden = !ev; });
+    document.querySelectorAll('#exposure').forEach((e) => { e.hidden = w || ev; });
+    ['hazard_map', 'county_panel', 'exposure_title', 'exposure_chart'].forEach((n) => dash.draw(n));
+  }));
+  document.querySelectorAll('#hz-up').forEach((b) => b.addEventListener('click', () => { if (LM.state.district) { LM.state.district = null; dash.draw('hazard_map'); dash.draw('county_panel'); } else LM.selectCounty(null); }));
+  document.querySelectorAll('#hz-reset').forEach((b) => b.addEventListener('click', () => LM.selectCounty(null)));
+})();
+</script>
+
+<script>
+const strengthCls = (c) => (c === 'very strong' || c === 'strong') ? 'lm-bad' : c === 'moderate' ? 'lm-warn' : null;
+const n34 = () => { const d = dash.data('nino_regions'); return { s: d.status, r: d.data.find((x) => x.region === 'Niño 3.4') }; };
+const rl = () => { const d = dash.data('roni_latest'); return { s: d.status, r: (d.data || [])[0] }; };
+const lh = () => { const d = dash.data('latest_hazard'); return { s: d.status, r: (d.data || [])[0] }; };
+const warnN = () => { const d = dash.data('county_counts'); const r = (d.data || []).find((x) => x.level === 'Warning'); return { s: d.status, r }; };
+
+dash.draw('strength_word', (el) => { const { s, r } = rl(); LM.setText(el, s, r && r.category, r && strengthCls(r.category)); });
+dash.draw('warn_count', (el) => { const { s, r } = warnN(); LM.setText(el, s, r && String(r.counties), 'lm-bad'); });
+dash.draw('n34_word', (el) => { const { s, r } = n34(); LM.setText(el, s, r && LM.fmtC(Number(r.anomaly_c))); });
+dash.draw('hist_word', (el) => { const d = dash.data('outlook'); const r = d.data.find((x) => Number(x.order) === 3); LM.setText(el, d.status, r && r.very_strong_pct != null ? r.very_strong_pct + '%' : null, 'lm-bad'); });
+dash.draw('hist_season', (el) => { const d = dash.data('outlook'); const r = d.data.find((x) => Number(x.order) === 3); LM.setText(el, d.status, r && r.label); });
+dash.draw('outlook_issued', (el) => { const d = dash.data('outlook'); LM.setText(el, d.status, d.data[0] && d.data[0].issued); });
+const est = () => { const d = dash.data('enso_status'); return { s: d.status, r: (d.data || [])[0] }; };
+dash.draw('enso_alert', (el) => { const { s, r } = est(); LM.setText(el, s, r && r.alert); });
+dash.draw('enso_synopsis', (el) => { const { s, r } = est(); LM.setText(el, s, r && r.synopsis); });
+dash.draw('enso_disc', (el) => { const { s, r } = est(); LM.setText(el, s, r && r.discussion_date ? LM.fmtDate(r.discussion_date) : null); });
+dash.draw('enso_next', (el) => { const { s, r } = est(); LM.setText(el, s, r && r.next_date ? LM.fmtDate(r.next_date) : 'not announced'); });
+dash.draw('enso_week', (el) => { const { s, r } = est(); LM.setText(el, s, r && r.weekly_week ? LM.fmtDate(r.weekly_week) : null); });
+
+dash.draw('tile_n34', (el) => { const { s, r } = n34(); LM.setText(el, s, r && LM.fmtC(Number(r.anomaly_c)), r && Number(r.anomaly_c) >= 1.5 ? 'lm-bad' : null); });
+dash.draw('tile_n34_week', (el) => { const { s, r } = n34(); LM.setText(el, s, r && LM.fmtDate(r.week)); });
+dash.draw('tile_roni', (el) => { const { s, r } = rl(); LM.setText(el, s, r && LM.fmtC(r.roni_c), r && strengthCls(r.category)); });
+dash.draw('tile_roni_change', (el) => { const { s, r } = rl(); LM.setText(el, s, r && r.change_c != null ? LM.fmtC(r.change_c) : null, r && r.change_c > 0 ? 'lm-bad' : r && r.change_c < 0 ? 'lm-good' : null); });
+dash.draw('tile_roni_season', (el) => { const { s, r } = rl(); LM.setText(el, s, r && r.season); });
+dash.draw('tile_warn', (el) => { const { s, r } = warnN(); LM.setText(el, s, r && String(r.counties), r && r.counties > 0 ? 'lm-bad' : 'lm-good'); });
+const exp = () => { const d = dash.data('exposed_pop'); return { s: d.status, r: (d.data || []).find((x) => x.hazard === 'dryness' && x.level === 'Warning') }; };
+dash.draw('exposed_word', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2014)); });
+dash.draw('tile_exposed', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2014), r && r.pop2014 > 0 ? 'lm-bad' : null); });
+dash.draw('tile_exposed_share', (el) => { const { s, r } = exp(); LM.setText(el, s, r && r.share + '%'); });
+dash.draw('tile_lib', (el) => { const { s, r } = lh(); LM.setText(el, s, r && r.hazard, r && LM.lvlCls(r.level)); });
+dash.draw('tile_lib_area', (el) => { const { s, r } = lh(); LM.setText(el, s, r && r.area); });
+dash.draw('tile_lib_period', (el) => { const { s, r } = lh(); LM.setText(el, s, r && r.period); });
+
+dash.onData(() => {
+  document.querySelectorAll('.lm-legend span[data-series]').forEach((sp) => { const c = LM.series[sp.getAttribute('data-series')]; if (c) sp.style.background = c; });
+  document.querySelectorAll('[data-level]').forEach((sp) => { const c = LM.levelColor[sp.getAttribute('data-level')]; if (c) sp.style.background = c; });
+});
+</script>
+
+<script>
+function lmEmpty(el, status, h) {
+  el.replaceChildren();
+  const p = document.createElement('p');
+  p.className = 'lm-note';
+  p.style.minHeight = h + 'px';
+  p.textContent = status === 'error' ? 'Failed to load' : '—';
+  if (status === 'loading') p.classList.add('dash-skeleton');
+  el.appendChild(p);
+}
+window.lmEmpty = lmEmpty;
+
+function lmMap(el, opts) {
+  const c = dash.data('counties'), w = dash.data('county_watch'), dd = opts.districts ? dash.data('districts') : { status: 'ok', data: null };
+  const wantClans = !!(opts.districts && opts.selected && LM.state.district);
+  const cl = wantClans ? dash.data('clans') : { status: 'ok', data: null };
+  const isW = LM.isWind(opts.hazard);
+  const wz = isW ? dash.data('wind_zones') : { status: 'ok', data: [] };
+  const isEv = LM.isEvents(opts.hazard);
+  const ev = isEv ? dash.data('windstorm_by_county') : { status: 'ok', data: [] };
+  const st = [c.status, w.status, dd.status, cl.status, wz.status, ev.status];
+  if (st.some((s) => s !== 'ok') || !c.data || !c.data.features) return lmEmpty(el, st.find((s) => s !== 'ok') || 'error', opts.minH);
+  const watch = new Map(w.data.map((r) => [r.county, r]));
+  const hz = opts.hazard;
+  const sel = opts.selected;
+  const W = el.clientWidth, H = Math.round(Math.min(opts.maxH, Math.max(opts.minH, W * 0.9)));
+  el.replaceChildren();
+  const selFeat = sel ? c.data.features.find((f) => f.properties.county === sel) : null;
+  const dFeats = selFeat && dd.data && dd.data.features ? dd.data.features.filter((f) => f.properties.county === sel) : [];
+  const dSel = wantClans ? dFeats.find((f) => f.properties.district === LM.state.district) : null;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', `Map of Liberia coloured by ${LM.hazardName[hz]} level` + (dSel ? `, zoomed to ${LM.state.district} District with its clans` : sel ? `, zoomed to ${sel} County with its districts` : ''));
+  const proj = d3.geoMercator().fitExtent([[8, 8], [W - 8, H - 8]], dSel || selFeat || c.data);
+  const path = d3.geoPath(proj);
+  const tip = LM.tip(el);
+  const lvl = (name) => { const r = watch.get(name); return r ? r[hz] : null; };
+  const wmap = new Map((wz.data || []).map((r) => [r.key, r]));
+  const wval = (p, level) => { const r = wmap.get(LM.windKey(p, level)); return r ? r[hz + '_mean'] : null; };
+  const activeLevel = wantClans ? 'clan' : (sel && opts.districts ? 'district' : 'county');
+  const wvals = (wz.data || []).filter((r) => r.level === activeLevel && (!sel || r.county === sel) && (!wantClans || r.district === LM.state.district)).map((r) => r[hz + '_mean']).filter((v) => v != null);
+  const wscale = d3.scaleSequential(d3.interpolateBlues).domain(wvals.length ? [d3.min(wvals) * 0.9, d3.max(wvals)] : [0, 1]);
+  const wfill = (p, level) => { const v = wval(p, level); return v == null ? 'var(--color-border-line)' : wscale(v); };
+  const evMap = new Map((ev.data || []).map((r) => [r.county, r]));
+  const evN = (cty) => { const r = evMap.get(cty); return r ? r.events : 0; };
+  const evDist = (cty, d) => { const r = evMap.get(cty); return !!(r && r.districts && r.districts.split(', ').includes(d)); };
+  const cFill = (f) => isEv ? LM.evColor(evN(f.properties.county)) : isW ? wfill(f.properties, 'county') : (LM.levelColor[lvl(f.properties.county)] || 'var(--color-border-line)');
+  const cTip = (f) => isEv ? `${f.properties.county} County · ${evN(f.properties.county)} recorded windstorm event${evN(f.properties.county) === 1 ? '' : 's'} since 2024` : isW ? `${f.properties.county} County · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'county'))}` : `${f.properties.county} County · ${LM.hazardName[hz]}: ${lvl(f.properties.county) || 'no data'}`;
+  const showTip = (ev, text) => { const [px, py] = d3.pointer(ev, el); tip.textContent = text; tip.hidden = false; LM.placeTip(el, tip, px, py); };
+  const hideTip = () => { tip.hidden = true; };
+  svg.append('g').selectAll('path').data(c.data.features).join('path')
+    .attr('class', (f) => 'lm-area' + (f.properties.county === sel && !dSel ? ' lm-sel' : ''))
+    .attr('d', path)
+    .style('fill', cFill)
+    .style('opacity', (f) => sel && f.properties.county !== sel ? 0.25 : 0.9)
+    .on('pointermove', (ev, f) => showTip(ev, cTip(f)))
+    .on('pointerleave', hideTip)
+    .on('click', (ev, f) => opts.onCounty(f.properties.county));
+  if (dFeats.length) {
+    svg.append('g').selectAll('path').data(dFeats).join('path')
+      .attr('class', (f) => 'lm-area' + (dSel && f.properties.district === LM.state.district ? ' lm-sel' : ''))
+      .attr('d', path)
+      .style('fill', (f) => isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'district') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
+      .style('fill-opacity', (f) => dSel ? (f.properties.district === LM.state.district ? 0.35 : 0.15) : (isW ? 1 : isEv ? (evDist(sel, f.properties.district) ? 1 : 0.45) : 0.75))
+      .style('stroke-width', (f) => isEv && evDist(sel, f.properties.district) ? 3 : null)
+      .on('pointermove', (ev, f) => showTip(ev, isEv ? `${f.properties.district} District` + (evDist(sel, f.properties.district) ? ' · named in a windstorm report' : '') : isW ? `${f.properties.district} District · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'district'))}` : `${f.properties.district} District · ${d3.format(',')(f.properties.pop2014)} people (2014)`))
+      .on('pointerleave', hideTip)
+      .on('click', (ev, f) => { ev.stopPropagation(); LM.state.district = f.properties.district; dash.draw('hazard_map'); dash.draw('county_panel'); });
+  }
+  if (dSel && cl.data && cl.data.features) {
+    const cs = cl.data.features.filter((f) => f.properties.district === LM.state.district && f.properties.county === sel);
+    svg.append('g').selectAll('path').data(cs).join('path')
+      .attr('class', 'lm-area')
+      .attr('d', path)
+      .style('fill', (f) => isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'clan') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
+      .style('fill-opacity', isW ? 1 : 0.8)
+      .on('pointermove', (ev, f) => showTip(ev, `Clan #${f.properties.clan_id} · ${f.properties.area_km2} km² · ${isEv ? 'windstorm events recorded in ' + sel + ' County: ' + evN(sel) : LM.hazardName[hz] + ': ' + (isW ? LM.windFmt(hz, wval(f.properties, 'clan')) : lvl(sel))}`))
+      .on('pointerleave', hideTip)
+      .on('click', (ev) => ev.stopPropagation());
+  }
+  if (isEv) {
+    const lg = svg.append('g').attr('transform', `translate(10,${H - 24})`);
+    [0, 1, 2, 3].forEach((n, i) => {
+      lg.append('rect').attr('x', i * 46).attr('width', 12).attr('height', 10).attr('rx', 2).style('fill', LM.evColor(n));
+      lg.append('text').attr('x', i * 46 + 16).attr('y', 9).text(n === 3 ? '3+' : String(n));
+    });
+    lg.append('text').attr('x', 0).attr('y', -6).text('Recorded events since 2024');
+  }
+  if (isW && wvals.length) {
+    const lg = svg.append('g').attr('transform', `translate(10,${H - 34})`);
+    const gid = 'lmwg' + Math.random().toString(36).slice(2, 8);
+    const grad = svg.append('defs').append('linearGradient').attr('id', gid);
+    d3.range(0, 1.01, 0.25).forEach((t) => grad.append('stop').attr('offset', t * 100 + '%').attr('stop-color', wscale(wscale.domain()[0] + t * (wscale.domain()[1] - wscale.domain()[0]))));
+    lg.append('rect').attr('width', 120).attr('height', 8).attr('rx', 2).style('fill', `url(#${gid})`);
+    lg.append('text').attr('y', 22).text(LM.windFmt(hz, d3.min(wvals)));
+    lg.append('text').attr('x', 120).attr('y', 22).attr('text-anchor', 'end').text(LM.windFmt(hz, d3.max(wvals)));
+  }
+  const labelFeats = dSel ? [] : (dFeats.length ? dFeats : (W > 340 ? c.data.features : []));
+  const labelOf = (f) => f.properties.district || f.properties.county;
+  const sorted = labelFeats.slice().sort((a, b) => path.area(b) - path.area(a));
+  const lab = svg.append('g').selectAll('text').data(sorted).join('text').attr('class', 'lm-maplabel')
+    .attr('transform', (f) => `translate(${path.centroid(f)})`).attr('text-anchor', 'middle').attr('dy', '0.35em').text(labelOf);
+  const kept = [];
+  lab.each(function () {
+    const b = this.getBBox(), t = this.getCTM ? null : null;
+    const [cx, cy] = d3.select(this).attr('transform').match(/-?[\d.]+/g).map(Number);
+    const box = { x0: cx + b.x - 2, x1: cx + b.x + b.width + 2, y0: cy + b.y - 1, y1: cy + b.y + b.height + 1 };
+    const hit = !isFinite(cx) || kept.some((k) => box.x0 < k.x1 && box.x1 > k.x0 && box.y0 < k.y1 && box.y1 > k.y0);
+    if (hit) this.style.display = 'none'; else kept.push(box);
+  });
+}
+
+dash.draw('overview_map', (el) => lmMap(el, { hazard: 'dryness', selected: null, minH: 280, maxH: 420, districts: false,
+  onCounty: (name) => { LM.state.hazard = 'dryness'; document.querySelectorAll('#hz-select').forEach((s) => { s.value = 'dryness'; }); LM.state.county = name; LM.state.district = null; LM.openTab('hazards'); } }));
+
+dash.draw('hazard_map', (el) => lmMap(el, { hazard: LM.state.hazard, selected: LM.state.county, minH: 380, maxH: 580, districts: true, onCounty: (name) => LM.selectCounty(name) }));
+
+dash.draw('county_panel', (el) => {
+  const w = dash.data('county_watch'), dp = dash.data('district_pop'), cp = dash.data('county_pop');
+  el.replaceChildren();
+  if (w.status !== 'ok') { el.textContent = w.status === 'error' ? 'Failed to load' : '—'; return; }
+  const sel = LM.state.county, dsel = LM.state.district;
+  const fmt = d3.format(',');
+  const add = (tag, text, parent) => { const e = document.createElement(tag); if (text != null) e.textContent = text; (parent || el).appendChild(e); return e; };
+  const mark = (e, src, field, where) => { e.setAttribute('data-source', src); e.setAttribute('data-field', field); if (where) e.setAttribute('data-where', where); return e; };
+  if (!sel) {
+    add('h3', 'All of Liberia');
+    add('p', 'Click a county on the map to see its hazard levels, the evidence behind them and its people. Then click a district to see its clans.').className = 'lm-note';
+    const dl = add('dl');
+    ['Warning', 'Watch', 'Low'].forEach((lv) => {
+      const names = w.data.filter((r) => r[LM.state.hazard] === lv).map((r) => r.county);
+      const dt = add('dt', null, dl); const pill = add('span', lv, dt); pill.className = 'lm-level'; pill.style.background = LM.levelColor[lv];
+      add('dd', names.length ? names.join(', ') : 'None', dl);
+    });
+    return;
+  }
+  const r = w.data.find((x) => x.county === sel);
+  const cw = 'county=' + encodeURIComponent(sel);
+  add('h3', dsel ? `${dsel} District` : `${sel} County`);
+  if (dsel) add('p', `${sel} County`).className = 'lm-note';
+  if (dsel && dp.status === 'ok') {
+    const d = dp.data.find((x) => x.district === dsel && x.county === sel);
+    if (d) {
+      const dw = 'district=' + encodeURIComponent(dsel) + '&county=' + encodeURIComponent(sel);
+      const dl = add('dl');
+      add('dt', 'People (2014 projection)', dl); mark(add('dd', fmt(Number(d.pop2014)), dl), 'district_pop', 'pop2014', dw);
+      add('dt', 'People (2008 census)', dl); mark(add('dd', fmt(Number(d.pop2008)), dl), 'district_pop', 'pop2008', dw);
+      add('dt', 'Households (2008)', dl); mark(add('dd', fmt(Number(d.households2008)), dl), 'district_pop', 'households2008', dw);
+      add('dt', 'Area', dl); mark(add('dd', fmt(Number(d.area_km2)) + ' km²', dl), 'district_pop', 'area_km2', dw);
+    }
+    const cl = dash.data('clans');
+    if (cl.status === 'ok' && cl.data && cl.data.features) {
+      const n = cl.data.features.filter((f) => f.properties.district === dsel && f.properties.county === sel).length;
+      const p = add('p', `${n} clans shown on the map. Hover a clan for its size. Clan names will appear once the clan attribute table (.dbf) is loaded; clans use ${sel} County's hazard levels for now.`);
+      p.className = 'lm-note'; p.style.marginTop = 'var(--cds-gap-md)';
+    }
+    const b = add('button', `Back to ${sel} County`); b.type = 'button'; b.className = 'lm-btn'; b.style.marginTop = 'var(--cds-gap-sm)';
+    b.addEventListener('click', () => { LM.state.district = null; dash.draw('hazard_map'); dash.draw('county_panel'); });
+  }
+  if (LM.isEvents(LM.state.hazard)) {
+    const E = dash.data('windstorm_events'), EC = dash.data('windstorm_event_counties');
+    if (E.status === 'ok' && EC.status === 'ok') {
+      const recs = EC.data.filter((x) => x.county === sel);
+      const h = add('p', `Recorded windstorms in ${sel} County: ${recs.length}`); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-sm)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+      if (!recs.length) add('p', 'No windstorm event in the current record. This may mean none was reported, not that none happened.').className = 'lm-note';
+      recs.forEach((rc) => {
+        const e = E.data.find((x) => x.id === rc.event_id); if (!e) return;
+        const box = add('div'); box.style.borderLeft = '3px solid #BF0A30'; box.style.padding = '0 0 0 10px'; box.style.margin = '0 0 var(--cds-gap-md)';
+        const d = add('div', e.start === e.end ? LM.fmtDate(e.start) : `${LM.fmtDate(e.start)} – ${LM.fmtDate(e.end)}`, box); d.style.fontWeight = 'var(--cds-font-weight-medium)';
+        mark(d, 'windstorm_events', 'start', 'id=' + encodeURIComponent(e.id));
+        add('div', rc.note + (rc.district ? ` District: ${rc.district}.` : ''), box).className = 'lm-note';
+        const sm = add('div', e.summary, box); sm.style.fontSize = 'var(--cds-font-size-caption)'; sm.style.color = 'var(--color-fg-muted)';
+        const a = add('a', e.source, box); a.href = e.url; a.target = '_blank'; a.rel = 'noopener'; a.style.fontSize = 'var(--cds-font-size-caption)'; a.style.display = 'block';
+      });
+    }
+  }
+  if (!r) { add('p', 'No hazard data for this county.').className = 'lm-note'; return; }
+  if (dsel) { const h = add('p', `Hazard levels (${sel} County)`); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-sm)'; h.style.fontWeight = 'var(--cds-font-weight-medium)'; }
+  const dl = add('dl');
+  [['dryness', 'dryness_basis'], ['flood', 'flood_basis'], ['heat', 'heat_basis']].forEach(([k, b]) => {
+    const dt = add('dt', LM.hazardName[k] + ' ', dl);
+    const pill = mark(add('span', r[k], dt), 'county_watch', k, cw); pill.className = 'lm-level'; pill.style.background = LM.levelColor[r[k]];
+    add('dd', r[b], dl);
+  });
+  add('dt', 'Confidence', dl); mark(add('dd', r.confidence, dl), 'county_watch', 'confidence', cw);
+  const wz = dash.data('wind_zones');
+  if (wz.status === 'ok') {
+    const key = dsel ? 'district:' + sel + ':' + dsel : 'county:' + sel;
+    const wr = wz.data.find((x) => x.key === key);
+    if (wr) {
+      const wk = 'key=' + encodeURIComponent(key);
+      const h = add('p', `Average wind (Global Wind Atlas, ${dsel ? 'district' : 'county'} mean)`); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-sm)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+      const wl = add('dl');
+      [['ws100', 'Wind speed, 100 m'], ['ws50', 'Wind speed, 50 m'], ['ws10', 'Wind speed, 10 m'], ['pd100', 'Wind power, 100 m'], ['pd50', 'Wind power, 50 m'], ['pd10', 'Wind power, 10 m']].forEach(([k, lab]) => {
+        if (wr[k + '_mean'] == null) return;
+        add('dt', lab, wl); mark(add('dd', LM.windFmt(k, wr[k + '_mean']), wl), 'wind_zones', k + '_mean', wk);
+      });
+      add('dt', 'Strongest 250 m cell, 10 m', wl); mark(add('dd', LM.windFmt('ws10', wr.ws10_max), wl), 'wind_zones', 'ws10_max', wk);
+    }
+  }
+  if (!dsel && cp.status === 'ok') {
+    const c = (cp.data || []).find((x) => x.county === sel);
+    if (c) {
+      add('dt', 'People (2014 projection)', dl); mark(add('dd', fmt(c.pop2014), dl), 'county_pop', 'pop2014', cw);
+      add('dt', 'Households (2008)', dl); mark(add('dd', fmt(c.households2008), dl), 'county_pop', 'households2008', cw);
+    }
+  }
+  if (!dsel && dp.status === 'ok') {
+    const ds = dp.data.filter((x) => x.county === sel).sort((a, b) => a.district.localeCompare(b.district));
+    const h = add('p', `${ds.length} districts · click one to see its clans`); h.style.margin = 'var(--cds-gap-md) 0 0'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+    const chips = add('div'); chips.className = 'lm-chips';
+    ds.forEach((d) => {
+      const s = add('span', `${d.district} · ${fmt(Number(d.pop2014))}`, chips);
+      s.style.cursor = 'pointer'; s.setAttribute('role', 'button'); s.tabIndex = 0;
+      const go = () => { LM.state.district = d.district; dash.draw('hazard_map'); dash.draw('county_panel'); };
+      s.addEventListener('click', go); s.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+    });
+  }
+});
+
+dash.draw('county_rows', (tb) => {
+  const d = dash.data('county_watch'), cp = dash.data('county_pop');
+  tb.replaceChildren();
+  if (d.status !== 'ok') return;
+  const pop = new Map(((cp.status === 'ok' && cp.data) || []).map((x) => [x.county, x.pop2014]));
+  const order = { Warning: 0, Watch: 1, Low: 2 };
+  d.data.slice().sort((a, b) => (order[a.dryness] - order[b.dryness]) || a.county.localeCompare(b.county)).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', encodeURIComponent(r.county));
+    tr.style.cursor = 'pointer';
+    if (r.county === LM.state.county) tr.style.background = 'var(--color-panel)';
+    tr.addEventListener('click', () => { LM.selectCounty(r.county); document.querySelectorAll('#hazards').forEach((s) => s.scrollIntoView({ behavior: 'smooth', block: 'start' })); });
+    const td0 = document.createElement('td'); td0.textContent = r.county; td0.style.fontWeight = 'var(--cds-font-weight-medium)'; tr.appendChild(td0);
+    ['dryness', 'flood', 'heat'].forEach((k) => { const td = document.createElement('td'); const s = document.createElement('span'); s.className = 'lm-level'; s.style.background = LM.levelColor[r[k]]; s.textContent = r[k]; td.appendChild(s); tr.appendChild(td); });
+    const tc = document.createElement('td'); tc.textContent = r.confidence; tr.appendChild(tc);
+    const tp = document.createElement('td'); tp.style.fontVariantNumeric = 'tabular-nums'; tp.textContent = pop.has(r.county) ? d3.format(',')(pop.get(r.county)) : '—'; tr.appendChild(tp);
+    tb.appendChild(tr);
+  });
+});
+
+dash.draw('exposure_title', (el) => {
+  if (LM.isWind(LM.state.hazard)) { el.textContent = 'People by hazard level'; return; }
+  const d = dash.data('exposed_pop');
+  const r = d.status === 'ok' ? d.data.find((x) => x.hazard === LM.state.hazard && x.level === 'Warning') : null;
+  const h = LM.hazardName[LM.state.hazard].toLowerCase();
+  el.textContent = d.status !== 'ok' ? '—' : r && r.pop2014 > 0 ? `${d3.format(',')(r.pop2014)} people live in counties under a ${h} warning` : `No county is under a ${h} warning`;
+});
+
+dash.draw('exposure_chart', (el) => {
+  if (LM.isWind(LM.state.hazard)) { el.replaceChildren(); return; }
+  const d = dash.data('exposed_pop');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 140);
+  const rows = ['Warning', 'Watch', 'Low'].map((lv) => d.data.find((x) => x.hazard === LM.state.hazard && x.level === lv) || { level: lv, pop2014: 0, share: 0 });
+  const W = el.clientWidth, bh = 28, gap = 10, H = rows.length * (bh + gap);
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', `Bar chart of population by ${LM.hazardName[LM.state.hazard]} level`);
+  const labels = svg.append('g');
+  rows.forEach((r, i) => labels.append('text').attr('x', 0).attr('y', i * (bh + gap) + bh / 2 + 4).text(r.level));
+  const lw = d3.max(labels.selectAll('text').nodes(), (n) => n.getComputedTextLength()) + 10;
+  const vals = rows.map((r) => `${d3.format(',')(r.pop2014)} (${r.share}%)`);
+  const vw = Math.min(150, W * 0.4);
+  const x = d3.scaleLinear().domain([0, Math.max(1, d3.max(rows, (r) => r.pop2014))]).range([lw, W - vw]);
+  const tip = LM.tip(el);
+  rows.forEach((r, i) => {
+    const yy = i * (bh + gap);
+    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.pop2014 > 0 ? 2 : 0, x(r.pop2014) - x(0))).style('fill', LM.levelColor[r.level])
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `${r.level}: ${vals[i]} of Liberia's people`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+      .on('pointerleave', () => { tip.hidden = true; });
+    svg.append('text').attr('class', 'lm-val').attr('x', x(r.pop2014) + 6).attr('y', yy + bh / 2 + 4).text(vals[i]);
+  });
+});
+</script>
+
+<script>
+dash.draw('roni_chart', (el) => {
+  const d = dash.data('roni');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 260);
+  const rows = d.data.map((r) => ({ year: String(r.year), season: r.season, order: Number(r.order), v: Number(r.roni_c) }));
+  const seasons = Array.from(new Map(rows.sort((a, b) => a.order - b.order).map((r) => [r.order, r.season])).values());
+  const years = ['1997', '2015', '2023', '2026'].filter((y) => rows.some((r) => r.year === y));
+  const W = el.clientWidth, H = 260, m = { t: 12, r: 12, b: 26, l: 44 };
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Line chart of RONI by season for 1997, 2015, 2023 and 2026, with El Niño and record thresholds');
+  const x = d3.scalePoint().domain(seasons).range([m.l, W - m.r]).padding(0.2);
+  const yMax = Math.max(3, d3.max(rows, (r) => r.v) + 0.3), yMin = Math.min(-1, d3.min(rows, (r) => r.v) - 0.2);
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([H - m.b, m.t]);
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickSizeOuter(0).tickValues(W < 480 ? seasons.filter((_, i) => i % 2 === 0) : seasons))
+    .call((g) => { g.select('.domain').style('stroke', 'var(--cds-chart-axis)'); g.selectAll('.tick line').remove(); });
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6).tickFormat((v) => (v > 0 ? '+' : '') + v))
+    .call((g) => { g.select('.domain').remove(); g.selectAll('.tick line').attr('x2', W - m.l - m.r).style('stroke', 'var(--cds-chart-grid)'); });
+  [[LM.THRESHOLD, 'El Niño threshold'], [LM.RECORD, 'Record (+2.5 °C)']].forEach(([v, lab]) => {
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v)).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', W - m.r).attr('y', y(v) - 4).attr('text-anchor', 'end').text(lab);
+  });
+  const line = d3.line().x((r) => x(r.season)).y((r) => y(r.v));
+  years.forEach((yr) => {
+    const s = rows.filter((r) => r.year === yr);
+    const c = LM.series[yr];
+    svg.append('path').datum(s).attr('d', line).attr('fill', 'none').style('stroke', c).attr('stroke-width', yr === '2026' ? 3 : 1.75).style('opacity', yr === '2026' ? 1 : 0.75);
+    if (yr === '2026') {
+      const last = s[s.length - 1];
+      svg.append('circle').attr('cx', x(last.season)).attr('cy', y(last.v)).attr('r', 4.5).style('fill', c);
+      svg.append('text').attr('class', 'lm-val').attr('x', x(last.season) + 8).attr('y', y(last.v) + 4).text(LM.fmtC(last.v));
+    }
+  });
+  const tip = LM.tip(el);
+  const guide = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--cds-chart-axis)').style('opacity', 0);
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('pointermove', (ev) => {
+      const [px, py] = d3.pointer(ev);
+      const s = seasons.reduce((a, b) => Math.abs(x(b) - px) < Math.abs(x(a) - px) ? b : a);
+      guide.attr('x1', x(s)).attr('x2', x(s)).style('opacity', 1);
+      tip.replaceChildren();
+      const h = document.createElement('div'); h.style.fontWeight = 'var(--cds-font-weight-medium)'; h.textContent = s; tip.appendChild(h);
+      years.slice().reverse().forEach((yr) => {
+        const r = rows.find((q) => q.year === yr && q.season === s);
+        const line = document.createElement('div');
+        line.textContent = yr + ': ' + (r ? LM.fmtC(r.v) : 'not yet');
+        tip.appendChild(line);
+      });
+      tip.hidden = false; LM.placeTip(el, tip, px, py);
+    })
+    .on('pointerleave', () => { tip.hidden = true; guide.style('opacity', 0); });
+});
+
+dash.draw('regions_chart', (el) => {
+  const d = dash.data('nino_regions');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 180);
+  const rows = d.data.map((r) => ({ ...r, v: Number(r.anomaly_c) }));
+  const W = el.clientWidth, bh = 30, gap = 12, H = rows.length * (bh + gap);
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Bar chart of the latest weekly temperature anomaly in each Niño region');
+  const labels = svg.append('g');
+  rows.forEach((r, i) => labels.append('text').attr('x', 0).attr('y', i * (bh + gap) + bh / 2 + 4).text(r.region));
+  const lw = d3.max(labels.selectAll('text').nodes(), (n) => n.getComputedTextLength()) + 10;
+  const vw = 58;
+  const x = d3.scaleLinear().domain([0, Math.max(5, d3.max(rows, (r) => r.v))]).range([lw, W - vw]);
+  const tip = LM.tip(el);
+  rows.forEach((r, i) => {
+    const yy = i * (bh + gap);
+    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('width', Math.max(2, x(Math.max(0, r.v)) - x(0))).attr('rx', 3)
+      .style('fill', r.v >= LM.RECORD ? 'var(--cds-chart-status-critical)' : 'var(--lm-c1)')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `${r.region} · ${r.area}: ${LM.fmtC(r.v)} (week of ${LM.fmtDate(r.week)})`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+      .on('pointerleave', () => { tip.hidden = true; });
+    svg.append('text').attr('class', 'lm-val').attr('x', x(Math.max(0, r.v)) + 6).attr('y', yy + bh / 2 + 4).text(LM.fmtC(r.v));
+  });
+});
+
+dash.draw('outlook_chart', (el) => {
+  const d = dash.data('outlook');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 180);
+  const rows = d.data.map((r) => ({ ...r, e: Number(r.elnino_pct), v: r.very_strong_pct == null ? null : Number(r.very_strong_pct) })).sort((a, b) => Number(a.order) - Number(b.order));
+  const W = el.clientWidth, H = 210, m = { t: 20, b: 24, l: 4, r: 4 };
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Bar chart of NOAA chances of El Niño and of a very strong El Niño for each upcoming 3-month season');
+  const x = d3.scaleBand().domain(rows.map((r) => r.season)).range([m.l, W - m.r]).padding(0.2);
+  const y = d3.scaleLinear().domain([0, 100]).range([H - m.b, m.t]);
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(50)).attr('y2', y(50)).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+  const tip = LM.tip(el);
+  rows.forEach((r) => {
+    const bx = x(r.season), bw = x.bandwidth();
+    const show = (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `${r.label}: ${r.e}% chance of El Niño · ${r.v == null ? 'n/a' : r.v + '%'} very strong (+2.0 °C or more)`; tip.hidden = false; LM.placeTip(el, tip, px, py); };
+    svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(r.e)).attr('height', y(0) - y(r.e)).attr('rx', 2).style('fill', 'var(--lm-c3)').style('opacity', 0.45).on('pointermove', show).on('pointerleave', () => { tip.hidden = true; });
+    if (r.v != null) svg.append('rect').attr('x', bx + bw * 0.2).attr('width', bw * 0.6).attr('y', y(r.v)).attr('height', y(0) - y(r.v)).attr('rx', 2).style('fill', '#BF0A30').on('pointermove', show).on('pointerleave', () => { tip.hidden = true; });
+    if (r.v != null && bw > 22) svg.append('text').attr('class', 'lm-val').attr('x', bx + bw / 2).attr('y', y(Math.max(r.v, 0)) - 4).attr('text-anchor', 'middle').text(r.v + '%');
+    svg.append('text').attr('x', bx + bw / 2).attr('y', H - 6).attr('text-anchor', 'middle').text(r.season);
+  });
+});
+
+dash.draw('monthly_chart', (el) => {
+  const d = dash.data('nino_monthly');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 200);
+  const rows = d.data.map((r) => ({ ...r, v: Number(r.anomaly_c) }));
+  const months = Array.from(new Set(rows.map((r) => r.month))).sort();
+  const regions = ['Niño 1+2', 'Niño 3', 'Niño 3.4', 'Niño 4'].filter((g) => rows.some((r) => r.region === g));
+  const W = el.clientWidth, H = 230, m = { t: 12, r: 52, b: 26, l: 40 };
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('role', 'img').attr('aria-label', 'Line chart of monthly Niño region temperature anomalies this year');
+  const x = d3.scalePoint().domain(months).range([m.l, W - m.r]).padding(0.3);
+  const y = d3.scaleLinear().domain([Math.min(-1, d3.min(rows, (r) => r.v) - 0.3), Math.max(4, d3.max(rows, (r) => r.v) + 0.4)]).range([H - m.b, m.t]).nice();
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6).tickFormat((v) => (v > 0 ? '+' : '') + v))
+    .call((g) => { g.select('.domain').remove(); g.selectAll('.tick line').attr('x2', W - m.l - m.r).style('stroke', 'var(--cds-chart-grid)'); });
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(months.filter((_, i) => W > 520 || i % 2 === 0)).tickSizeOuter(0).tickFormat((s) => d3.utcFormat('%b')(new Date(s + '-01T00:00:00Z'))))
+    .call((g) => { g.select('.domain').style('stroke', 'var(--cds-chart-axis)'); g.selectAll('.tick line').remove(); });
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
+  const line = d3.line().x((r) => x(r.month)).y((r) => y(r.v));
+  const ends = [];
+  regions.forEach((g) => {
+    const s = rows.filter((r) => r.region === g).sort((a, b) => a.month.localeCompare(b.month));
+    svg.append('path').datum(s).attr('d', line).attr('fill', 'none').style('stroke', LM.series[g]).attr('stroke-width', g === 'Niño 3.4' ? 3 : 2);
+    const last = s[s.length - 1]; ends.push({ g, y: y(last.v), x: x(last.month), v: last.v });
+  });
+  ends.sort((a, b) => a.y - b.y); for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 12) ends[i].y = ends[i - 1].y + 12;
+  ends.forEach((e) => svg.append('text').attr('class', 'lm-val').attr('x', e.x + 6).attr('y', e.y + 4).text((e.v > 0 ? '+' : '') + e.v.toFixed(1)));
+  const tip = LM.tip(el);
+  const guide = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--cds-chart-axis)').style('opacity', 0);
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('pointermove', (ev) => {
+      const [px, py] = d3.pointer(ev);
+      const mo = months.reduce((a, b) => Math.abs(x(b) - px) < Math.abs(x(a) - px) ? b : a);
+      guide.attr('x1', x(mo)).attr('x2', x(mo)).style('opacity', 1);
+      tip.replaceChildren();
+      const h = document.createElement('div'); h.style.fontWeight = 'var(--cds-font-weight-medium)'; h.textContent = d3.utcFormat('%B %Y')(new Date(mo + '-01T00:00:00Z')); tip.appendChild(h);
+      regions.forEach((g) => { const r = rows.find((q) => q.region === g && q.month === mo); const l = document.createElement('div'); l.textContent = `${g}: ${r ? LM.fmtC(r.v) : '—'}`; tip.appendChild(l); });
+      tip.hidden = false; const [qx, qy] = d3.pointer(ev, el); LM.placeTip(el, tip, qx, qy);
+    })
+    .on('pointerleave', () => { tip.hidden = true; guide.style('opacity', 0); });
+});
+
+dash.draw('hazard_rows', (tb) => {
+  const d = dash.data('liberia_hazards');
+  tb.replaceChildren();
+  if (d.status !== 'ok') return;
+  d.data.slice().sort((a, b) => String(b.issued).localeCompare(String(a.issued))).forEach((r) => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-key', encodeURIComponent(r.id));
+    const cell = (txt, cls) => { const td = document.createElement('td'); td.textContent = txt; if (cls) td.className = cls; tr.appendChild(td); return td; };
+    cell(r.period, 'lm-nowrap');
+    cell(r.area);
+    const hz = cell(r.hazard);
+    const hc = LM.lvlCls(r.level); if (hc) hz.classList.add(hc);
+    hz.style.fontWeight = 'var(--cds-font-weight-medium)';
+    cell(r.detail, 'lm-detail');
+    cell(r.source);
+    tb.appendChild(tr);
+  });
+});
+
+dash.draw('ws_rows', (tb) => {
+  const d = dash.data('windstorm_events');
+  tb.replaceChildren();
+  if (d.status !== 'ok') return;
+  const fmt = (v) => v == null ? 'not reported' : d3.format(',')(Number(v));
+  d.data.slice().sort((a, b) => String(b.start).localeCompare(String(a.start))).forEach((e) => {
+    const tr = document.createElement('tr'); tr.setAttribute('data-key', encodeURIComponent(e.id));
+    const cell = (t, cls) => { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; tr.appendChild(td); return td; };
+    cell(e.start === e.end ? LM.fmtDate(e.start) : `${LM.fmtDate(e.start)} – ${LM.fmtDate(e.end)}`, 'lm-nowrap');
+    cell(e.counties);
+    cell(fmt(e.people_affected)).style.fontVariantNumeric = 'tabular-nums';
+    cell(e.houses_damaged == null ? 'not reported' : fmt(e.houses_damaged) + (e.houses_destroyed ? ` (${fmt(e.houses_destroyed)} destroyed)` : '')).style.fontVariantNumeric = 'tabular-nums';
+    cell(e.summary, 'lm-detail');
+    const td = cell(''); const a = document.createElement('a'); a.href = e.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = e.source; td.appendChild(a);
+    tb.appendChild(tr);
+  });
+});
+
+</script>
+<script>
+window.LMO = {
+  view: 'pacific', layer: 'ocean', date: null, regions: true, t: null, timer: null, cache: new Map(),
+  ds() { return LMO.view === 'pacific' ? 'ocean_pacific' : (LMO.layer === 'rain' ? 'rain_wafrica' : 'ocean_wafrica'); },
+  REGIONS: [
+    { name: 'Niño 4', lon0: 160, lon1: -150, lat0: -5, lat1: 5 },
+    { name: 'Niño 3.4', lon0: -170, lon1: -120, lat0: -5, lat1: 5 },
+    { name: 'Niño 3', lon0: -150, lon1: -90, lat0: -5, lat1: 5 },
+    { name: 'Niño 1+2', lon0: -90, lon1: -80, lat0: -10, lat1: 0 },
+    { name: 'ATL3', lon0: -20, lon1: 0, lat0: -3, lat1: 3 }
+  ],
+  grid(m, day) {
+    const k = m.view + '|' + day.date;
+    if (!LMO.cache.has(k)) { const s = atob(day.grid); const a = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); LMO.cache.set(k, a); }
+    return LMO.cache.get(k);
+  },
+  label(m, v) {
+    if (!v) return m.layer === 'rain' ? 'No rain detected (below 0.1 mm/hr)' : 'No ocean reading here (land or data gap)';
+    const raw = m.bins[String(v)] || '';
+    const r = raw.replace(/[\[\)\]]/g, '').split(',').map((x) => x.trim());
+    const n = (x) => Number(x);
+    const sgn = (x) => (n(x) > 0 ? '+' : n(x) < 0 ? '−' : '') + Math.abs(n(x)).toFixed(1);
+    if (m.layer === 'rain') {
+      if (r[1] === '+INF') return `${n(r[0]).toFixed(0)}+ mm/hr average (over ${Math.round(n(r[0]) * 24)} mm in the day)`;
+      const mid = (n(r[0]) + n(r[1])) / 2;
+      return `${n(r[0]).toFixed(1)}–${n(r[1]).toFixed(1)} mm/hr average (about ${Math.round(mid * 24)} mm in the day)`;
+    }
+    if (r[0] === '-INF') return `${sgn(r[1])} °C or colder than normal`;
+    if (r[1] === '+INF') return `${sgn(r[0])} °C or more above normal`;
+    const mid = (n(r[0]) + n(r[1])) / 2;
+    return `${mid >= 0 ? '+' : '−'}${Math.abs(mid).toFixed(2)} °C ±0.05 vs normal`;
+  },
+  setView(v) {
+    LMO.view = v; if (v === 'pacific' && LMO.layer === 'rain') LMO.layer = 'ocean'; LMO.t = null; LMO.sync();
+  },
+  setLayer(l) {
+    LMO.layer = l; if (l === 'rain' && LMO.view === 'pacific') LMO.view = 'wafrica'; LMO.t = null; LMO.sync();
+  },
+  sync() {
+    document.querySelectorAll('[data-ocean-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.getAttribute('data-ocean-view') === LMO.view)));
+    document.querySelectorAll('[data-ocean-layer]').forEach((b) => b.setAttribute('aria-pressed', String(b.getAttribute('data-ocean-layer') === LMO.layer)));
+    ['ocean_map', 'ocean_time', 'ocean_legend'].forEach((n) => dash.draw(n));
+  },
+  stop() {
+    if (LMO.timer) { clearInterval(LMO.timer); LMO.timer = null; }
+    document.querySelectorAll('#ocean-play').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    document.querySelectorAll('#ocean-play .lm-play-on').forEach((e) => { e.hidden = false; });
+    document.querySelectorAll('#ocean-play .lm-play-off').forEach((e) => { e.hidden = true; });
+  },
+  play() {
+    const d = dash.data(LMO.ds());
+    if (d.status !== 'ok' || !d.data || !d.data.days) return;
+    const days = d.data.days.map((x) => x.date);
+    let i = days.indexOf(LMO.date); if (i < 0 || i >= days.length - 1) i = -1;
+    document.querySelectorAll('#ocean-play').forEach((b) => b.setAttribute('aria-pressed', 'true'));
+    document.querySelectorAll('#ocean-play .lm-play-on').forEach((e) => { e.hidden = true; });
+    document.querySelectorAll('#ocean-play .lm-play-off').forEach((e) => { e.hidden = false; });
+    LMO.timer = setInterval(() => {
+      i += 1; if (i >= days.length) { LMO.stop(); return; }
+      LMO.date = days[i]; dash.draw('ocean_map'); dash.draw('ocean_time');
+    }, 650);
+  }
+};
+
+(function initOcean() {
+  document.querySelectorAll('[data-ocean-view]').forEach((b) => b.addEventListener('click', () => { LMO.stop(); LMO.setView(b.getAttribute('data-ocean-view')); }));
+  document.querySelectorAll('[data-ocean-layer]').forEach((b) => b.addEventListener('click', () => { LMO.stop(); LMO.setLayer(b.getAttribute('data-ocean-layer')); }));
+  document.querySelectorAll('#ocean-regions').forEach((c) => c.addEventListener('change', () => { LMO.regions = c.checked; dash.draw('ocean_map'); }));
+  document.querySelectorAll('#ocean-play').forEach((b) => b.addEventListener('click', () => { if (LMO.timer) LMO.stop(); else LMO.play(); }));
+})();
+
+dash.draw('ocean_map', {
+  mount(el) {
+    el.replaceChildren();
+    el.style.position = 'relative';
+    const svg = d3.select(el).append('svg').attr('role', 'img').style('width', '100%').style('display', 'block').style('border-radius', 'var(--cds-radius)').style('touch-action', 'none').style('cursor', 'crosshair');
+    const g = svg.append('g');
+    const image = g.append('image').attr('preserveAspectRatio', 'none');
+    const over = g.append('g');
+    const msg = d3.select(el).append('p').attr('class', 'lm-note').style('min-height', '140px').style('margin', '0');
+    const tip = document.createElement('div'); tip.className = 'lm-tip'; tip.hidden = true; el.appendChild(tip);
+    const btns = d3.select(el).append('div').style('position', 'absolute').style('top', '8px').style('left', '8px').style('display', 'flex').style('flex-direction', 'column').style('gap', '4px');
+    const made = { svg, g, image, over, msg, tip, btns, zoom: null, m: null };
+    [['+', 1.6], ['−', 1 / 1.6], ['⤢', 0]].forEach(([t, f]) => {
+      btns.append('button').attr('type', 'button').attr('class', 'lm-btn').attr('aria-label', f === 0 ? 'Reset zoom' : f > 1 ? 'Zoom in' : 'Zoom out')
+        .style('width', '30px').style('padding', '2px 0').style('background', 'var(--color-panel)').text(t)
+        .on('click', () => { if (!made.zoom) return; if (f === 0) svg.transition().duration(300).call(made.zoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(made.zoom.scaleBy, f); });
+    });
+    const probe = (ev) => {
+      const m = made.m; if (!m) return;
+      const [ux, uy] = d3.pointer(ev, svg.node());
+      const t = LMO.t || d3.zoomIdentity;
+      const [x, y] = t.invert([ux, uy]);
+      const latSpan = m.lat_max - m.lat_min;
+      if (x < 0 || y < 0 || x >= m.lon_span || y >= latSpan) { tip.hidden = true; return; }
+      const gx = Math.floor(x / m.lon_span * m.grid_w), gy = Math.floor(y / latSpan * m.grid_h);
+      const day = m.days.find((dd) => dd.date === LMO.date) || m.days[m.days.length - 1];
+      const v = LMO.grid(m, day)[gy * m.grid_w + gx];
+      let lon = m.lon0 + x; if (lon > 180) lon -= 360;
+      const lat = m.lat_max - y;
+      tip.replaceChildren();
+      const a = document.createElement('div'); a.style.fontWeight = 'var(--cds-font-weight-medium)'; a.textContent = LMO.label(m, v);
+      const b = document.createElement('div'); b.style.color = 'var(--cds-text-secondary)';
+      b.textContent = `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(2)}°${lon >= 0 ? 'E' : 'W'} · ${LM.fmtDate(day.date)}`;
+      tip.append(a, b); tip.hidden = false;
+      const [px, py] = d3.pointer(ev, el); LM.placeTip(el, tip, px, py + 14);
+    };
+    svg.on('pointermove', probe).on('click', probe).on('pointerleave', () => { tip.hidden = true; });
+    return made;
+  },
+  update(el, made) {
+    const id = LMO.ds();
+    el.setAttribute('data-source', id + (LMO.view === 'wafrica' ? ' counties' : ''));
+    const d = dash.data(id);
+    if (d.status !== 'ok' || !d.data || !d.data.days) {
+      made.svg.style('display', 'none'); made.btns.style('display', 'none');
+      made.msg.style('display', null).classed('dash-skeleton', d.status === 'loading').text(d.status === 'error' ? 'Failed to load' : d.status === 'loading' ? '' : '—');
+      return;
+    }
+    made.msg.style('display', 'none'); made.svg.style('display', null); made.btns.style('display', 'flex');
+    const m = d.data; made.m = m;
+    const latSpan = m.lat_max - m.lat_min;
+    const day = m.days.find((dd) => dd.date === LMO.date) || m.days[m.days.length - 1];
+    LMO.date = day.date;
+    const W = el.clientWidth || 600;
+    const k0 = W / m.lon_span;
+    made.svg.attr('viewBox', `0 0 ${m.lon_span} ${latSpan}`)
+      .attr('aria-label', `${m.layer === 'rain' ? 'Satellite rainfall' : 'Sea-surface temperature anomaly'} map, ${LMO.view === 'pacific' ? 'Pacific to the Gulf of Guinea' : 'Liberia and the Gulf of Guinea'}, ${day.date}`);
+    made.image.attr('href', day.image).attr('width', m.lon_span).attr('height', latSpan);
+    const px = (lon) => (((lon - m.lon0) % 360) + 360) % 360;
+    const py = (lat) => m.lat_max - lat;
+    const fs = 11 / k0, sw = 1.5;
+    made.over.selectAll('*').remove();
+    const ov = made.over;
+    if (LMO.view === 'wafrica') {
+      const c = dash.data('counties');
+      if (c.status === 'ok' && c.data && c.data.features) {
+        const proj = d3.geoTransform({ point(lon, lat) { this.stream.point(px(lon), py(lat)); } });
+        ov.append('g').selectAll('path').data(c.data.features).join('path').attr('d', d3.geoPath(proj))
+          .attr('fill', 'none').style('stroke', '#1b1b1b').style('stroke-opacity', 0.55).attr('stroke-width', 0.8).attr('vector-effect', 'non-scaling-stroke');
+      }
+    }
+    const lab = (x, y, t, anchor) => ov.append('text').attr('class', 'lm-oc-lab').attr('x', x).attr('y', y).attr('text-anchor', anchor || 'start')
+      .style('font-size', fs + 'px').attr('font-weight', 600).style('fill', '#111').style('paint-order', 'stroke').style('stroke', '#fff').style('stroke-width', fs / 3.5).text(t);
+    if (LMO.regions) {
+      LMO.REGIONS.forEach((r) => {
+        const x0 = px(r.lon0), x1 = px(r.lon1);
+        if (x0 >= m.lon_span || x1 > m.lon_span || x1 <= x0) return;
+        ov.append('rect').attr('x', x0).attr('y', py(r.lat1)).attr('width', x1 - x0).attr('height', r.lat1 - r.lat0)
+          .attr('fill', 'none').style('stroke', '#111').attr('stroke-width', sw).attr('stroke-dasharray', '6 4').attr('vector-effect', 'non-scaling-stroke');
+        const below = r.name === 'Niño 3.4' || r.name === 'Niño 1+2';
+        const yy = below ? py(r.lat0) + 1.1 * fs : py(r.lat1) - 0.4 * fs;
+        if (r.name === 'Niño 3') lab(x1 - 0.4 * fs, yy, r.name, 'end');
+        else if (r.name === 'Niño 3.4') lab((x0 + x1) / 2, yy, r.name, 'middle');
+        else lab(x0 + 0.4 * fs, yy, r.name);
+      });
+    }
+    if (px(-10.8) < m.lon_span) {
+      ov.append('circle').attr('cx', px(-10.8)).attr('cy', py(6.3)).attr('r', 5 / k0).style('fill', '#BF0A30').style('stroke', '#fff').attr('stroke-width', 2).attr('vector-effect', 'non-scaling-stroke').attr('class', 'lm-oc-dot');
+      lab(px(-10.8) - 0.9 * fs, py(6.3) - 0.7 * fs, LMO.view === 'pacific' ? 'Liberia' : 'Monrovia', 'end');
+    }
+    const H = W * latSpan / m.lon_span;
+    made.svg.style('height', H + 'px');
+    const apply = (t) => {
+      LMO.t = t; made.g.attr('transform', t);
+      made.over.selectAll('text.lm-oc-lab').style('font-size', (fs / t.k) + 'px').style('stroke-width', fs / t.k / 3.5);
+      made.over.selectAll('circle.lm-oc-dot').attr('r', 5 / k0 / t.k);
+    };
+    if (!made.zoom || made.view !== LMO.view) {
+      made.zoom = d3.zoom().scaleExtent([1, 12]).extent([[0, 0], [m.lon_span, latSpan]]).translateExtent([[0, 0], [m.lon_span, latSpan]])
+        .on('zoom', (ev) => apply(ev.transform));
+      made.svg.call(made.zoom).on('dblclick.zoom', null);
+      made.view = LMO.view;
+      made.svg.call(made.zoom.transform, LMO.t || d3.zoomIdentity);
+    } else apply(LMO.t || d3.zoomIdentity);
+  }
+});
+
+dash.draw('ocean_time', (el) => {
+  const id = LMO.ds();
+  el.setAttribute('data-source', id);
+  const d = dash.data(id);
+  el.replaceChildren();
+  if (d.status !== 'ok' || !d.data || !d.data.days) { el.textContent = '—'; el.classList.toggle('dash-skeleton', d.status === 'loading'); return; }
+  el.classList.remove('dash-skeleton');
+  const days = d.data.days.map((x) => x.date);
+  let i = days.indexOf(LMO.date); if (i < 0) i = days.length - 1;
+  const wrap = document.createElement('div'); wrap.style.display = 'flex'; wrap.style.alignItems = 'center'; wrap.style.gap = '10px';
+  const r = document.createElement('input'); r.type = 'range'; r.min = '0'; r.max = String(days.length - 1); r.value = String(i); r.style.flex = '1'; r.style.minWidth = '0';
+  r.setAttribute('aria-label', 'Map date'); r.style.accentColor = '#BF0A30';
+  const lab = document.createElement('span'); lab.style.fontVariantNumeric = 'tabular-nums'; lab.style.whiteSpace = 'nowrap'; lab.style.fontSize = 'var(--cds-font-size-caption)';
+  lab.textContent = `${LM.fmtDate(days[i])} (${i + 1} of ${days.length})`;
+  r.addEventListener('input', () => { LMO.stop(); LMO.date = days[Number(r.value)]; lab.textContent = `${LM.fmtDate(LMO.date)} (${Number(r.value) + 1} of ${days.length})`; dash.draw('ocean_map'); });
+  wrap.append(r, lab); el.appendChild(wrap);
+});
+
+dash.draw('ocean_legend', (el) => {
+  const id = LMO.ds();
+  el.setAttribute('data-source', id);
+  const d = dash.data(id);
+  el.replaceChildren();
+  if (d.status !== 'ok' || !d.data || !d.data.legend) return;
+  const img = document.createElement('img'); img.src = d.data.legend;
+  img.alt = d.data.layer === 'rain' ? 'Colour scale: rainfall rate in millimetres per hour, light green (light rain) to dark purple (very heavy rain)' : 'Colour scale: sea-surface temperature anomaly from below −3 °C (purple) to above +3 °C (dark red)';
+  img.style.maxWidth = '360px'; img.style.width = '100%'; img.style.background = '#fff'; img.style.borderRadius = '6px';
+  el.appendChild(img);
+});
+</script>
+<script>
+window.LMF = { sel: null, ELNINO: [1987, 1991, 1997, 2002, 2009, 2015, 2023] };
+
+dash.calc('fao_summary', {
+  title: 'FAO drought summary',
+  description: 'Counties at Warning on the FAO Agricultural Stress Index, the latest date, and the county with the lowest share of normal rainfall since 1 March.',
+  inputs: ['fao_county'],
+  fn: (counties) => {
+    if (!counties.length) return [];
+    const driest = counties.slice().sort((a, b) => Number(a.rain_season_pct) - Number(b.rain_season_pct))[0];
+    return [{ asi_date: counties.map((c) => c.asi_date).sort().pop(), warn_count: counties.filter((c) => Number(c.asi_pct) >= 25).length, driest_county: driest.county, driest_pct: Number(driest.rain_season_pct) }];
+  }
+});
+
+const fs0 = () => { const d = dash.data('fao_summary'); return { s: d.status, r: (d.data || [])[0] }; };
+dash.draw('fao_warn_n', (el) => { const { s, r } = fs0(); LM.setText(el, s, r && String(r.warn_count), r && r.warn_count > 0 ? 'lm-bad' : 'lm-good'); });
+dash.draw('fao_date', (el) => { const { s, r } = fs0(); LM.setText(el, s, r && LM.fmtDate(r.asi_date)); });
+dash.draw('fao_dry_county', (el) => { const { s, r } = fs0(); LM.setText(el, s, r && r.driest_county); });
+dash.draw('fao_dry_pct', (el) => { const { s, r } = fs0(); LM.setText(el, s, r && r.driest_pct + '%', r && r.driest_pct < 75 ? 'lm-bad' : r && r.driest_pct < 90 ? 'lm-warn' : null); });
+
+function lmHBars(el, rows, opts) {
+  const W = el.clientWidth, bh = 18, gap = 6, H = rows.length * (bh + gap) + 18;
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', opts.aria);
+  const labels = svg.append('g');
+  rows.forEach((r, i) => labels.append('text').attr('x', 0).attr('y', i * (bh + gap) + bh / 2 + 4).text(r.label));
+  const lw = d3.max(labels.selectAll('text').nodes(), (n) => n.getComputedTextLength()) + 10;
+  const x = d3.scaleLinear().domain([0, opts.max]).range([lw, W - 44]);
+  (opts.refs || []).forEach(([v, t]) => {
+    svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', 0).attr('y2', H - 16).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(v)).attr('y', H - 4).attr('text-anchor', 'middle').text(t);
+  });
+  const tip = LM.tip(el);
+  rows.forEach((r, i) => {
+    const yy = i * (bh + gap);
+    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.v > 0 ? 2 : 0, x(Math.min(r.v, opts.max)) - x(0))).style('fill', r.color)
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = r.tip; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+      .on('pointerleave', () => { tip.hidden = true; });
+    svg.append('text').attr('class', 'lm-val').attr('x', x(Math.min(r.v, opts.max)) + 5).attr('y', yy + bh / 2 + 4).text(r.text);
+  });
+}
+
+dash.draw('asi_chart', (el) => {
+  const d = dash.data('fao_county');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 340);
+  const rows = d.data.slice().sort((a, b) => Number(b.asi_pct) - Number(a.asi_pct)).map((c) => ({
+    label: c.county, v: Number(c.asi_pct), color: LM.levelColor[c.level] || 'var(--lv-low)', text: Number(c.asi_pct).toFixed(0) + '%',
+    tip: `${c.county}: ${Number(c.asi_pct).toFixed(1)}% of cropland under drought stress (${c.level}), 10 days to ${LM.fmtDate(c.asi_date)}` }));
+  lmHBars(el, rows, { max: Math.max(60, d3.max(rows, (r) => r.v)), refs: [[10, '10%'], [25, '25%']], aria: 'Bar chart of the share of cropland under drought stress in each county' });
+});
+
+dash.draw('rain_pct_chart', (el) => {
+  const d = dash.data('fao_county');
+  if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 340);
+  const rows = d.data.slice().sort((a, b) => Number(a.rain_season_pct) - Number(b.rain_season_pct)).map((c) => {
+    const v = Number(c.rain_season_pct);
+    return { label: c.county, v, color: v < 75 ? 'var(--lv-warn)' : v < 90 ? 'var(--lv-watch)' : 'var(--lm-c1)', text: v + '%',
+      tip: `${c.county}: ${d3.format(',')(c.rain_season_mm)} mm since 1 Mar vs ${d3.format(',')(c.rain_season_normal_mm)} mm normal (${v}%), to ${LM.fmtDate(c.rain_to)}` };
+  });
+  lmHBars(el, rows, { max: Math.max(130, d3.max(rows, (r) => r.v)), refs: [[100, 'normal']], aria: 'Bar chart of rainfall since 1 March as a percentage of normal in each county' });
+});
+
+const faoSel = () => {
+  const d = dash.data('fao_county');
+  if (!LMF.sel && d.status === 'ok' && d.data.length) LMF.sel = d.data.slice().sort((a, b) => Number(b.asi_pct) - Number(a.asi_pct))[0].county;
+  return LMF.sel;
+};
+
+dash.draw('fao_county_select', (sel) => {
+  const d = dash.data('fao_county');
+  const names = (d.status === 'ok' ? d.data : []).map((c) => c.county).sort();
+  sel.replaceChildren(...names.map((n) => new Option(n, n)));
+  const cur = faoSel(); if (cur) sel.value = cur;
+  sel.onchange = () => { LMF.sel = sel.value; dash.draw('fao_rain_chart'); dash.draw('fao_hist_chart'); };
+});
+
+dash.draw('fao_rain_chart', (el) => {
+  const d = dash.data('fao_rain'); const c = faoSel();
+  if (d.status !== 'ok' || !d.data.length || !c) return lmEmpty(el, d.status, 200);
+  const rows = d.data.filter((r) => r.county === c).map((r) => ({ date: r.date, v: Number(r.rain_mm), n: Number(r.normal_mm) }));
+  el.setAttribute('data-source', 'fao_rain');
+  const W = el.clientWidth, H = 220, m = { t: 10, r: 8, b: 24, l: 40 };
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `Rainfall every 10 days in ${c} County this year against the long-term average`);
+  const x = d3.scaleBand().domain(rows.map((r) => r.date)).range([m.l, W - m.r]).padding(0.15);
+  const y = d3.scaleLinear().domain([0, d3.max(rows, (r) => Math.max(r.v, r.n)) * 1.1 || 10]).range([H - m.b, m.t]).nice();
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => v + ' mm'))
+    .call((g) => { g.select('.domain').remove(); g.selectAll('.tick line').attr('x2', W - m.l - m.r).style('stroke', 'var(--cds-chart-grid)'); });
+  const months = rows.filter((r) => r.date.endsWith('-01'));
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(months.filter((_, i) => W > 500 || i % 2 === 0).map((r) => r.date)).tickFormat((s) => d3.utcFormat('%b')(new Date(s + 'T00:00:00Z'))).tickSizeOuter(0))
+    .call((g) => { g.select('.domain').style('stroke', 'var(--cds-chart-axis)'); g.selectAll('.tick line').remove(); });
+  const tip = LM.tip(el);
+  rows.forEach((r) => {
+    svg.append('rect').attr('x', x(r.date)).attr('width', x.bandwidth()).attr('y', y(r.v)).attr('height', y(0) - y(r.v)).attr('rx', 1.5)
+      .style('fill', r.v < 0.75 * r.n ? 'var(--lv-warn)' : 'var(--lm-c1)')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `10 days from ${LM.fmtDate(r.date)}: ${r.v} mm (normal ${r.n} mm)`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+      .on('pointerleave', () => { tip.hidden = true; });
+    svg.append('line').attr('x1', x(r.date) - 1).attr('x2', x(r.date) + x.bandwidth() + 1).attr('y1', y(r.n)).attr('y2', y(r.n)).style('stroke', 'var(--color-fg-muted)').attr('stroke-width', 2).style('pointer-events', 'none');
+  });
+});
+
+dash.draw('fao_hist_chart', (el) => {
+  const d = dash.data('fao_asi_annual'); const c = faoSel();
+  if (d.status !== 'ok' || !d.data.length || !c) return lmEmpty(el, d.status, 190);
+  const rows = d.data.filter((r) => r.county === c).map((r) => ({ year: Number(r.year), v: Number(r.asi_pct) })).sort((a, b) => a.year - b.year);
+  const W = el.clientWidth, H = 200, m = { t: 10, r: 8, b: 24, l: 36 };
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `Seasonal drought stress in ${c} County each year since 1984, with El Niño years highlighted`);
+  const x = d3.scaleBand().domain(rows.map((r) => r.year)).range([m.l, W - m.r]).padding(0.15);
+  const y = d3.scaleLinear().domain([0, Math.max(30, d3.max(rows, (r) => r.v))]).range([H - m.b, m.t]).nice();
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => v + '%'))
+    .call((g) => { g.select('.domain').remove(); g.selectAll('.tick line').attr('x2', W - m.l - m.r).style('stroke', 'var(--cds-chart-grid)'); });
+  const step = W < 500 ? 10 : 5;
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(rows.map((r) => r.year).filter((yv) => yv % step === 0)).tickSizeOuter(0))
+    .call((g) => { g.select('.domain').style('stroke', 'var(--cds-chart-axis)'); g.selectAll('.tick line').remove(); });
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(25)).attr('y2', y(25)).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+  const tip = LM.tip(el);
+  rows.forEach((r) => {
+    const en = LMF.ELNINO.includes(r.year);
+    svg.append('rect').attr('x', x(r.year)).attr('width', x.bandwidth()).attr('y', y(r.v)).attr('height', Math.max(r.v > 0 ? 1 : 0, y(0) - y(r.v))).attr('rx', 1)
+      .style('fill', en ? '#BF0A30' : 'var(--lm-c3)')
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `${r.year}${en ? ' (El Niño developing)' : ''}: ${r.v}% of cropland under drought stress`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+      .on('pointerleave', () => { tip.hidden = true; });
+  });
+});
+
+dash.draw('fao_rows', (tb) => {
+  const d = dash.data('fao_county');
+  tb.replaceChildren();
+  if (d.status !== 'ok') return;
+  d.data.slice().sort((a, b) => Number(b.asi_pct) - Number(a.asi_pct)).forEach((c) => {
+    const tr = document.createElement('tr'); tr.setAttribute('data-key', encodeURIComponent(c.county)); tr.style.cursor = 'pointer';
+    tr.addEventListener('click', () => { LMF.sel = c.county; dash.draw('fao_county_select'); dash.draw('fao_rain_chart'); dash.draw('fao_hist_chart'); document.querySelectorAll('#county-drought').forEach((s) => s.scrollIntoView({ behavior: 'smooth', block: 'start' })); });
+    const cell = (t) => { const td = document.createElement('td'); td.textContent = t; td.style.fontVariantNumeric = 'tabular-nums'; tr.appendChild(td); return td; };
+    cell(c.county).style.fontWeight = 'var(--cds-font-weight-medium)';
+    cell(Number(c.asi_pct).toFixed(1) + '%');
+    const td = cell(''); const s = document.createElement('span'); s.className = 'lm-level'; s.style.background = LM.levelColor[c.level]; s.textContent = c.level; td.appendChild(s);
+    cell(c.vhi == null ? '—' : Number(c.vhi).toFixed(2));
+    cell(c.rain_season_pct + '%');
+    cell(c.rain_30d_pct + '%');
+    tb.appendChild(tr);
+  });
+});
+</script>
+<script>
+window.LMM = {
+  layer: 'asi', date: null, districts: true, t: null, click: null, canvases: new Map(),
+  PXKM2: 0.372,
+  ASI: { 1: 'Under 10% (low stress)', 2: '10–25% stress', 3: '25–40% stress', 4: '40–55% stress', 5: '55–70% stress', 6: '70–85% stress', 7: '85% or more stress', 8: 'Off season: crops not growing', 9: 'No data (cloud)', 10: 'No growing season', 11: 'Not cropland', 0: 'Outside the map' },
+  HDF: { 1: 'Severe drought in under 5% of years', 2: 'Severe drought in 5–10% of years', 3: 'Severe drought in 10–15% of years', 4: 'Severe drought in 15–20% of years', 5: 'Severe drought in 20–25% of years', 6: 'Severe drought in 25–30% of years', 7: 'Severe drought in over 30% of years', 9: 'No data', 10: 'No growing season', 11: 'Not cropland', 0: 'Outside the map' },
+  PAL: [[47, 205, 0, 1], [154, 231, 19, 2], [255, 255, 48, 3], [255, 186, 32, 4], [255, 117, 16, 5], [255, 42, 2, 6], [196, 0, 0, 7], [102, 102, 255, 8], [40, 40, 40, 9], [120, 120, 120, 10], [226, 226, 222, 11]],
+  classAt(src, w, h, px, py, done) {
+    let c = LMM.canvases.get(src);
+    const read = (cv) => {
+      if (px < 0 || py < 0 || px >= w || py >= h) return done(0);
+      const d = cv.getContext('2d').getImageData(px, py, 1, 1).data;
+      if (d[3] < 128) return done(0);
+      let best = 0, bd = 1e9; LMM.PAL.forEach(([r, g, b, k]) => { const e = (r - d[0]) ** 2 + (g - d[1]) ** 2 + (b - d[2]) ** 2; if (e < bd) { bd = e; best = k; } });
+      done(bd < 300 ? best : 0);
+    };
+    if (c) return read(c);
+    const img = new Image(); img.onload = () => { const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(img, 0, 0); LMM.canvases.set(src, cv); read(cv); }; img.src = src;
+  },
+  sync() {
+    document.querySelectorAll('[data-faomap-layer]').forEach((b) => b.setAttribute('aria-pressed', String(b.getAttribute('data-faomap-layer') === LMM.layer)));
+    document.querySelectorAll('#faomap-legend-asi').forEach((e) => { e.hidden = LMM.layer !== 'asi'; });
+    document.querySelectorAll('#faomap-legend-hdf').forEach((e) => { e.hidden = LMM.layer !== 'hdf'; });
+    ['faomap', 'faomap_time', 'faomap_info'].forEach((n) => dash.draw(n));
+  }
+};
+(function initFaoMap() {
+  document.querySelectorAll('[data-faomap-layer]').forEach((b) => b.addEventListener('click', () => { LMM.layer = b.getAttribute('data-faomap-layer'); LMM.sync(); }));
+  document.querySelectorAll('#faomap-districts').forEach((c) => c.addEventListener('change', () => { LMM.districts = c.checked; dash.draw('faomap'); }));
+})();
+
+dash.draw('faomap_latest', (el) => { const d = dash.data('fao_map'); LM.setText(el, d.status, d.data && d.data.latest ? LM.fmtDate(d.data.latest) : null); });
+
+dash.draw('faomap', {
+  mount(el) {
+    el.replaceChildren(); el.style.position = 'relative';
+    const svg = d3.select(el).append('svg').attr('role', 'img').style('width', '100%').style('display', 'block').style('touch-action', 'none').style('cursor', 'crosshair').style('background', 'var(--color-panel)').style('border-radius', 'var(--cds-radius)');
+    const g = svg.append('g'); const image = g.append('image').attr('preserveAspectRatio', 'none').style('image-rendering', 'pixelated');
+    const over = g.append('g');
+    const msg = d3.select(el).append('p').attr('class', 'lm-note').style('min-height', '280px').style('margin', '0');
+    const tip = document.createElement('div'); tip.className = 'lm-tip'; tip.hidden = true; el.appendChild(tip);
+    const btns = d3.select(el).append('div').style('position', 'absolute').style('top', '8px').style('left', '8px').style('display', 'flex').style('flex-direction', 'column').style('gap', '4px');
+    const made = { svg, g, image, over, msg, tip, btns, zoom: null, m: null };
+    [['+', 1.6], ['−', 1 / 1.6], ['⤢', 0]].forEach(([t, f]) => {
+      btns.append('button').attr('type', 'button').attr('class', 'lm-btn').attr('aria-label', f === 0 ? 'Reset zoom' : f > 1 ? 'Zoom in' : 'Zoom out')
+        .style('width', '30px').style('padding', '2px 0').style('background', 'var(--color-panel)').text(t)
+        .on('click', () => { if (!made.zoom) return; if (f === 0) svg.transition().duration(300).call(made.zoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(made.zoom.scaleBy, f); });
+    });
+    const where = (ev) => {
+      const m = made.m; if (!m) return null;
+      const [ux, uy] = d3.pointer(ev, svg.node()); const [x, y] = (LMM.t || d3.zoomIdentity).invert([ux, uy]);
+      const spanX = m.bbox[2] - m.bbox[0], spanY = m.bbox[3] - m.bbox[1];
+      if (x < 0 || y < 0 || x > spanX || y > spanY) return null;
+      return { lon: m.bbox[0] + x, lat: m.bbox[3] - y, px: Math.floor(x / spanX * m.width), py: Math.floor(y / spanY * m.height) };
+    };
+    const src = () => { const m = made.m; if (!m) return null; if (LMM.layer === 'hdf') return m.hdf_image; const day = m.days.find((d) => d.date === LMM.date) || m.days[m.days.length - 1]; return day.image; };
+    const labels = () => LMM.layer === 'hdf' ? LMM.HDF : LMM.ASI;
+    svg.on('pointermove', (ev) => {
+      const p = where(ev); if (!p) { tip.hidden = true; return; }
+      LMM.classAt(src(), made.m.width, made.m.height, p.px, p.py, (k) => { tip.textContent = labels()[k] || '—'; tip.hidden = false; const [qx, qy] = d3.pointer(ev, el); LM.placeTip(el, tip, qx, qy + 14); });
+    }).on('pointerleave', () => { tip.hidden = true; })
+      .on('click', (ev) => {
+        const p = where(ev); if (!p) return;
+        LMM.classAt(src(), made.m.width, made.m.height, p.px, p.py, (k) => { LMM.click = { lon: p.lon, lat: p.lat, cls: k, layer: LMM.layer, date: LMM.layer === 'hdf' ? null : LMM.date }; dash.draw('faomap'); dash.draw('faomap_info'); });
+      });
+    return made;
+  },
+  update(el, made) {
+    const d = dash.data('fao_map');
+    if (d.status !== 'ok' || !d.data || !d.data.days) {
+      made.svg.style('display', 'none'); made.btns.style('display', 'none');
+      made.msg.style('display', null).classed('dash-skeleton', d.status === 'loading').text(d.status === 'error' ? 'Failed to load' : d.status === 'loading' ? '' : '—');
+      return;
+    }
+    made.msg.style('display', 'none'); made.svg.style('display', null); made.btns.style('display', 'flex');
+    const m = d.data; made.m = m;
+    if (!LMM.date || !m.days.some((x) => x.date === LMM.date)) LMM.date = m.latest;
+    const spanX = m.bbox[2] - m.bbox[0], spanY = m.bbox[3] - m.bbox[1];
+    const W = el.clientWidth || 500, H = W * spanY / spanX, k0 = W / spanX;
+    made.svg.attr('viewBox', `0 0 ${spanX} ${spanY}`).style('height', H + 'px')
+      .attr('aria-label', LMM.layer === 'hdf' ? 'Map of how often Liberia\'s cropland had severe drought, 1984–2025' : `Map of crop stress across Liberia, 10 days from ${LMM.date}`);
+    const day = m.days.find((x) => x.date === LMM.date) || m.days[m.days.length - 1];
+    made.image.attr('href', LMM.layer === 'hdf' ? m.hdf_image : day.image).attr('width', spanX).attr('height', spanY);
+    const proj = d3.geoTransform({ point(lon, lat) { this.stream.point(lon - m.bbox[0], m.bbox[3] - lat); } });
+    const path = d3.geoPath(proj);
+    made.over.selectAll('*').remove();
+    const dd = dash.data('districts'), cc = dash.data('counties');
+    if (LMM.districts && dd.status === 'ok' && dd.data && dd.data.features)
+      made.over.append('g').selectAll('path').data(dd.data.features).join('path').attr('d', path).attr('fill', 'none').style('stroke', '#333').style('stroke-opacity', 0.45).attr('stroke-width', 0.6).attr('vector-effect', 'non-scaling-stroke');
+    if (cc.status === 'ok' && cc.data && cc.data.features)
+      made.over.append('g').selectAll('path').data(cc.data.features).join('path').attr('d', path).attr('fill', 'none').style('stroke', '#111').attr('stroke-width', 1.6).attr('vector-effect', 'non-scaling-stroke');
+    if (LMM.click) made.over.append('circle').attr('class', 'lm-fm-dot').attr('cx', LMM.click.lon - m.bbox[0]).attr('cy', m.bbox[3] - LMM.click.lat).attr('r', 6 / k0).style('fill', 'none').style('stroke', '#BF0A30').attr('stroke-width', 3).attr('vector-effect', 'non-scaling-stroke');
+    const apply = (t) => { LMM.t = t; made.g.attr('transform', t); made.over.selectAll('circle.lm-fm-dot').attr('r', 6 / k0 / t.k); };
+    if (!made.zoom) {
+      made.zoom = d3.zoom().scaleExtent([1, 16]).extent([[0, 0], [spanX, spanY]]).translateExtent([[0, 0], [spanX, spanY]]).on('zoom', (ev) => apply(ev.transform));
+      made.svg.call(made.zoom).on('dblclick.zoom', null);
+      made.svg.call(made.zoom.transform, LMM.t || d3.zoomIdentity);
+    } else apply(LMM.t || d3.zoomIdentity);
+  }
+});
+
+dash.draw('faomap_time', (el) => {
+  const d = dash.data('fao_map');
+  el.replaceChildren();
+  if (LMM.layer === 'hdf') { const p = document.createElement('p'); p.className = 'lm-note'; p.style.margin = '0'; p.textContent = 'Share of seasons since 1984 in which at least 30% of nearby cropland was in severe drought (FAO Historic Agricultural Drought Frequency).'; el.appendChild(p); return; }
+  if (d.status !== 'ok' || !d.data || !d.data.days) { el.textContent = '—'; return; }
+  const days = d.data.days.map((x) => x.date);
+  let i = days.indexOf(LMM.date); if (i < 0) i = days.length - 1;
+  const wrap = document.createElement('div'); wrap.style.display = 'flex'; wrap.style.alignItems = 'center'; wrap.style.gap = '10px';
+  const r = document.createElement('input'); r.type = 'range'; r.min = '0'; r.max = String(days.length - 1); r.value = String(i); r.style.flex = '1'; r.style.minWidth = '0'; r.style.accentColor = '#BF0A30'; r.setAttribute('aria-label', '10-day period');
+  const lab = document.createElement('span'); lab.style.whiteSpace = 'nowrap'; lab.style.fontSize = 'var(--cds-font-size-caption)'; lab.style.fontVariantNumeric = 'tabular-nums';
+  const txt = (k) => `10 days from ${LM.fmtDate(days[k])}`;
+  lab.textContent = txt(i);
+  r.addEventListener('input', () => { LMM.date = days[Number(r.value)]; lab.textContent = txt(Number(r.value)); dash.draw('faomap'); });
+  wrap.append(r, lab); el.appendChild(wrap);
+});
+
+dash.draw('faomap_info', (el) => {
+  el.replaceChildren();
+  const add = (tag, text, parent) => { const e = document.createElement(tag); if (text != null) e.textContent = text; (parent || el).appendChild(e); return e; };
+  const c = LMM.click;
+  if (!c) { add('p', 'Click the map to see a location\'s reading and the estimate for its district and clan.').className = 'lm-note'; return; }
+  const lab = (c.layer === 'hdf' ? LMM.HDF : LMM.ASI)[c.cls] || '—';
+  add('h3', lab).style.fontSize = '1.2rem';
+  add('p', `${Math.abs(c.lat).toFixed(3)}°${c.lat >= 0 ? 'N' : 'S'}, ${Math.abs(c.lon).toFixed(3)}°${c.lon >= 0 ? 'E' : 'W'}` + (c.date ? ` · 10 days from ${LM.fmtDate(c.date)}` : ' · 1984–2025')).className = 'lm-note';
+  const dd = dash.data('districts'), cl = dash.data('clans'), A = dash.data('fao_map_areas');
+  if (dd.status !== 'ok' || !dd.data || A.status !== 'ok') return;
+  const pt = [c.lon, c.lat];
+  const dist = dd.data.features.find((f) => d3.geoContains(f, pt));
+  if (!dist) { add('p', 'Outside Liberia\'s districts.').className = 'lm-note'; return; }
+  const rows = new Map(A.data.map((r) => [r.key, r]));
+  const block = (title, key) => {
+    const r = rows.get(key); if (!r) return;
+    const h = add('p', title); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-xs)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+    const dl = add('dl'); const wk = 'key=' + encodeURIComponent(key);
+    const mk = (e, f) => { e.setAttribute('data-source', 'fao_map_areas'); e.setAttribute('data-field', f); e.setAttribute('data-where', wk); return e; };
+    if (r.crop_px) {
+      add('dt', 'Stress index (est.)', dl); mk(add('dd', r.index_est == null ? '—' : String(r.index_est), dl), 'index_est');
+      add('dt', 'Cropland stressed (est.)', dl); mk(add('dd', r.stressed_pct == null ? '—' : r.stressed_pct + '%', dl), 'stressed_pct');
+      add('dt', 'Cropland in season', dl); add('dd', `about ${d3.format(',')(Math.round(r.crop_px * LMM.PXKM2))} km²`, dl);
+    } else { add('dt', 'Cropland in season', dl); add('dd', 'none in the latest 10 days', dl); }
+    add('dt', 'Drought years since 1984', dl); mk(add('dd', r.hdf_pct == null ? '—' : `about ${r.hdf_pct}%`, dl), 'hdf_pct');
+  };
+  const p = dist.properties;
+  block(`${p.district} District, ${p.county} County`, `district:${p.county}:${p.district}`);
+  if (cl.status === 'ok' && cl.data && cl.data.features) {
+    const clan = cl.data.features.find((f) => f.properties.district === p.district && f.properties.county === p.county && d3.geoContains(f, pt));
+    if (clan) block(`Clan #${clan.properties.clan_id} (name pending)`, `clan:${p.county}:${p.district}:${clan.properties.clan_id}`);
+  } else if (cl.status === 'loading') add('p', 'Loading clan boundaries…').className = 'lm-note';
+  const n = add('p', 'District and clan figures are estimates from FAO\'s 1 km map for the latest 10 days.'); n.className = 'lm-note'; n.style.marginTop = 'var(--cds-gap-sm)';
+});
+
+dash.draw('faomap_rows', (tb) => {
+  const A = dash.data('fao_map_areas');
+  tb.replaceChildren();
+  if (A.status !== 'ok') return;
+  A.data.filter((r) => r.level === 'district' && r.crop_px >= 270 && r.index_est != null).sort((a, b) => b.index_est - a.index_est).slice(0, 12).forEach((r) => {
+    const tr = document.createElement('tr'); tr.setAttribute('data-key', encodeURIComponent(r.key));
+    const cell = (t) => { const td = document.createElement('td'); td.textContent = t; td.style.fontVariantNumeric = 'tabular-nums'; tr.appendChild(td); return td; };
+    cell(r.district).style.fontWeight = 'var(--cds-font-weight-medium)'; cell(r.county);
+    const s = cell(String(r.index_est)); s.style.color = r.index_est >= 55 ? 'var(--color-bad)' : r.index_est >= 25 ? 'var(--color-warn)' : '';
+    cell(r.stressed_pct + '%'); cell(d3.format(',')(Math.round(r.crop_px * LMM.PXKM2))); cell(r.hdf_pct == null ? '—' : `about ${r.hdf_pct}%`);
+    tb.appendChild(tr);
+  });
+});
+</script>

@@ -1,0 +1,42 @@
+[
+{
+"id": "h1",
+"issued": "2026-11-05",
+"period": "5\u201311 Nov 2026",
+"source": "NOAA CPC Africa Hazards Outlook (FEWS NET)",
+"area": "Central & eastern Liberia",
+"hazard": "Abnormal dryness",
+"level": "warn",
+"detail": "Remains under abnormal dryness after sustained below-average rain, with below-average rain forecast for the week."
+},
+{
+"id": "h2",
+"issued": "2026-10-29",
+"period": "29 Oct\u20134 Nov 2026",
+"source": "NOAA CPC Global Weather Hazards",
+"area": "Liberia (national)",
+"hazard": "Mixed: 30-day surplus, local dryness",
+"level": "watch",
+"detail": "Liberia saw 30-day rainfall surpluses overall, but central/eastern Liberia stayed under abnormal dryness. Heavy rain was forecast for parts of Liberia."
+},
+{
+"id": "h3",
+"issued": "2026-10-22",
+"period": "22\u201328 Oct 2026",
+"source": "NOAA CPC Africa Hazards Outlook (FEWS NET)",
+"area": "Central & eastern Liberia",
+"hazard": "Abnormal dryness",
+"level": "warn",
+"detail": "Large 90-day deficits (over 100 mm) across Liberia, Sierra Leone and C\u00f4te d'Ivoire; the ITF was retreating south quickly."
+},
+{
+"id": "h4",
+"issued": "2026-07-30",
+"period": "Aug\u2013Oct 2026 (seasonal)",
+"source": "AGRHYMET seasonal forecast update",
+"area": "Coastal West Africa",
+"hazard": "Warmer than normal; mixed rainfall",
+"level": "watch",
+"detail": "Excess rain forecast along the Atlantic coast to central Liberia, but warmer-than-normal temperatures and deficit risk further east along the Gulf of Guinea."
+}
+]
