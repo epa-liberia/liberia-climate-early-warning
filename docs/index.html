@@ -207,6 +207,23 @@
 .lm-src details summary { cursor: pointer; color: var(--lr-blue); }
 @media (prefers-color-scheme: dark) { .lm-src details summary { color: #8fb3ff; } }
 .lm-src details p { margin-top: 6px; font-size: 12.5px; }
+
+.lm-about { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr); gap: 28px; }
+@media (max-width: 900px) { .lm-about { grid-template-columns: 1fr; } }
+.lm-about-lede { margin: 0 0 18px; font-size: 15.5px; line-height: 1.6; max-width: 75ch; }
+.lm-about-h { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.lm-checks { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px 20px; }
+.lm-checks li { position: relative; padding-left: 28px; font-size: 13px; color: var(--color-fg-muted); line-height: 1.45; }
+.lm-checks li b { display: block; color: var(--color-fg); font-size: 14px; font-weight: var(--cds-font-weight-medium); }
+.lm-checks li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 19px; height: 19px; border-radius: 50%; background: var(--color-ok); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+.lm-next { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.lm-next li { font-size: 12.5px; border: 1px dashed var(--color-border-line); border-radius: 999px; padding: 4px 12px; color: var(--color-fg-muted); }
+.lm-about-side { background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 18px; align-self: start; border-top: 3px solid var(--lr-red); }
+.lm-about-k { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); margin-bottom: 8px; font-weight: var(--cds-font-weight-medium); }
+.lm-about-host { display: flex; align-items: center; gap: 12px; font-family: var(--font-anthropic-serif); font-size: 17px; line-height: 1.3; }
+.lm-about-host img { width: 48px; background: #fff; border-radius: 10px; padding: 3px; border: 1px solid var(--color-border-line); }
+.lm-about-v { font-size: 16px; } .lm-about-v b { font-weight: var(--cds-font-weight-medium); }
+.lm-about-s { font-size: 13px; color: var(--color-fg-muted); margin-top: 2px; }
 </style>
 
 <div class="lm">
@@ -634,17 +651,37 @@
   <!-- ABOUT -->
   <section class="lm-page" id="about" role="tabpanel" hidden>
     <div class="lm-pagehead"><h2>About &amp; Data</h2><p>What this platform is, how levels are set, and where every figure comes from.</p></div>
-    <div class="lm-card lm-section">
-      <h2>About this platform</h2>
-      <p class="lm-note" style="margin:0">Hosted by the Environmental Protection Agency of Liberia to monitor the 2026–27 El Niño and coordinate preparedness. Phase 1 covers monitoring, county hazard mapping, preparedness and bulletins. District population is now included; farmland, infrastructure, vulnerability and sector impact estimates follow in later phases.</p>
-    </div>
-    <div class="lm-card lm-section">
-      <h2>Developed by</h2>
-      <p class="lm-note" style="margin:0"><b style="color:var(--color-fg)">Berexford Saylee Jallah</b>, Geospatial Information Services and Environmental Statistics Unit, Environmental Protection Agency of Liberia.</p>
-    </div>
-    <div class="lm-card lm-section">
-      <h2>Collaborating institutions</h2>
-      <div class="lm-partners"><span>National Disaster Management Agency (NDMA)</span><span>Liberia Meteorological Service</span><span>Liberia Hydrological Service</span><span>Ministry of Agriculture</span><span>National Public Health Institute (NPHIL)</span><span>LISGIS</span></div>
+    <div class="lm-card lm-section lm-about">
+      <div class="lm-about-main">
+        <h2>About this platform</h2>
+        <p class="lm-about-lede">The Liberia El Niño Early Warning Platform is hosted by the Environmental Protection Agency of Liberia to monitor the 2026–27 El Niño and coordinate preparedness across agencies. It brings ocean, climate, drought, flood and population data together for every county, district and clan, and updates itself from NOAA, NASA and FAO.</p>
+        <h3 class="lm-about-h">What it covers now</h3>
+        <ul class="lm-checks">
+          <li><b>El Niño monitoring</b> NOAA indices and outlooks, NASA ocean and rain maps, daily</li>
+          <li><b>Hazard maps to clan level</b> Dryness, flood exposure, heat and windstorms</li>
+          <li><b>Flood exposure</b> JRC river flood zones with 2022 census population</li>
+          <li><b>Drought and crops</b> FAO crop stress by county and at 1 km</li>
+          <li><b>Preparedness</b> Early actions by hazard, with proposed lead agencies</li>
+          <li><b>Bulletins and sources</b> Regional bulletins and a live data catalogue</li>
+        </ul>
+        <h3 class="lm-about-h">Coming next</h3>
+        <ul class="lm-next"><li>Farmland and crops</li><li>Health facilities and schools</li><li>Roads and infrastructure</li><li>Vulnerability index</li><li>Sector impact estimates</li><li>Clan names</li></ul>
+      </div>
+      <aside class="lm-about-side">
+        <div class="lm-about-block">
+          <div class="lm-about-k">Hosted by</div>
+          <div class="lm-about-host"><img src="assets/epa-logo.png" alt="EPA Liberia logo"><span>Environmental Protection Agency of Liberia</span></div>
+        </div>
+        <div class="lm-about-block">
+          <div class="lm-about-k">Developed by</div>
+          <div class="lm-about-v"><b>Berexford Saylee Jallah</b></div>
+          <div class="lm-about-s">Geospatial Information Services and Environmental Statistics Unit, EPA</div>
+        </div>
+        <div class="lm-about-block">
+          <div class="lm-about-k">Collaborating institutions</div>
+          <div class="lm-partners"><span>National Disaster Management Agency (NDMA)</span><span>Liberia Meteorological Service</span><span>Liberia Hydrological Service</span><span>Ministry of Agriculture</span><span>National Public Health Institute (NPHIL)</span><span>LISGIS</span></div>
+        </div>
+      </aside>
     </div>
     <div class="lm-card lm-section">
       <h2>Definitions</h2>
