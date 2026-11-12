@@ -643,10 +643,10 @@
   </section>
 
   <footer class="lm-foot">
-    <div class="lm-foot-brand"><img data-logo-copy alt="EPA Liberia logo"><div><h4>Environmental Protection Agency of Liberia</h4><p>Liberia El Niño Early Warning Platform: monitoring the 2026–27 El Niño and preparing for its hazards, county by county.</p></div></div>
+    <div class="lm-foot-brand"><img src="/_blob/4eb17e335402b27d0e7debfd176f5a11" alt="EPA Liberia logo"><div><h4>Environmental Protection Agency of Liberia</h4><p>Liberia El Niño Early Warning Platform: monitoring the 2026–27 El Niño and preparing for its hazards, county by county.</p></div></div>
     <div><h4>Platform</h4><p><a href="#overview" data-goto="overview">Overview</a> · <a href="#elnino" data-goto="elnino">El Niño &amp; Climate</a> · <a href="#hazards" data-goto="hazards">Hazard Map</a> · <a href="#drought" data-goto="drought">Drought &amp; Crops</a> · <a href="#prepare" data-goto="prepare">Preparedness</a> · <a href="#bulletins" data-goto="bulletins">Bulletins</a> · <a href="#about" data-goto="about">About &amp; Data</a></p></div>
     <div><h4>Collaborating institutions</h4><p>National Disaster Management Agency · Liberia Meteorological Service · Liberia Hydrological Service · Ministry of Agriculture · National Public Health Institute · LISGIS</p></div>
-    <div><h4>Contact</h4><p data-draw="foot_contact">Environmental Protection Agency of Liberia, Monrovia</p></div>
+    <div><h4>Contact</h4><p>Environmental Protection Agency of Liberia, Monrovia</p></div>
     <div class="lm-foot-base"><span>© 2026 Environmental Protection Agency of Liberia. Levels shown are EPA working assessments, not official LiMet or NDMA warnings.</span><span>Data: NOAA · NASA · FAO · JRC Copernicus · WorldPop · Global Wind Atlas · LISGIS</span></div>
     <div class="lm-foot-credit">Developed by <b>Berexford Saylee Jallah</b> · EPA Geospatial Information Services and Environmental Statistics Unit</div>
   </footer>
@@ -807,19 +807,6 @@ dash.calc('exposed_pop', {
   }
 });
 
-LM.CONTACT = { address: '', phone: '', email: '', hours: '', web: '', social: [] };  // EPA to fill in
-
-dash.draw('foot_contact', (el) => {
-  const c = LM.CONTACT, parts = [];
-  el.replaceChildren();
-  const line = (t, href) => { const d = document.createElement('div'); if (href) { const a = document.createElement('a'); a.href = href; a.textContent = t; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } d.appendChild(a); } else d.textContent = t; el.appendChild(d); parts.push(d); };
-  line(c.address || 'Environmental Protection Agency of Liberia, Monrovia');
-  if (c.phone) line(c.phone, 'tel:' + c.phone.replace(/[^+\d]/g, ''));
-  if (c.email) line(c.email, 'mailto:' + c.email);
-  if (c.hours) line(c.hours);
-  if (c.web) line(c.web.replace(/^https?:\/\//, ''), c.web);
-  (c.social || []).forEach(([name, url]) => line(name, url));
-});
 
 dash.draw('ticker', (el) => {
   const get = (id) => dash.data(id);
@@ -914,7 +901,6 @@ dash.draw('catalogue', (el) => {
 if (dash.manifest) dash.manifest().then((m) => { window.LM_MANIFEST = m; dash.draw('catalogue'); });
 
 (function initLayout() {
-  const logo = document.querySelector('.lm-band img'); document.querySelectorAll('img[data-logo-copy]').forEach((i) => { if (logo) i.src = logo.src; });
   document.querySelectorAll('[data-goto]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); LM.openTab(b.getAttribute('data-goto')); window.scrollTo({ top: 0, behavior: 'smooth' }); }));
   const top = document.getElementById('lm-top');
   if (top) {
