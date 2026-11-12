@@ -88,7 +88,14 @@
   function start() {
     started = true;
     runAll();
-    new MutationObserver((muts) => { if (muts.some((m) => m.attributeName === 'hidden')) schedule(); })
+    // Redraw only when a section is shown or hidden, not when a drawing changes its own contents (such as a tooltip).
+    const affectsDrawings = (m) => {
+      const t = m.target;
+      if (m.attributeName !== 'hidden' || t.nodeType !== 1) return false;
+      if (t.parentElement && t.parentElement.closest('[data-draw]')) return false;
+      return t.hasAttribute('data-draw') || !!t.querySelector('[data-draw]');
+    };
+    new MutationObserver((muts) => { if (muts.some(affectsDrawings)) schedule(); })
       .observe(document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
     let lastW = document.documentElement.clientWidth;
     new ResizeObserver(() => { const w = document.documentElement.clientWidth; if (w !== lastW) { lastW = w; schedule(); } }).observe(document.documentElement);
