@@ -5,7 +5,10 @@
 "district": "Glio-Twarbo",
 "area_km2": 1475.6,
 "pop2022": 6659,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1468,
+"clans": 4,
+"clan_pop_sum": 6659
 },
 {
 "code": "0302",
@@ -13,7 +16,10 @@
 "district": "Klay",
 "area_km2": 403.9,
 "pop2022": 25720,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4130,
+"clans": 3,
+"clan_pop_sum": 25720
 },
 {
 "code": "0304",
@@ -21,7 +27,10 @@
 "district": "Suehn Mecca",
 "area_km2": 446.9,
 "pop2022": 16219,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4770,
+"clans": 4,
+"clan_pop_sum": 16219
 },
 {
 "code": "0306",
@@ -29,7 +38,10 @@
 "district": "Senjeh",
 "area_km2": 549.3,
 "pop2022": 52740,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 14624,
+"clans": 4,
+"clan_pop_sum": 52740
 },
 {
 "code": "0308",
@@ -37,7 +49,10 @@
 "district": "Dowein",
 "area_km2": 350.5,
 "pop2022": 28371,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 5015,
+"clans": 6,
+"clan_pop_sum": 28371
 },
 {
 "code": "0310",
@@ -45,7 +60,10 @@
 "district": "Tehr",
 "area_km2": 191.2,
 "pop2022": 10655,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4183,
+"clans": 5,
+"clan_pop_sum": 10655
 },
 {
 "code": "0602",
@@ -53,7 +71,10 @@
 "district": "Fuamah",
 "area_km2": 1017.5,
 "pop2022": 35055,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 11475,
+"clans": 5,
+"clan_pop_sum": 35055
 },
 {
 "code": "0604",
@@ -61,7 +82,10 @@
 "district": "Jorquelleh",
 "area_km2": 1299.4,
 "pop2022": 145235,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 39426,
+"clans": 5,
+"clan_pop_sum": 145235
 },
 {
 "code": "0606",
@@ -69,7 +93,10 @@
 "district": "Yeallequelleh",
 "area_km2": 964.0,
 "pop2022": 43695,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 12737,
+"clans": 4,
+"clan_pop_sum": 43695
 },
 {
 "code": "0608",
@@ -77,7 +104,10 @@
 "district": "Panta",
 "area_km2": 448.1,
 "pop2022": 19853,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4419,
+"clans": 3,
+"clan_pop_sum": 19853
 },
 {
 "code": "0610",
@@ -85,7 +115,10 @@
 "district": "Salala",
 "area_km2": 787.7,
 "pop2022": 52928,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 13830,
+"clans": 4,
+"clan_pop_sum": 52928
 },
 {
 "code": "0612",
@@ -93,7 +126,10 @@
 "district": "Sanoyeah",
 "area_km2": 1091.5,
 "pop2022": 39467,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10338,
+"clans": 7,
+"clan_pop_sum": 39467
 },
 {
 "code": "0614",
@@ -101,7 +137,10 @@
 "district": "Suakoko",
 "area_km2": 616.5,
 "pop2022": 44930,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 11337,
+"clans": 3,
+"clan_pop_sum": 44930
 },
 {
 "code": "0616",
@@ -109,7 +148,10 @@
 "district": "Zota",
 "area_km2": 852.4,
 "pop2022": 22206,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6475,
+"clans": 5,
+"clan_pop_sum": 22206
 },
 {
 "code": "0618",
@@ -117,7 +159,10 @@
 "district": "Kokoyah",
 "area_km2": 262.6,
 "pop2022": 4012,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1286,
+"clans": 2,
+"clan_pop_sum": 4012
 },
 {
 "code": "0620",
@@ -125,7 +170,10 @@
 "district": "Tukpahblee",
 "area_km2": 365.5,
 "pop2022": 13120,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3352,
+"clans": 2,
+"clan_pop_sum": 13120
 },
 {
 "code": "0622",
@@ -133,7 +181,10 @@
 "district": "Boinsen",
 "area_km2": 270.3,
 "pop2022": 17254,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4641,
+"clans": 2,
+"clan_pop_sum": 17254
 },
 {
 "code": "0624",
@@ -141,7 +192,10 @@
 "district": "Kpaai",
 "area_km2": 671.6,
 "pop2022": 29806,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8002,
+"clans": 2,
+"clan_pop_sum": 29806
 },
 {
 "code": "0902",
@@ -149,7 +203,10 @@
 "district": "Owensgrove",
 "area_km2": 296.6,
 "pop2022": 14422,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4845,
+"clans": 3,
+"clan_pop_sum": 14422
 },
 {
 "code": "0904",
@@ -157,7 +214,10 @@
 "district": "District Number 1 (Dianblae)",
 "area_km2": 1158.4,
 "pop2022": 30223,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10963,
+"clans": 10,
+"clan_pop_sum": 30223
 },
 {
 "code": "0906",
@@ -165,7 +225,10 @@
 "district": "District Number 2 (Glarkon)",
 "area_km2": 1887.1,
 "pop2022": 32565,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 11113,
+"clans": 11,
+"clan_pop_sum": 32565
 },
 {
 "code": "0908",
@@ -173,7 +236,10 @@
 "district": "St. John River City",
 "area_km2": 434.7,
 "pop2022": 14273,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4920,
+"clans": 10,
+"clan_pop_sum": 14273
 },
 {
 "code": "0910",
@@ -181,7 +247,10 @@
 "district": "Neekreen",
 "area_km2": 511.6,
 "pop2022": 62883,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 18871,
+"clans": 12,
+"clan_pop_sum": 62883
 },
 {
 "code": "0912",
@@ -189,7 +258,10 @@
 "district": "Commonwealth",
 "area_km2": 23.1,
 "pop2022": 35740,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 12481,
+"clans": 13,
+"clan_pop_sum": 35740
 },
 {
 "code": "0914",
@@ -197,7 +269,10 @@
 "district": "District Number 3 (Wee)",
 "area_km2": 2114.8,
 "pop2022": 62421,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 16634,
+"clans": 13,
+"clan_pop_sum": 62421
 },
 {
 "code": "0916",
@@ -205,7 +280,10 @@
 "district": "District Number 4 (Kpaoegbarn)",
 "area_km2": 1287.1,
 "pop2022": 41162,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10580,
+"clans": 10,
+"clan_pop_sum": 41162
 },
 {
 "code": "1202",
@@ -213,7 +291,10 @@
 "district": "Garwula",
 "area_km2": 813.6,
 "pop2022": 33403,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10497,
+"clans": 9,
+"clan_pop_sum": 33393
 },
 {
 "code": "1204",
@@ -221,7 +302,10 @@
 "district": "Golakonneh",
 "area_km2": 1794.3,
 "pop2022": 45798,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 15623,
+"clans": 3,
+"clan_pop_sum": 45873
 },
 {
 "code": "1206",
@@ -229,7 +313,10 @@
 "district": "Porkpa",
 "area_km2": 1279.2,
 "pop2022": 51131,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8906,
+"clans": 3,
+"clan_pop_sum": 51131
 },
 {
 "code": "1208",
@@ -237,7 +324,10 @@
 "district": "Commonwealth",
 "area_km2": 203.7,
 "pop2022": 14057,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3987,
+"clans": 4,
+"clan_pop_sum": 13992
 },
 {
 "code": "1210",
@@ -245,7 +335,10 @@
 "district": "Tewor",
 "area_km2": 630.9,
 "pop2022": 34478,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10760,
+"clans": 3,
+"clan_pop_sum": 34478
 },
 {
 "code": "1502",
@@ -253,7 +346,10 @@
 "district": "Gbao",
 "area_km2": 1759.3,
 "pop2022": 19211,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3674,
+"clans": 4,
+"clan_pop_sum": 19211
 },
 {
 "code": "1504",
@@ -261,7 +357,10 @@
 "district": "Gboe-Ploe",
 "area_km2": 1721.4,
 "pop2022": 6464,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 969,
+"clans": 4,
+"clan_pop_sum": 6464
 },
 {
 "code": "1506",
@@ -269,7 +368,10 @@
 "district": "Konobo",
 "area_km2": 1656.7,
 "pop2022": 26588,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6347,
+"clans": 4,
+"clan_pop_sum": 26588
 },
 {
 "code": "1508",
@@ -277,7 +379,10 @@
 "district": "Tchien",
 "area_km2": 1332.2,
 "pop2022": 75771,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 20430,
+"clans": 4,
+"clan_pop_sum": 75771
 },
 {
 "code": "1512",
@@ -285,7 +390,10 @@
 "district": "Putu",
 "area_km2": 1153.1,
 "pop2022": 34026,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3469,
+"clans": 4,
+"clan_pop_sum": 34026
 },
 {
 "code": "1514",
@@ -293,7 +401,10 @@
 "district": "B'hai",
 "area_km2": 621.3,
 "pop2022": 13013,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3164,
+"clans": 4,
+"clan_pop_sum": 13013
 },
 {
 "code": "1516",
@@ -301,7 +412,10 @@
 "district": "Cavala",
 "area_km2": 1287.1,
 "pop2022": 34960,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 5713,
+"clans": 4,
+"clan_pop_sum": 34960
 },
 {
 "code": "1802",
@@ -309,7 +423,10 @@
 "district": "Lower Jloh",
 "area_km2": 361.3,
 "pop2022": 3639,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 596,
+"clans": 4,
+"clan_pop_sum": 3639
 },
 {
 "code": "1804",
@@ -317,7 +434,10 @@
 "district": "Upper Jloh",
 "area_km2": 258.0,
 "pop2022": 3746,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 908,
+"clans": 3,
+"clan_pop_sum": 3746
 },
 {
 "code": "1806",
@@ -325,7 +445,10 @@
 "district": "Fenetoe",
 "area_km2": 40.8,
 "pop2022": 2236,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 747,
+"clans": 2,
+"clan_pop_sum": 2236
 },
 {
 "code": "1808",
@@ -333,7 +456,10 @@
 "district": "Bolloh",
 "area_km2": 129.0,
 "pop2022": 1755,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 303,
+"clans": 2,
+"clan_pop_sum": 1755
 },
 {
 "code": "1810",
@@ -341,7 +467,10 @@
 "district": "Dorbor",
 "area_km2": 224.0,
 "pop2022": 8167,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1899,
+"clans": 5,
+"clan_pop_sum": 8167
 },
 {
 "code": "1812",
@@ -349,7 +478,10 @@
 "district": "Forpoh",
 "area_km2": 97.0,
 "pop2022": 4970,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1151,
+"clans": 3,
+"clan_pop_sum": 4970
 },
 {
 "code": "1814",
@@ -357,7 +489,10 @@
 "district": "Wlogba",
 "area_km2": 83.1,
 "pop2022": 2029,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 483,
+"clans": 2,
+"clan_pop_sum": 2029
 },
 {
 "code": "1816",
@@ -365,7 +500,10 @@
 "district": "Dweh",
 "area_km2": 94.0,
 "pop2022": 3966,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1088,
+"clans": 2,
+"clan_pop_sum": 3966
 },
 {
 "code": "1818",
@@ -373,7 +511,10 @@
 "district": "Kpi",
 "area_km2": 164.4,
 "pop2022": 1367,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 299,
+"clans": 3,
+"clan_pop_sum": 1367
 },
 {
 "code": "1820",
@@ -381,7 +522,10 @@
 "district": "Gee",
 "area_km2": 38.9,
 "pop2022": 5328,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1202,
+"clans": 2,
+"clan_pop_sum": 5328
 },
 {
 "code": "1822",
@@ -389,7 +533,10 @@
 "district": "Buah",
 "area_km2": 344.1,
 "pop2022": 2903,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 509,
+"clans": 4,
+"clan_pop_sum": 2903
 },
 {
 "code": "1824",
@@ -397,7 +544,10 @@
 "district": "Nrokwia-Wesldow",
 "area_km2": 238.8,
 "pop2022": 2873,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 638,
+"clans": 2,
+"clan_pop_sum": 2873
 },
 {
 "code": "1826",
@@ -405,7 +555,10 @@
 "district": "Felo-Jekwi",
 "area_km2": 160.5,
 "pop2022": 3903,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 851,
+"clans": 3,
+"clan_pop_sum": 3903
 },
 {
 "code": "1828",
@@ -413,7 +566,10 @@
 "district": "Barclayville",
 "area_km2": 396.7,
 "pop2022": 12619,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2990,
+"clans": 3,
+"clan_pop_sum": 12619
 },
 {
 "code": "1830",
@@ -421,7 +577,10 @@
 "district": "Grand Cess Wedabo",
 "area_km2": 409.6,
 "pop2022": 18011,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3057,
+"clans": 4,
+"clan_pop_sum": 18011
 },
 {
 "code": "1832",
@@ -429,7 +588,10 @@
 "district": "Bleebo",
 "area_km2": 114.4,
 "pop2022": 2820,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 416,
+"clans": 2,
+"clan_pop_sum": 2820
 },
 {
 "code": "1834",
@@ -437,7 +599,10 @@
 "district": "Trenbo",
 "area_km2": 256.7,
 "pop2022": 9182,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1451,
+"clans": 6,
+"clan_pop_sum": 9182
 },
 {
 "code": "1836",
@@ -445,7 +610,10 @@
 "district": "Garraway",
 "area_km2": 336.8,
 "pop2022": 17000,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2891,
+"clans": 6,
+"clan_pop_sum": 17000
 },
 {
 "code": "1838",
@@ -453,7 +621,10 @@
 "district": "Penicess",
 "area_km2": 142.2,
 "pop2022": 2828,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 596,
+"clans": 2,
+"clan_pop_sum": 2828
 },
 {
 "code": "2102",
@@ -461,7 +632,10 @@
 "district": "Foya",
 "area_km2": 247.7,
 "pop2022": 46894,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 14782,
+"clans": 3,
+"clan_pop_sum": 46959
 },
 {
 "code": "2104",
@@ -469,7 +643,10 @@
 "district": "Kolahun",
 "area_km2": 411.1,
 "pop2022": 29603,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10075,
+"clans": 2,
+"clan_pop_sum": 29603
 },
 {
 "code": "2106",
@@ -477,7 +654,10 @@
 "district": "Salayea",
 "area_km2": 1265.5,
 "pop2022": 28960,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8712,
+"clans": 3,
+"clan_pop_sum": 28970
 },
 {
 "code": "2108",
@@ -485,7 +665,10 @@
 "district": "Vahun",
 "area_km2": 386.0,
 "pop2022": 27921,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2542,
+"clans": 3,
+"clan_pop_sum": 27921
 },
 {
 "code": "2110",
@@ -493,7 +676,10 @@
 "district": "Voinjama",
 "area_km2": 1950.6,
 "pop2022": 61308,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 24481,
+"clans": 3,
+"clan_pop_sum": 61273
 },
 {
 "code": "2112",
@@ -501,7 +687,10 @@
 "district": "Zorzor",
 "area_km2": 3133.3,
 "pop2022": 50681,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 20719,
+"clans": 3,
+"clan_pop_sum": 50641
 },
 {
 "code": "2114",
@@ -509,7 +698,10 @@
 "district": "Quardu Boundi",
 "area_km2": 327.4,
 "pop2022": 22844,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 5815,
+"clans": 1,
+"clan_pop_sum": 22844
 },
 {
 "code": "2116",
@@ -517,7 +709,10 @@
 "district": "Lukameh",
 "area_km2": 1375.2,
 "pop2022": 24417,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4624,
+"clans": 2,
+"clan_pop_sum": 24417
 },
 {
 "code": "2118",
@@ -525,7 +720,10 @@
 "district": "Wahasa",
 "area_km2": 409.4,
 "pop2022": 34796,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6840,
+"clans": 2,
+"clan_pop_sum": 34796
 },
 {
 "code": "2120",
@@ -533,7 +731,10 @@
 "district": "Waum",
 "area_km2": 187.7,
 "pop2022": 23261,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4735,
+"clans": 3,
+"clan_pop_sum": 23261
 },
 {
 "code": "2122",
@@ -541,7 +742,10 @@
 "district": "Tengia",
 "area_km2": 177.8,
 "pop2022": 16691,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4314,
+"clans": 2,
+"clan_pop_sum": 16691
 },
 {
 "code": "2402",
@@ -549,7 +753,10 @@
 "district": "Farmington",
 "area_km2": 421.0,
 "pop2022": 54257,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 14409,
+"clans": 6,
+"clan_pop_sum": 54257
 },
 {
 "code": "2404",
@@ -557,7 +764,10 @@
 "district": "Gibi",
 "area_km2": 598.2,
 "pop2022": 15380,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 5684,
+"clans": 2,
+"clan_pop_sum": 15380
 },
 {
 "code": "2406",
@@ -565,7 +775,10 @@
 "district": "Kakata",
 "area_km2": 1119.7,
 "pop2022": 123840,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 43382,
+"clans": 7,
+"clan_pop_sum": 123840
 },
 {
 "code": "2408",
@@ -573,7 +786,10 @@
 "district": "Mambahn Kabah",
 "area_km2": 331.0,
 "pop2022": 37787,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10796,
+"clans": 5,
+"clan_pop_sum": 37787
 },
 {
 "code": "2410",
@@ -581,7 +797,10 @@
 "district": "Kabah Administrative",
 "area_km2": 230.5,
 "pop2022": 73682,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 30309,
+"clans": 6,
+"clan_pop_sum": 73682
 },
 {
 "code": "2702",
@@ -589,7 +808,10 @@
 "district": "Whojah",
 "area_km2": 229.1,
 "pop2022": 4424,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 699,
+"clans": 4,
+"clan_pop_sum": 4424
 },
 {
 "code": "2704",
@@ -597,7 +819,10 @@
 "district": "Gwelekpoken",
 "area_km2": 330.5,
 "pop2022": 4366,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 978,
+"clans": 4,
+"clan_pop_sum": 4366
 },
 {
 "code": "2706",
@@ -605,7 +830,10 @@
 "district": "Nyorken",
 "area_km2": 198.6,
 "pop2022": 6658,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 855,
+"clans": 4,
+"clan_pop_sum": 6658
 },
 {
 "code": "2708",
@@ -613,7 +841,10 @@
 "district": "Karluway Number 1",
 "area_km2": 337.9,
 "pop2022": 7391,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1804,
+"clans": 4,
+"clan_pop_sum": 7391
 },
 {
 "code": "2710",
@@ -621,7 +852,10 @@
 "district": "Karluway Number 2",
 "area_km2": 412.8,
 "pop2022": 11370,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2815,
+"clans": 6,
+"clan_pop_sum": 11370
 },
 {
 "code": "2712",
@@ -629,7 +863,10 @@
 "district": "Pleebo/Sodoken",
 "area_km2": 460.1,
 "pop2022": 85287,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 17863,
+"clans": 5,
+"clan_pop_sum": 85287
 },
 {
 "code": "2714",
@@ -637,7 +874,10 @@
 "district": "Harper",
 "area_km2": 322.4,
 "pop2022": 53091,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 12908,
+"clans": 7,
+"clan_pop_sum": 53091
 },
 {
 "code": "3002",
@@ -645,7 +885,10 @@
 "district": "Careysburg",
 "area_km2": 309.0,
 "pop2022": 55284,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 13479,
+"clans": 6,
+"clan_pop_sum": 55284
 },
 {
 "code": "3004",
@@ -653,7 +896,10 @@
 "district": "West Point Township",
 "area_km2": 0.5,
 "pop2022": 30847,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8692,
+"clans": 7,
+"clan_pop_sum": 30847
 },
 {
 "code": "3006",
@@ -661,7 +907,10 @@
 "district": "St. Paul River",
 "area_km2": 415.0,
 "pop2022": 172384,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 59396,
+"clans": 26,
+"clan_pop_sum": 172384
 },
 {
 "code": "3008",
@@ -669,7 +918,10 @@
 "district": "Todee",
 "area_km2": 776.9,
 "pop2022": 49361,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 12505,
+"clans": 8,
+"clan_pop_sum": 49361
 },
 {
 "code": "3010",
@@ -677,7 +929,10 @@
 "district": "Borough of New Kru Town",
 "area_km2": 5.4,
 "pop2022": 71739,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 27647,
+"clans": 25,
+"clan_pop_sum": 71739
 },
 {
 "code": "3012",
@@ -685,7 +940,10 @@
 "district": "Gardnersville Township",
 "area_km2": 16.9,
 "pop2022": 127566,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 37927,
+"clans": 18,
+"clan_pop_sum": 127566
 },
 {
 "code": "3014",
@@ -693,7 +951,10 @@
 "district": "Barnersville Township",
 "area_km2": 11.0,
 "pop2022": 65493,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 17231,
+"clans": 11,
+"clan_pop_sum": 65493
 },
 {
 "code": "3016",
@@ -701,7 +962,10 @@
 "district": "Lousana Township",
 "area_km2": 54.5,
 "pop2022": 26057,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6916,
+"clans": 1,
+"clan_pop_sum": 26057
 },
 {
 "code": "3018",
@@ -709,7 +973,10 @@
 "district": "Paynesville Township",
 "area_km2": 96.9,
 "pop2022": 617492,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 183153,
+"clans": 59,
+"clan_pop_sum": 617492
 },
 {
 "code": "3020",
@@ -717,7 +984,10 @@
 "district": "Congo Town Township",
 "area_km2": 12.4,
 "pop2022": 91632,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 31317,
+"clans": 17,
+"clan_pop_sum": 91632
 },
 {
 "code": "3022",
@@ -725,7 +995,10 @@
 "district": "New Georgia Township",
 "area_km2": 16.8,
 "pop2022": 99845,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 28397,
+"clans": 23,
+"clan_pop_sum": 99845
 },
 {
 "code": "3024",
@@ -733,7 +1006,10 @@
 "district": "Caldwell Township",
 "area_km2": 36.8,
 "pop2022": 112166,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 35521,
+"clans": 8,
+"clan_pop_sum": 112166
 },
 {
 "code": "3026",
@@ -741,7 +1017,10 @@
 "district": "Greater Monrovia",
 "area_km2": 12.2,
 "pop2022": 161891,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 57027,
+"clans": 36,
+"clan_pop_sum": 161891
 },
 {
 "code": "3028",
@@ -749,7 +1028,10 @@
 "district": "Garglohn Township",
 "area_km2": 8.3,
 "pop2022": 126281,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 44472,
+"clans": 20,
+"clan_pop_sum": 126281
 },
 {
 "code": "3034",
@@ -757,7 +1039,10 @@
 "district": "Johnsonville Township",
 "area_km2": 39.4,
 "pop2022": 112927,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 29107,
+"clans": 1,
+"clan_pop_sum": 112927
 },
 {
 "code": "3302",
@@ -765,7 +1050,10 @@
 "district": "Sanniquellie Mahn",
 "area_km2": 490.6,
 "pop2022": 47129,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 13705,
+"clans": 2,
+"clan_pop_sum": 47129
 },
 {
 "code": "3304",
@@ -773,7 +1061,10 @@
 "district": "Yarpea Mahn",
 "area_km2": 366.8,
 "pop2022": 14113,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3932,
+"clans": 5,
+"clan_pop_sum": 14113
 },
 {
 "code": "3306",
@@ -781,7 +1072,10 @@
 "district": "Yarmein",
 "area_km2": 503.7,
 "pop2022": 33523,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8624,
+"clans": 4,
+"clan_pop_sum": 33523
 },
 {
 "code": "3308",
@@ -789,7 +1083,10 @@
 "district": "Gbehlay-Geh",
 "area_km2": 641.4,
 "pop2022": 50450,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 11939,
+"clans": 4,
+"clan_pop_sum": 50450
 },
 {
 "code": "3310",
@@ -797,7 +1094,10 @@
 "district": "Twan River",
 "area_km2": 791.2,
 "pop2022": 45713,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 11821,
+"clans": 7,
+"clan_pop_sum": 45713
 },
 {
 "code": "3312",
@@ -805,7 +1105,10 @@
 "district": "Garr-Bain",
 "area_km2": 401.9,
 "pop2022": 111796,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 28489,
+"clans": 3,
+"clan_pop_sum": 111796
 },
 {
 "code": "3314",
@@ -813,7 +1116,10 @@
 "district": "Doe",
 "area_km2": 1438.1,
 "pop2022": 45532,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 12310,
+"clans": 4,
+"clan_pop_sum": 45532
 },
 {
 "code": "3316",
@@ -821,7 +1127,10 @@
 "district": "Gbi & Doru",
 "area_km2": 2109.3,
 "pop2022": 8118,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1960,
+"clans": 4,
+"clan_pop_sum": 8118
 },
 {
 "code": "3318",
@@ -829,7 +1138,10 @@
 "district": "Kparblee",
 "area_km2": 368.2,
 "pop2022": 16958,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2861,
+"clans": 4,
+"clan_pop_sum": 16958
 },
 {
 "code": "3320",
@@ -837,7 +1149,10 @@
 "district": "Boe & Quilla",
 "area_km2": 669.7,
 "pop2022": 20743,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4736,
+"clans": 4,
+"clan_pop_sum": 20743
 },
 {
 "code": "3322",
@@ -845,7 +1160,10 @@
 "district": "Gbor",
 "area_km2": 159.8,
 "pop2022": 10680,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2651,
+"clans": 4,
+"clan_pop_sum": 10680
 },
 {
 "code": "3324",
@@ -853,7 +1171,10 @@
 "district": "Zoe-Gbao",
 "area_km2": 359.7,
 "pop2022": 38356,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10170,
+"clans": 6,
+"clan_pop_sum": 38356
 },
 {
 "code": "3326",
@@ -861,7 +1182,10 @@
 "district": "Yarwein Mehnsonnoh",
 "area_km2": 999.5,
 "pop2022": 25350,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4568,
+"clans": 3,
+"clan_pop_sum": 25350
 },
 {
 "code": "3328",
@@ -869,7 +1193,10 @@
 "district": "Meinpea-Mahn",
 "area_km2": 605.9,
 "pop2022": 29313,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 7121,
+"clans": 5,
+"clan_pop_sum": 29313
 },
 {
 "code": "3330",
@@ -877,7 +1204,10 @@
 "district": "Leewehpea-Mahn",
 "area_km2": 446.6,
 "pop2022": 27207,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6564,
+"clans": 4,
+"clan_pop_sum": 27207
 },
 {
 "code": "3332",
@@ -885,7 +1215,10 @@
 "district": "Wee-Gbehyi-Mahn",
 "area_km2": 453.8,
 "pop2022": 45028,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 10364,
+"clans": 4,
+"clan_pop_sum": 45028
 },
 {
 "code": "3334",
@@ -893,7 +1226,10 @@
 "district": "Buu-Yao",
 "area_km2": 788.8,
 "pop2022": 51832,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 13289,
+"clans": 7,
+"clan_pop_sum": 51832
 },
 {
 "code": "3602",
@@ -901,7 +1237,10 @@
 "district": "Doedain",
 "area_km2": 1017.8,
 "pop2022": 12054,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2414,
+"clans": 4,
+"clan_pop_sum": 12054
 },
 {
 "code": "3604",
@@ -909,7 +1248,10 @@
 "district": "Fen River",
 "area_km2": 258.0,
 "pop2022": 9632,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2434,
+"clans": 4,
+"clan_pop_sum": 9632
 },
 {
 "code": "3606",
@@ -917,7 +1259,10 @@
 "district": "Norwein",
 "area_km2": 607.7,
 "pop2022": 17266,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4053,
+"clans": 4,
+"clan_pop_sum": 17266
 },
 {
 "code": "3608",
@@ -925,7 +1270,10 @@
 "district": "Central Rivercess",
 "area_km2": 1795.0,
 "pop2022": 18736,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4254,
+"clans": 5,
+"clan_pop_sum": 18736
 },
 {
 "code": "3610",
@@ -933,7 +1281,10 @@
 "district": "Beawor",
 "area_km2": 857.0,
 "pop2022": 8000,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1791,
+"clans": 3,
+"clan_pop_sum": 8000
 },
 {
 "code": "3612",
@@ -941,7 +1292,10 @@
 "district": "Sam Gbalor",
 "area_km2": 374.4,
 "pop2022": 3511,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 816,
+"clans": 2,
+"clan_pop_sum": 3511
 },
 {
 "code": "3614",
@@ -949,7 +1303,10 @@
 "district": "Jo River",
 "area_km2": 723.0,
 "pop2022": 11215,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2786,
+"clans": 4,
+"clan_pop_sum": 11215
 },
 {
 "code": "3616",
@@ -957,7 +1314,10 @@
 "district": "Zarflahn",
 "area_km2": 191.5,
 "pop2022": 10405,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2662,
+"clans": 2,
+"clan_pop_sum": 10405
 },
 {
 "code": "3902",
@@ -965,7 +1325,10 @@
 "district": "Greenville",
 "area_km2": 86.2,
 "pop2022": 28503,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 8051,
+"clans": 5,
+"clan_pop_sum": 28503
 },
 {
 "code": "3904",
@@ -973,7 +1336,10 @@
 "district": "Butaw",
 "area_km2": 238.6,
 "pop2022": 9760,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2532,
+"clans": 8,
+"clan_pop_sum": 9760
 },
 {
 "code": "3906",
@@ -981,7 +1347,10 @@
 "district": "Sanquin Number 2",
 "area_km2": 328.0,
 "pop2022": 2837,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 580,
+"clans": 3,
+"clan_pop_sum": 2837
 },
 {
 "code": "3908",
@@ -989,7 +1358,10 @@
 "district": "Sanquin Number 3",
 "area_km2": 409.7,
 "pop2022": 2175,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 335,
+"clans": 6,
+"clan_pop_sum": 2175
 },
 {
 "code": "3910",
@@ -997,7 +1369,10 @@
 "district": "Sanquin Number 1",
 "area_km2": 392.3,
 "pop2022": 2375,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 591,
+"clans": 3,
+"clan_pop_sum": 2375
 },
 {
 "code": "3912",
@@ -1005,7 +1380,10 @@
 "district": "Kulu",
 "area_km2": 376.9,
 "pop2022": 5978,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1537,
+"clans": 2,
+"clan_pop_sum": 5978
 },
 {
 "code": "3914",
@@ -1013,7 +1391,10 @@
 "district": "Plahn",
 "area_km2": 181.1,
 "pop2022": 4748,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 975,
+"clans": 2,
+"clan_pop_sum": 4748
 },
 {
 "code": "3916",
@@ -1021,7 +1402,10 @@
 "district": "Juarzon",
 "area_km2": 190.2,
 "pop2022": 7192,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1311,
+"clans": 5,
+"clan_pop_sum": 7192
 },
 {
 "code": "3918",
@@ -1029,7 +1413,10 @@
 "district": "Wedjah",
 "area_km2": 622.8,
 "pop2022": 3021,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 450,
+"clans": 4,
+"clan_pop_sum": 3021
 },
 {
 "code": "3920",
@@ -1037,7 +1424,10 @@
 "district": "Pynes Town",
 "area_km2": 817.7,
 "pop2022": 5131,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1115,
+"clans": 4,
+"clan_pop_sum": 5131
 },
 {
 "code": "3922",
@@ -1045,7 +1435,10 @@
 "district": "Jeadepo",
 "area_km2": 1656.9,
 "pop2022": 5862,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1353,
+"clans": 10,
+"clan_pop_sum": 5862
 },
 {
 "code": "3924",
@@ -1053,7 +1446,10 @@
 "district": "Jaedae",
 "area_km2": 370.5,
 "pop2022": 6831,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1152,
+"clans": 8,
+"clan_pop_sum": 6831
 },
 {
 "code": "3926",
@@ -1061,7 +1457,10 @@
 "district": "Bodae",
 "area_km2": 189.3,
 "pop2022": 4543,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1170,
+"clans": 4,
+"clan_pop_sum": 4543
 },
 {
 "code": "3928",
@@ -1069,7 +1468,10 @@
 "district": "Bokon",
 "area_km2": 136.7,
 "pop2022": 10364,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2074,
+"clans": 3,
+"clan_pop_sum": 10364
 },
 {
 "code": "3930",
@@ -1077,7 +1479,10 @@
 "district": "Kpayan",
 "area_km2": 656.4,
 "pop2022": 8973,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2671,
+"clans": 12,
+"clan_pop_sum": 8973
 },
 {
 "code": "3932",
@@ -1085,7 +1490,10 @@
 "district": "Bar-Nakay",
 "area_km2": 94.0,
 "pop2022": 2245,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 468,
+"clans": 4,
+"clan_pop_sum": 2245
 },
 {
 "code": "3934",
@@ -1093,7 +1501,10 @@
 "district": "Jlah",
 "area_km2": 180.8,
 "pop2022": 9503,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1641,
+"clans": 6,
+"clan_pop_sum": 9503
 },
 {
 "code": "3936",
@@ -1101,7 +1512,10 @@
 "district": "Krah",
 "area_km2": 182.8,
 "pop2022": 4251,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 819,
+"clans": 7,
+"clan_pop_sum": 4251
 },
 {
 "code": "3938",
@@ -1109,7 +1523,10 @@
 "district": "Sarboh",
 "area_km2": 213.4,
 "pop2022": 3380,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 708,
+"clans": 4,
+"clan_pop_sum": 3380
 },
 {
 "code": "3940",
@@ -1117,39 +1534,54 @@
 "district": "Seekon",
 "area_km2": 910.2,
 "pop2022": 5999,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1121,
+"clans": 4,
+"clan_pop_sum": 5999
 },
 {
 "code": "3942",
 "county": "Sinoe",
 "district": "Nyarn",
 "area_km2": 89.5,
-"pop2022": 1520.1953352769679,
-"pop2022_method": "2022 census, estimated (district not listed in the census table)"
+"pop2022": 4622,
+"pop2022_method": "2022 census (clan tables; not listed in the district tables)",
+"households2022": 1084,
+"clans": 2,
+"clan_pop_sum": 4622
 },
 {
 "code": "3944",
 "county": "Sinoe",
 "district": "Shaw Boe",
 "area_km2": 590.4,
-"pop2022": 10028.19358600583,
-"pop2022_method": "2022 census, estimated (district not listed in the census table)"
+"pop2022": 1324,
+"pop2022_method": "2022 census (clan tables; not listed in the district tables)",
+"households2022": 171,
+"clans": 2,
+"clan_pop_sum": 1324
 },
 {
 "code": "3946",
 "county": "Sinoe",
 "district": "Pertu",
 "area_km2": 111.7,
-"pop2022": 1897.271720116618,
-"pop2022_method": "2022 census, estimated (district not listed in the census table)"
+"pop2022": 3340,
+"pop2022_method": "2022 census (clan tables; not listed in the district tables)",
+"households2022": 1300,
+"clans": 5,
+"clan_pop_sum": 3340
 },
 {
 "code": "3948",
 "county": "Sinoe",
 "district": "Numopoh",
 "area_km2": 237.4,
-"pop2022": 4032.339358600583,
-"pop2022_method": "2022 census, estimated (district not listed in the census table)"
+"pop2022": 8192,
+"pop2022_method": "2022 census (clan tables; not listed in the district tables)",
+"households2022": 2054,
+"clans": 12,
+"clan_pop_sum": 8192
 },
 {
 "code": "4202",
@@ -1157,7 +1589,10 @@
 "district": "Chedepo",
 "area_km2": 789.8,
 "pop2022": 12008,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2992,
+"clans": 6,
+"clan_pop_sum": 12008
 },
 {
 "code": "4204",
@@ -1165,7 +1600,10 @@
 "district": "Karforh",
 "area_km2": 273.7,
 "pop2022": 5256,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 726,
+"clans": 4,
+"clan_pop_sum": 5256
 },
 {
 "code": "4206",
@@ -1173,7 +1611,10 @@
 "district": "Nanee",
 "area_km2": 230.3,
 "pop2022": 12065,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2347,
+"clans": 4,
+"clan_pop_sum": 12065
 },
 {
 "code": "4208",
@@ -1181,7 +1622,10 @@
 "district": "Gbeapo",
 "area_km2": 206.3,
 "pop2022": 19615,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6586,
+"clans": 4,
+"clan_pop_sum": 19615
 },
 {
 "code": "4210",
@@ -1189,7 +1633,10 @@
 "district": "Nyenawliken",
 "area_km2": 212.1,
 "pop2022": 14102,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3542,
+"clans": 4,
+"clan_pop_sum": 14102
 },
 {
 "code": "4212",
@@ -1197,7 +1644,10 @@
 "district": "Potupo",
 "area_km2": 891.9,
 "pop2022": 31533,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 6038,
+"clans": 6,
+"clan_pop_sum": 31533
 },
 {
 "code": "4214",
@@ -1205,7 +1655,10 @@
 "district": "Glaro",
 "area_km2": 891.4,
 "pop2022": 4470,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1207,
+"clans": 4,
+"clan_pop_sum": 4470
 },
 {
 "code": "4216",
@@ -1213,7 +1666,10 @@
 "district": "Sarbo",
 "area_km2": 543.1,
 "pop2022": 7494,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 1650,
+"clans": 4,
+"clan_pop_sum": 7494
 },
 {
 "code": "4218",
@@ -1221,7 +1677,10 @@
 "district": "Tuobo",
 "area_km2": 470.8,
 "pop2022": 10205,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2055,
+"clans": 6,
+"clan_pop_sum": 10205
 },
 {
 "code": "4220",
@@ -1229,7 +1688,10 @@
 "district": "Nyenebo",
 "area_km2": 359.0,
 "pop2022": 7905,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2554,
+"clans": 5,
+"clan_pop_sum": 7905
 },
 {
 "code": "4502",
@@ -1237,7 +1699,10 @@
 "district": "Kongba",
 "area_km2": 3012.0,
 "pop2022": 11508,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2245,
+"clans": 2,
+"clan_pop_sum": 11508
 },
 {
 "code": "4504",
@@ -1245,7 +1710,10 @@
 "district": "Belleh",
 "area_km2": 2415.8,
 "pop2022": 15214,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 2903,
+"clans": 2,
+"clan_pop_sum": 15214
 },
 {
 "code": "4506",
@@ -1253,7 +1721,10 @@
 "district": "Bokomu",
 "area_km2": 579.0,
 "pop2022": 13684,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 3717,
+"clans": 2,
+"clan_pop_sum": 13684
 },
 {
 "code": "4508",
@@ -1261,7 +1732,10 @@
 "district": "Bopolu",
 "area_km2": 2216.7,
 "pop2022": 23758,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 7322,
+"clans": 3,
+"clan_pop_sum": 23758
 },
 {
 "code": "4510",
@@ -1269,7 +1743,10 @@
 "district": "Gbarma",
 "area_km2": 826.2,
 "pop2022": 13845,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 4039,
+"clans": 2,
+"clan_pop_sum": 13845
 },
 {
 "code": "4512",
@@ -1277,6 +1754,9 @@
 "district": "Gounwolaila",
 "area_km2": 725.7,
 "pop2022": 17986,
-"pop2022_method": "2022 census"
+"pop2022_method": "2022 census",
+"households2022": 5047,
+"clans": 2,
+"clan_pop_sum": 17986
 }
 ]

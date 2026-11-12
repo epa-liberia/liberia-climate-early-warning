@@ -23,9 +23,9 @@
  "district_pop": {
   "file": "data/district_pop.json",
   "title": "District population",
-  "description": "LISGIS 2022 Population and Housing Census by district (160), with area in km²; four Sinoe districts not listed in the census tables are estimated.",
-  "updated": "2026-11-12T15:38:58Z",
-  "sha": "699ff827711d160f"
+  "description": "LISGIS 2022 Population and Housing Census by district (160): people and households, with area in km².",
+  "updated": "2026-11-12T15:50:17Z",
+  "sha": "1c59269a7d3c0e6a"
  },
  "districts": {
   "file": "data/districts.json",
@@ -163,8 +163,15 @@
  "flood_areas": {
   "file": "data/flood_areas.json",
   "title": "People and land in the flood zone",
-  "description": "Area and people (2022 census totals, placed within districts with WorldPop 2025) in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
-  "updated": "2026-11-12T15:38:58Z",
-  "sha": "66a4b58c2b79b588"
+  "description": "Area and people (2022 census by district and clan; WorldPop 2025 places them inside or outside the zone) in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
+  "updated": "2026-11-12T15:50:17Z",
+  "sha": "af800cc201ca3396"
+ },
+ "clan_pop": {
+  "file": "data/clan_pop.json",
+  "title": "Clan population",
+  "description": "LISGIS 2022 Population and Housing Census by clan (902 clans): people, men, women, households and density, matched to the 2022 clan map by code.",
+  "updated": "2026-11-12T15:50:17Z",
+  "sha": "edbf365b33979e7e"
  }
 }

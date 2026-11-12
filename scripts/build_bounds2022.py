@@ -4,7 +4,7 @@ Usage: python3 scripts/build_bounds2022.py SRC_DIR   (from the repository root)
 SRC_DIR holds LISGIS geo-counties-2022.geojson, geo-districts-2022.geojson and geo-clans-2022.geojson.
 Writes docs/data/counties.json, districts.json, clans.json (simplified for the web, lon/lat, wound for d3)
 and docs/data/district_pop.json (2022 census by district, from scripts/data/census2022_districts.csv).
-Clan population is placed later by build_flood.py / build_pop2022.py from WorldPop, scaled to district totals."""
+Also writes docs/data/clan_pop.json from the census clan tables (scripts/data/census2022_clans.csv)."""
 import csv, json, pathlib, re, sys, glob
 from shapely.geometry import shape, mapping
 from shapely.geometry.polygon import orient
@@ -63,7 +63,18 @@ for f in D:
     dpop.append({"code": p["code"], "county": cty, "district": name, "area_km2": km2(g),
                  "pop2022": table.get(k) if k else None, "pop2022_method": "2022 census" if k else None})
     dfeat.append({"type": "Feature", "properties": {"code": p["code"], "county": cty, "district": name, "area_km2": km2(g)}, "geometry": web(g, 0.0012)})
-# Districts the census table does not list share the county's unlisted people (Sinoe: 17,478).
+# Clan tables (LISGIS 2022 census by clan code). Fill districts the district tables do not list (Sinoe) from them.
+CL = {}
+for r in csv.DictReader(open(root / "scripts" / "data" / "census2022_clans.csv", encoding="utf-8-sig")):
+    CL[r["clan_code"]] = {k: (int(r[k]) if r[k] else None) for k in ("total", "male", "female", "households")}
+clansum = {}
+for c, r in CL.items():
+    if r["total"] is not None: clansum[c[:4]] = clansum.get(c[:4], 0) + r["total"]
+for r in dpop:
+    if r["pop2022"] is None and r["code"] in clansum:
+        r["pop2022"] = clansum[r["code"]]; r["pop2022_method"] = "2022 census (clan tables; not listed in the district tables)"
+        report.append(f"{r['county']}: {r['district']} from clan tables: {clansum[r['code']]:,}")
+# Districts still missing share the county's unlisted people.
 for cty in sorted(totals):
     rows = [r for r in dpop if r["county"] == cty]
     miss = [r for r in rows if r["pop2022"] is None]
@@ -77,6 +88,26 @@ for cty in sorted(totals):
     unused = {k for k in census.get(cty, {}) if (cty, k) not in used} - {"(not listed)"}
     if unused: report.append(f"{cty}: census entries with no boundary: {sorted(unused)}")
 
+# Clan population: census clan tables; a clan with no figure gets its district total minus the other clans.
+cpop = []
+for f in K:
+    p = f["properties"]; cty, dist = dname[p["parent_code"]]
+    r = CL.get(p["code"], {}); tot = r.get("total")
+    row = {"key": f"clan:{cty}:{dist}:{p['code']}", "clan_id": p["code"], "clan": title(p["name"]), "district": dist, "county": cty,
+           "area_km2": km2(shape(f["geometry"])), "pop2022": tot, "male": r.get("male"), "female": r.get("female"), "households": r.get("households"), "pop2022_method": "2022 census (clan tables)"}
+    if tot is None:
+        drow = next(x for x in dpop if x["code"] == p["parent_code"])
+        row["pop2022"] = int(round(drow["pop2022"])) - clansum.get(p["parent_code"], 0); row["pop2022_method"] = "estimated: district total minus its other clans (no clan figure)"
+        report.append(f"{cty}/{dist}: clan {row['clan']} has no figure; set to {row['pop2022']:,} (district minus other clans)")
+    row["density"] = round(row["pop2022"] / row["area_km2"], 1) if row["area_km2"] else None
+    cpop.append(row)
+hh = {}
+for r in cpop:
+    if r["households"]: hh[r["key"].split(":")[2] + "|" + r["county"]] = hh.get(r["key"].split(":")[2] + "|" + r["county"], 0) + r["households"]
+for r in dpop:
+    r["households2022"] = hh.get(r["district"] + "|" + r["county"])
+    cs = [x for x in cpop if x["county"] == r["county"] and x["district"] == r["district"]]
+    r["clans"] = len(cs); r["clan_pop_sum"] = sum(x["pop2022"] for x in cs)
 cfeat = [{"type": "Feature", "properties": {"county": f["properties"]["name"], "code": f["properties"]["code"]}, "geometry": web(shape(f["geometry"]), 0.002)} for f in C]
 kfeat = []
 for f in K:
@@ -88,4 +119,5 @@ out = root / "docs" / "data"
 for n, fs in [("counties", cfeat), ("districts", dfeat), ("clans", kfeat)]:
     (out / f"{n}.json").write_text(json.dumps({"type": "FeatureCollection", "features": fs}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 (out / "district_pop.json").write_text(json.dumps(dpop, ensure_ascii=False, indent=0), encoding="utf-8")
+(out / "clan_pop.json").write_text(json.dumps(cpop, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 print("\n".join(report)); print(len(cfeat), "counties,", len(dfeat), "districts,", len(kfeat), "clans; population", round(sum(r["pop2022"] for r in dpop)))
