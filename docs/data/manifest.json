@@ -173,5 +173,12 @@
   "description": "LISGIS 2022 Population and Housing Census by clan (902 clans): people, men, women, households and density, matched to the 2022 clan map by code.",
   "updated": "2026-11-12T15:56:07Z",
   "sha": "cd4d2acaa611d1a0"
+ },
+ "faq": {
+  "file": "data/faq.json",
+  "title": "El Niño assistant: approved answers",
+  "description": "Questions and answers the El Niño assistant draws on (draft, pending EPA review).",
+  "updated": "2026-11-12T20:30:00Z",
+  "sha": "36450e0b885c8733"
  }
 }

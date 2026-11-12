@@ -23,6 +23,8 @@ head = """<!doctype html>
 <link rel="stylesheet" href="assets/theme.css">
 <script src="assets/d3.min.js"></script>
 <script src="assets/dash-runtime.js"></script>
+<script src="assets/ask-config.js"></script>
+<script src="assets/ask-remote.js"></script>
 </head>
 <body>
 <div id="dash-root" lang="en">

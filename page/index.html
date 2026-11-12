@@ -279,7 +279,7 @@ html, body { overflow-x: clip; }
       <span class="lm-hero-eyebrow">Republic of Liberia · 2026–27 El Niño</span>
       <div class="lm-hero-top">
       <p class="lm-lede" data-read lang="en">El Niño is <b data-draw="strength_word" data-source="roni_latest" data-field="category" data-row="0">—</b> and still strengthening. <b data-draw="warn_count" data-source="county_counts" data-field="counties" data-where="level=Warning">—</b> of Liberia's 15 counties are under a dryness warning, home to about <b data-draw="exposed_word" data-source="exposed_pop" data-field="pop2022" data-where="hazard=dryness&amp;level=Warning">—</b> people (2022 census), and every county is on heat watch as the dry season begins.</p>
-        <div class="lm-hero-cta"><button type="button" class="lm-cta lm-cta-main" data-goto="hazards">See the hazard map</button><button type="button" class="lm-cta" data-goto="prepare">Preparedness actions</button><button type="button" class="lm-hero-link" id="lm-watch">▶ Watch: what is El Niño? (2 min)</button></div>
+        <div class="lm-hero-cta"><button type="button" class="lm-cta lm-cta-main" data-goto="hazards">See the hazard map</button><button type="button" class="lm-cta" data-goto="prepare">Preparedness actions</button><button type="button" class="lm-cta" data-ask-open>Ask a question</button><button type="button" class="lm-hero-link" id="lm-watch">▶ Watch: what is El Niño? (2 min)</button></div>
       </div>
       <div class="lm-tiles">
         <div class="lm-card lm-accent" id="tile-roni">
@@ -726,6 +726,16 @@ html, body { overflow-x: clip; }
     </div>
   </section>
 
+  <button type="button" class="lm-ask-fab" id="lm-ask-fab" aria-controls="lm-ask" aria-expanded="false"><span class="lm-ask-fab-i" aria-hidden="true">?</span><span class="lm-ask-fab-t">Ask about El Niño</span></button>
+  <aside class="lm-ask" id="lm-ask" aria-label="El Niño assistant" hidden>
+    <div class="lm-ask-head">
+      <div><h3 class="lm-ask-title">Ask about El Niño</h3><p class="lm-ask-sub">Answers from EPA Liberia's approved information and this platform's data</p></div>
+      <button type="button" class="lm-ask-x" id="lm-ask-close" aria-label="Close">✕</button>
+    </div>
+    <div class="lm-ask-body" data-draw="assistant" data-source="faq enso_status roni_latest latest_hazard hazard_watch flood_areas fao_map_areas district_pop clan_pop county_pop windstorm_by_county">—</div>
+    <p class="lm-ask-note">Automated assistant (answers pending EPA review). Not an official LiMet or NDMA warning. Please do not type names or phone numbers.</p>
+  </aside>
+
   <footer class="lm-foot">
     <div class="lm-foot-brand">
       <img src="/_blob/4eb17e335402b27d0e7debfd176f5a11" alt="EPA Liberia logo">
@@ -942,7 +952,7 @@ dash.draw('ticker', (el) => {
 });
 
 
-LM.SOURCES = [{"group": "Climate & ocean", "id": "noaa", "name": "El Niño indices and outlook", "provider": "NOAA Climate Prediction Center", "feeds": "Overview, El Niño & Climate", "detail": "RONI, weekly and monthly Niño indices, official probability and strength outlook, monthly ENSO discussion", "cadence": "Daily check", "stale": 12, "latest": ["nino_regions", "week"], "licence": "US Government work, free to reuse", "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/", "datasets": ["roni", "nino_regions", "nino_monthly", "outlook", "enso_status"], "note": "NOAA Climate Prediction Center data files (RONI table, weekly and monthly Niño indices, official ENSO probability and strength tables, monthly ENSO discussion), checked daily by a scheduled task. NOAA's monthly ENSO discussion comes out on the second Thursday of each month; the hazards outlook weekly. The platform updates itself automatically: NASA maps daily, NOAA El Niño data daily, FAO drought data weekly."}, {"group": "Climate & ocean", "id": "nasa", "name": "Ocean warmth and rainfall maps", "provider": "NASA GIBS (GHRSST MUR, GPM IMERG)", "feeds": "El Niño & Climate: ocean and rain monitor", "detail": "Daily sea-surface temperature anomaly and satellite rainfall, last 30 days", "cadence": "Daily", "stale": 3, "latest": ["ocean_pacific", "days"], "licence": "NASA imagery, free to reuse", "url": "https://nasa-gibs.github.io/gibs-api-docs/", "datasets": ["ocean_pacific", "ocean_wafrica", "rain_wafrica"], "note": "NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task."}, {"group": "Climate & ocean", "id": "video", "name": "What is El Niño? (video)", "provider": "NOAA SciJinks", "feeds": "El Niño & Climate: explainer video", "detail": "2 min 25 s plain-language explainer, played from YouTube only when a viewer presses play", "cadence": "Fixed", "stale": null, "latest": null, "licence": "US Government work (NOAA)", "url": "https://www.youtube.com/watch?v=57S0Rw9L_hw", "datasets": [], "note": "Embedded with YouTube's privacy-enhanced mode (youtube-nocookie.com); nothing loads from YouTube until a viewer presses play. If the player is blocked, the Watch on YouTube link opens it in a new tab."}, {"group": "Hazards", "id": "fao_county", "name": "County drought and rainfall indices", "provider": "FAO GIEWS ASIS", "feeds": "Overview, Hazard Map (dryness), Drought & Crops", "detail": "Agricultural Stress Index, Vegetation Health Index and satellite rainfall by county, every 10 days; FAO publishes several weeks behind", "cadence": "Weekly check", "stale": 60, "latest": ["fao_county", "asi_date"], "licence": "FAO open data", "url": "https://www.fao.org/giews/earthobservation/country/index.jsp?code=LBR", "datasets": ["fao_county", "fao_rain", "fao_asi_annual"], "note": "FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates."}, {"group": "Hazards", "id": "fao_map", "name": "Crop stress map, 1 km", "provider": "FAO GIEWS ASIS map service", "feeds": "Drought & Crops map and district table", "detail": "1 km Agricultural Stress Index for cropland every 10 days, and drought frequency since 1984", "cadence": "Weekly check", "stale": 25, "latest": ["fao_map", "latest"], "licence": "FAO open data", "url": "https://www.fao.org/giews/earthobservation/", "datasets": ["fao_map", "fao_map_areas"], "note": "FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map."}, {"group": "Hazards", "id": "jrc", "name": "River flood zones", "provider": "JRC Copernicus Emergency Management Service", "feeds": "Hazard Map (flood exposure), flood map and tables", "detail": "Flood depth for 1-in-10, 100 and 500-year river floods, about 90 m, version 2.1", "cadence": "Fixed", "stale": null, "latest": null, "licence": "Free to reuse", "url": "https://data.jrc.ec.europa.eu/", "datasets": ["flood_map", "flood_areas"], "note": "JRC Copernicus Emergency Management Service Global River Flood Hazard Maps, version 2.1 (Baugh et al. 2024), flood depth for 1-in-10, 1-in-100 and 1-in-500-year river floods at about 90 m, free to reuse; combined with WorldPop 2025 constrained population at 100 m (CC BY 4.0), scaled to 2022 census district totals, to count people and area in the flood zone of every county, district and clan. River floods only; coastal surge and urban drainage flooding are not included."}, {"group": "Hazards", "id": "gwa", "name": "Average wind", "provider": "Global Wind Atlas 3 (DTU, World Bank / ESMAP)", "feeds": "Hazard Map (wind context layers)", "detail": "Mean wind speed and power at 10, 50 and 100 m on a 250 m grid", "cadence": "Fixed", "stale": null, "latest": null, "licence": "CC BY 4.0", "url": "https://globalwindatlas.info/", "datasets": ["wind_zones"], "note": "Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan."}, {"group": "Hazards", "id": "storms", "name": "Windstorm records", "provider": "NDMA, IFRC, allAfrica", "feeds": "Hazard Map (windstorm)", "detail": "Damaging windstorm events in Liberia since 2024, with counties and towns named", "cadence": "Added by EPA", "stale": null, "latest": ["windstorm_events", "start"], "licence": "Cited reports", "url": null, "datasets": ["windstorm_events", "windstorm_event_counties"], "note": "NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026)."}, {"group": "Hazards", "id": "bulletins", "name": "Regional hazard bulletins", "provider": "NOAA CPC / FEWS NET, AGRHYMET", "feeds": "Bulletins, Overview, Hazard Map (heat)", "detail": "Weekly Africa hazards outlooks and seasonal updates that name Liberia", "cadence": "Added by EPA", "stale": 14, "latest": ["liberia_hazards", "issued"], "licence": "US Government work; AGRHYMET public bulletins", "url": "https://www.cpc.ncep.noaa.gov/products/international/africa/", "datasets": ["liberia_hazards"], "note": "NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026); AGRHYMET seasonal update (30 Jul 2026)."}, {"group": "People & places", "id": "bounds", "name": "County, district and clan boundaries", "provider": "LISGIS", "feeds": "All maps", "detail": "2022 boundaries: 15 counties, 160 districts and 902 named clans", "cadence": "Fixed", "stale": null, "latest": null, "licence": "LISGIS", "url": null, "datasets": ["counties", "districts", "clans"], "note": "LISGIS 2022 county, district and clan boundaries with names and codes, simplified for the web. They match the 2022 census district tables one to one."}, {"group": "People & places", "id": "census", "name": "2022 Population and Housing Census", "provider": "LISGIS", "feeds": "Population everywhere on the platform, down to clan", "detail": "People, men, women and households by county (15), district (160) and clan (902), on the 2022 maps", "cadence": "Fixed", "stale": null, "latest": null, "licence": "LISGIS", "url": null, "datasets": ["district_pop", "clan_pop"], "note": "LISGIS 2022 Liberia Population and Housing Census tables by county, district and clan, matched to the LISGIS 2022 maps by code. The three tables agree exactly: clans add up to their districts and districts to their counties, 5,250,187 people and 1,477,787 households in all. One clan, Gorblah (Klay District, Bomi), has no row in the clan table and is taken as Klay's district figure minus its other clans (5,393 people, 783 households). These tables replace the earlier figures read from the final-results report (June 2023), which put a few dozen people in different districts within Grand Cape Mount and Lofa (up to 75 per district), omitted Owensgrove and four Sinoe districts, and printed Gounwolaila under the wrong counties. County area in the LISGIS table is in square miles."}, {"group": "People & places", "id": "worldpop", "name": "Where people live within districts", "provider": "WorldPop", "feeds": "Flood exposure (who lives inside the flood zone)", "detail": "2025 constrained population at 100 m, used only to place census people inside or outside the flood zone", "cadence": "Fixed", "stale": null, "latest": null, "licence": "CC BY 4.0", "url": "https://www.worldpop.org/", "datasets": ["flood_areas"], "note": "Census figures say how many people live in each clan and district, not where within it. WorldPop's 100 m grid is used to estimate what share of each clan's census population lives inside the flood zone. Where WorldPop shows no settlement in a clan, people are assumed to be spread like the land."}];
+LM.SOURCES = [{"group": "Climate & ocean", "id": "noaa", "name": "El Niño indices and outlook", "provider": "NOAA Climate Prediction Center", "feeds": "Overview, El Niño & Climate", "detail": "RONI, weekly and monthly Niño indices, official probability and strength outlook, monthly ENSO discussion", "cadence": "Daily check", "stale": 12, "latest": ["nino_regions", "week"], "licence": "US Government work, free to reuse", "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/", "datasets": ["roni", "nino_regions", "nino_monthly", "outlook", "enso_status"], "note": "NOAA Climate Prediction Center data files (RONI table, weekly and monthly Niño indices, official ENSO probability and strength tables, monthly ENSO discussion), checked daily by a scheduled task. NOAA's monthly ENSO discussion comes out on the second Thursday of each month; the hazards outlook weekly. The platform updates itself automatically: NASA maps daily, NOAA El Niño data daily, FAO drought data weekly."}, {"group": "Climate & ocean", "id": "nasa", "name": "Ocean warmth and rainfall maps", "provider": "NASA GIBS (GHRSST MUR, GPM IMERG)", "feeds": "El Niño & Climate: ocean and rain monitor", "detail": "Daily sea-surface temperature anomaly and satellite rainfall, last 30 days", "cadence": "Daily", "stale": 3, "latest": ["ocean_pacific", "days"], "licence": "NASA imagery, free to reuse", "url": "https://nasa-gibs.github.io/gibs-api-docs/", "datasets": ["ocean_pacific", "ocean_wafrica", "rain_wafrica"], "note": "NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task."}, {"group": "Climate & ocean", "id": "video", "name": "What is El Niño? (video)", "provider": "NOAA SciJinks", "feeds": "El Niño & Climate: explainer video", "detail": "2 min 25 s plain-language explainer, played from YouTube only when a viewer presses play", "cadence": "Fixed", "stale": null, "latest": null, "licence": "US Government work (NOAA)", "url": "https://www.youtube.com/watch?v=57S0Rw9L_hw", "datasets": [], "note": "Embedded with YouTube's privacy-enhanced mode (youtube-nocookie.com); nothing loads from YouTube until a viewer presses play. If the player is blocked, the Watch on YouTube link opens it in a new tab."}, {"group": "Hazards", "id": "fao_county", "name": "County drought and rainfall indices", "provider": "FAO GIEWS ASIS", "feeds": "Overview, Hazard Map (dryness), Drought & Crops", "detail": "Agricultural Stress Index, Vegetation Health Index and satellite rainfall by county, every 10 days; FAO publishes several weeks behind", "cadence": "Weekly check", "stale": 60, "latest": ["fao_county", "asi_date"], "licence": "FAO open data", "url": "https://www.fao.org/giews/earthobservation/country/index.jsp?code=LBR", "datasets": ["fao_county", "fao_rain", "fao_asi_annual"], "note": "FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates."}, {"group": "Hazards", "id": "fao_map", "name": "Crop stress map, 1 km", "provider": "FAO GIEWS ASIS map service", "feeds": "Drought & Crops map and district table", "detail": "1 km Agricultural Stress Index for cropland every 10 days, and drought frequency since 1984", "cadence": "Weekly check", "stale": 25, "latest": ["fao_map", "latest"], "licence": "FAO open data", "url": "https://www.fao.org/giews/earthobservation/", "datasets": ["fao_map", "fao_map_areas"], "note": "FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map."}, {"group": "Hazards", "id": "jrc", "name": "River flood zones", "provider": "JRC Copernicus Emergency Management Service", "feeds": "Hazard Map (flood exposure), flood map and tables", "detail": "Flood depth for 1-in-10, 100 and 500-year river floods, about 90 m, version 2.1", "cadence": "Fixed", "stale": null, "latest": null, "licence": "Free to reuse", "url": "https://data.jrc.ec.europa.eu/", "datasets": ["flood_map", "flood_areas"], "note": "JRC Copernicus Emergency Management Service Global River Flood Hazard Maps, version 2.1 (Baugh et al. 2024), flood depth for 1-in-10, 1-in-100 and 1-in-500-year river floods at about 90 m, free to reuse; combined with WorldPop 2025 constrained population at 100 m (CC BY 4.0), scaled to 2022 census district totals, to count people and area in the flood zone of every county, district and clan. River floods only; coastal surge and urban drainage flooding are not included."}, {"group": "Hazards", "id": "gwa", "name": "Average wind", "provider": "Global Wind Atlas 3 (DTU, World Bank / ESMAP)", "feeds": "Hazard Map (wind context layers)", "detail": "Mean wind speed and power at 10, 50 and 100 m on a 250 m grid", "cadence": "Fixed", "stale": null, "latest": null, "licence": "CC BY 4.0", "url": "https://globalwindatlas.info/", "datasets": ["wind_zones"], "note": "Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan."}, {"group": "Hazards", "id": "storms", "name": "Windstorm records", "provider": "NDMA, IFRC, allAfrica", "feeds": "Hazard Map (windstorm)", "detail": "Damaging windstorm events in Liberia since 2024, with counties and towns named", "cadence": "Added by EPA", "stale": null, "latest": ["windstorm_events", "start"], "licence": "Cited reports", "url": null, "datasets": ["windstorm_events", "windstorm_event_counties"], "note": "NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026)."}, {"group": "Hazards", "id": "bulletins", "name": "Regional hazard bulletins", "provider": "NOAA CPC / FEWS NET, AGRHYMET", "feeds": "Bulletins, Overview, Hazard Map (heat)", "detail": "Weekly Africa hazards outlooks and seasonal updates that name Liberia", "cadence": "Added by EPA", "stale": 14, "latest": ["liberia_hazards", "issued"], "licence": "US Government work; AGRHYMET public bulletins", "url": "https://www.cpc.ncep.noaa.gov/products/international/africa/", "datasets": ["liberia_hazards"], "note": "NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026); AGRHYMET seasonal update (30 Jul 2026)."}, {"group": "People & places", "id": "bounds", "name": "County, district and clan boundaries", "provider": "LISGIS", "feeds": "All maps", "detail": "2022 boundaries: 15 counties, 160 districts and 902 named clans", "cadence": "Fixed", "stale": null, "latest": null, "licence": "LISGIS", "url": null, "datasets": ["counties", "districts", "clans"], "note": "LISGIS 2022 county, district and clan boundaries with names and codes, simplified for the web. They match the 2022 census district tables one to one."}, {"group": "People & places", "id": "census", "name": "2022 Population and Housing Census", "provider": "LISGIS", "feeds": "Population everywhere on the platform, down to clan", "detail": "People, men, women and households by county (15), district (160) and clan (902), on the 2022 maps", "cadence": "Fixed", "stale": null, "latest": null, "licence": "LISGIS", "url": null, "datasets": ["district_pop", "clan_pop"], "note": "LISGIS 2022 Liberia Population and Housing Census tables by county, district and clan, matched to the LISGIS 2022 maps by code. The three tables agree exactly: clans add up to their districts and districts to their counties, 5,250,187 people and 1,477,787 households in all. One clan, Gorblah (Klay District, Bomi), has no row in the clan table and is taken as Klay's district figure minus its other clans (5,393 people, 783 households). These tables replace the earlier figures read from the final-results report (June 2023), which put a few dozen people in different districts within Grand Cape Mount and Lofa (up to 75 per district), omitted Owensgrove and four Sinoe districts, and printed Gounwolaila under the wrong counties. County area in the LISGIS table is in square miles."}, {"group": "People & places", "id": "worldpop", "name": "Where people live within districts", "provider": "WorldPop", "feeds": "Flood exposure (who lives inside the flood zone)", "detail": "2025 constrained population at 100 m, used only to place census people inside or outside the flood zone", "cadence": "Fixed", "stale": null, "latest": null, "licence": "CC BY 4.0", "url": "https://www.worldpop.org/", "datasets": ["flood_areas"], "note": "Census figures say how many people live in each clan and district, not where within it. WorldPop's 100 m grid is used to estimate what share of each clan's census population lives inside the flood zone. Where WorldPop shows no settlement in a clan, people are assumed to be spread like the land."}, {"group": "People & places", "id": "faq", "name": "El Niño assistant answers", "provider": "EPA Liberia", "feeds": "Ask about El Niño (chat box)", "detail": "20 approved questions and answers, answer rules and contacts (draft, pending EPA review)", "cadence": "Added by EPA", "stale": null, "latest": null, "licence": "EPA Liberia", "url": null, "datasets": ["faq"], "note": "The chat box answers from these approved answers and from this platform's own data for the county, district or clan a visitor names. On the public website, when EPA's Google Apps Script is switched on, Google's Gemini model writes each answer from the same material; questions are logged in EPA's Google Sheet without names or phone numbers."}];
 LM.srcLatest = (src) => {
   if (!src.latest) return { status: 'ok', date: null };
   const [id, f] = src.latest, d = dash.data(id);
@@ -2251,4 +2261,233 @@ dash.draw('flood_rows', (tb) => {
     tb.appendChild(tr);
   });
 });
+</script>
+<style>
+.lm-ask-fab { position: fixed; right: 18px; bottom: 18px; z-index: 60; display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 14px; font-weight: var(--cds-font-weight-medium); color: #fff; background: var(--lr-blue); border: 0; border-radius: 999px; padding: 10px 16px 10px 10px; cursor: pointer; box-shadow: 0 6px 20px rgba(0,20,60,.35); }
+.lm-ask-fab:hover { background: #0d47a8; }
+.lm-ask-fab-i { width: 26px; height: 26px; border-radius: 50%; background: var(--lr-red); display: inline-grid; place-items: center; font-weight: 700; }
+.lm-ask-fab[aria-expanded="true"] { display: none; }
+.lm-ask { position: fixed; right: 18px; bottom: 18px; z-index: 61; width: min(400px, calc(100vw - 24px)); height: min(620px, calc(100vh - 36px)); display: flex; flex-direction: column; background: var(--color-panel); color: var(--color-fg); border: 1px solid var(--color-border-line); border-radius: 14px; box-shadow: 0 14px 40px rgba(0,20,60,.35); overflow: hidden; }
+.lm-ask[hidden] { display: none; }
+.lm-ask-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; padding: 12px 14px; background: var(--lr-blue); color: #fff; border-bottom: 3px solid var(--lr-red); }
+.lm-ask-title { margin: 0; font-size: 16px; color: #fff; }
+.lm-ask-sub { margin: 2px 0 0; font-size: 12px; color: rgba(255,255,255,.8); }
+.lm-ask-x { background: transparent; border: 0; color: #fff; font-size: 16px; cursor: pointer; padding: 2px 6px; }
+.lm-ask-body { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.lm-ask-log { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.lm-ask-msg { max-width: 92%; padding: 9px 12px; border-radius: 12px; font-size: 14px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.lm-ask-msg p { margin: 0 0 6px; } .lm-ask-msg p:last-child { margin: 0; }
+.lm-ask-me { align-self: flex-end; background: var(--lr-blue); color: #fff; border-bottom-right-radius: 4px; }
+.lm-ask-bot { align-self: flex-start; background: var(--color-bg); border: 1px solid var(--color-border-line); border-bottom-left-radius: 4px; }
+.lm-ask-bot h4 { margin: 0 0 4px; font-size: 14px; }
+.lm-ask-bot ul { margin: 4px 0; padding-left: 18px; } .lm-ask-bot li { margin: 2px 0; }
+.lm-ask-src { display: block; margin-top: 6px; font-size: 11px; color: var(--color-fg-muted); white-space: normal; }
+.lm-ask-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 8px; }
+.lm-ask-chip { font: inherit; font-size: 12px; border: 1px solid var(--color-border-line); background: var(--color-panel); color: var(--color-fg); border-radius: 999px; padding: 4px 10px; cursor: pointer; text-align: left; }
+.lm-ask-chip:hover { border-color: var(--lr-blue); }
+.lm-ask-form { display: flex; gap: 6px; padding: 10px 12px; border-top: 1px solid var(--color-border-line); }
+.lm-ask-in { flex: 1; min-width: 0; font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--color-border-line); border-radius: 8px; background: var(--color-bg); color: var(--color-fg); }
+.lm-ask-send { font: inherit; font-size: 14px; padding: 8px 14px; border: 0; border-radius: 8px; background: var(--lr-blue); color: #fff; cursor: pointer; }
+.lm-ask-send:disabled { opacity: .5; cursor: default; }
+.lm-ask-opts { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 12px 8px; font-size: 12px; color: var(--color-fg-muted); }
+.lm-ask-opts label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+.lm-ask-mode { font-size: 11px; border-radius: 999px; padding: 1px 8px; border: 1px solid var(--color-border-line); }
+.lm-ask-typing { font-size: 13px; color: var(--color-fg-muted); font-style: italic; }
+.lm-ask-note { margin: 0; padding: 6px 12px 10px; font-size: 11px; color: var(--color-fg-muted); }
+@media (max-width: 520px) { .lm-ask { right: 0; bottom: 0; width: 100vw; height: 100dvh; border-radius: 0; } .lm-ask-fab-t { display: none; } .lm-ask-fab { padding: 10px; } }
+@media print { .lm-ask, .lm-ask-fab { display: none !important; } }
+</style>
+<script>
+/* El Niño assistant. Answers from the approved FAQ and the platform's data. On the public site, when EPA's
+   Apps Script address is set, an AI writes the answer from the same material (window.LM_ASK_REMOTE, public site only). */
+window.LMA = {
+  norm: (s) => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(),
+  // Place names that are also everyday words are matched only when the question says "clan" or "district".
+  SKIP: new Set(['mango', 'manna', 'omega', 'rehab', 'glow', 'clan 1', 'clan 2', 'town hall', 'town hall community', 'police station', 'power plant', 'fair ground', 'pipe line', 'own your own', 'fish market', 'water tower', 'plank field', 'hope community', 'success community', 'point four', 'double bridge', 'big town', 'fish town', 'sand town', 'rock town', 'ocean view', 'river view', 'sports commission', 'police academy', 'island clinic', 'shoe factory', 'iron factory', 'cow factory', 'chocolate city', 'cassava hill']),
+  ALIAS: { monrovia: ['district', 'Montserrado', 'Greater Monrovia'] },
+  fmt: (n) => n == null || !isFinite(n) ? '—' : Math.round(Number(n)).toLocaleString('en-US'),
+  get(id) { const d = dash.data(id); return d.status === 'ok' && Array.isArray(d.data) ? d.data : []; },
+  index() {
+    const rows = LMA.get('flood_areas');
+    if (LMA._idx && LMA._idxN === rows.length) return LMA._idx;
+    const out = [];
+    rows.forEach((r) => {
+      const name = r.level === 'county' ? r.county : r.level === 'district' ? r.district : r.clan;
+      const n = LMA.norm(name);
+      if (n) out.push({ n, level: r.level, county: r.county, district: r.district || '', clan: r.clan || '', clan_id: r.clan_id || '', key: r.key, name });
+    });
+    LMA._idx = out; LMA._idxN = rows.length;
+    return out;
+  },
+  findPlaces(q) {
+    const t = ' ' + LMA.norm(q) + ' ';
+    const explicit = /\b(clan|district)\b/.test(t);
+    let hits = LMA.index().filter((p) => {
+      if (!t.includes(' ' + p.n + ' ')) return false;
+      if (p.level === 'county') return true;
+      const one = !p.n.includes(' ');
+      if (LMA.SKIP.has(p.n) || (one && p.n.length < 5)) return explicit;
+      return true;
+    });
+    Object.entries(LMA.ALIAS).forEach(([w, [lv, c, d]]) => {
+      if (t.includes(' ' + w + ' ') && !hits.length) { const p = LMA.index().find((x) => x.level === lv && x.county === c && x.district === d); if (p) hits.push(p); }
+    });
+    // Keep the most specific names: drop a match whose name sits inside a longer matched name.
+    hits = hits.filter((p) => !hits.some((o) => o !== p && o.n.length > p.n.length && (' ' + o.n + ' ').includes(' ' + p.n + ' ')));
+    // A county named alongside one of its own districts or clans adds nothing.
+    hits = hits.filter((p) => !(p.level === 'county' && hits.some((o) => o.level !== 'county' && o.county === p.county)));
+    const rank = { clan: 0, district: 1, county: 2 };
+    return hits.sort((a, b) => rank[a.level] - rank[b.level]).slice(0, 3);
+  },
+  // Plain-language facts about one place, used both for the offline answer and as the AI's material.
+  placeFacts(p) {
+    const fl = LMA.get('flood_areas').find((r) => r.key === p.key);
+    const fa = LMA.get('fao_map_areas').find((r) => r.key === p.key);
+    const hw = LMA.get('hazard_watch').find((r) => r.county === p.county);
+    const ws = LMA.get('windstorm_by_county').find((r) => r.county === p.county);
+    let pop = null, hh = null;
+    if (p.level === 'county') { const c = LMA.get('county_pop').find((r) => r.county === p.county); if (c) { pop = c.pop2022; hh = c.households2022; } }
+    else if (p.level === 'district') { const d = LMA.get('district_pop').find((r) => r.county === p.county && r.district === p.district); if (d) { pop = d.pop2022; hh = d.households2022; } }
+    else { const c = LMA.get('clan_pop').find((r) => r.key === p.key); if (c) { pop = c.pop2022; hh = c.households; } }
+    const title = p.level === 'county' ? `${p.county} County` : p.level === 'district' ? `${p.district} District, ${p.county} County` : `${p.clan} clan, ${p.district} District, ${p.county} County`;
+    const lines = [];
+    if (pop != null) lines.push(`People (2022 census): ${LMA.fmt(pop)}${hh ? `, in ${LMA.fmt(hh)} households` : ''}.`);
+    if (fl) lines.push(`Flood exposure: ${fl.flood_level}. About ${LMA.fmt(fl.rp100_pop)} people (${fl.rp100_pop_pct}%) live in the 1-in-100-year river flood zone (JRC flood maps).`);
+    if (hw) {
+      lines.push(`Dryness (${p.level === 'county' ? 'county' : p.county + ' County'} level): ${hw.dryness}. ${hw.dryness_basis || ''}`.trim());
+      lines.push(`Heat (${p.level === 'county' ? 'county' : p.county + ' County'} level): ${hw.heat}. ${hw.heat_basis || ''}`.trim());
+    }
+    if (fa && fa.stressed_pct != null) lines.push(`Crop stress (FAO 1 km map, 10 days from ${fa.date}): ${fa.stressed_pct}% of cropland under stress${fa.hdf_pct != null ? `; since 1984, drought has hit cropland here in about ${fa.hdf_pct}% of seasons` : ''}.`);
+    if (ws) lines.push(`Damaging windstorms recorded in ${p.county} County since 2024: ${ws.events}.`);
+    if (p.county === 'Montserrado' && fl && fl.rp100_pop_pct >= 30) lines.push('Note: the global flood model overstates flooding in some Monrovia townships; check locally.');
+    return { title, lines };
+  },
+  statusFacts() {
+    const es = LMA.get('enso_status')[0], rl = LMA.get('roni_latest')[0], lh = LMA.get('latest_hazard')[0];
+    const lines = [];
+    if (es) lines.push(`NOAA status: ${es.alert} (monthly discussion of ${LM.fmtDate(es.discussion_date)}). ${es.synopsis}`);
+    if (rl) lines.push(`Latest El Niño index (RONI, ${rl.season}): ${LM.fmtC(rl.roni_c)}, ${rl.category} El Niño range. El Niño starts at +0.5 °C.`);
+    if (es && es.next_date) lines.push(`Next NOAA monthly update: ${LM.fmtDate(es.next_date)}.`);
+    if (lh) lines.push(`Latest bulletin naming Liberia (${lh.source}, ${lh.period}): ${lh.hazard} in ${lh.area}. ${lh.detail}`);
+    return { title: 'El Niño now', lines };
+  },
+  STEM: (w) => w.replace(/(ings|ing|ies|es|s)$/, ''),
+  rankFaq(q) {
+    const words = LMA.norm(q).split(' ').filter((w) => w.length > 2).map(LMA.STEM);
+    const stop = new Set(['what', 'the', 'and', 'how', 'can', 'for', 'does', 'doe', 'are', 'you', 'this', 'that', 'with', 'about', 'tell', 'mean', 'when', 'will', 'why', 'who', 'our', 'any', 'there', 'thi', 'get']);
+    const ws = words.filter((w) => !stop.has(w));
+    return LMA.get('faq').map((f) => {
+      const k = LMA.norm(f.k).split(' ').map(LMA.STEM), qq = LMA.norm(f.q).split(' ').map(LMA.STEM), aa = LMA.norm(f.a).split(' ').map(LMA.STEM);
+      let s = 0;
+      ws.forEach((w) => { s += k.includes(w) ? 3 : qq.includes(w) ? 2 : aa.includes(w) ? 0.5 : 0; });
+      return { f, s };
+    }).filter((x) => x.s > 0).sort((a, b) => b.s - a.s);
+  },
+  isStatusQ: (q) => { const t = LMA.norm(q); return /\b(nino|nina|enso)\b/.test(t) && /\b(now|current|currently|today|happening|this year|strong|strength|status|advisory|still|forecast|coming|outlook)\b/.test(t); },
+  // The answer the assistant gives without AI: approved FAQ text and platform facts.
+  offline(q) {
+    const places = LMA.findPlaces(q);
+    const ranked = LMA.rankFaq(q);
+    const blocks = [], related = [];
+    let src = [];
+    if (places.length) { places.forEach((p) => blocks.push(LMA.placeFacts(p))); src.push('Hazard Map and census data on this platform'); }
+    else if (LMA.isStatusQ(q) || (ranked[0] && ranked[0].f.live === 'status' && ranked[0].s >= 3)) { blocks.push(LMA.statusFacts()); src.push('NOAA Climate Prediction Center, via this platform'); }
+    if (!blocks.length && ranked[0] && ranked[0].s >= 2.5) {
+      blocks.push({ title: ranked[0].f.q, lines: [ranked[0].f.a] }); src.push("EPA's approved answers (draft)");
+      ranked.slice(1, 3).forEach((x) => { if (x.s >= 2) related.push(x.f.q); });
+    }
+    if (!blocks.length) {
+      blocks.push({ title: null, lines: ["I don't have an approved answer for that yet. Try asking about El Niño, your county, district or clan, floods, heat, dry spells or farming. For anything urgent, contact the National Disaster Management Agency (NDMA)."] });
+      related.push('Is El Niño happening now?', 'How does El Niño affect Liberia?', 'How can I get ready for floods?');
+    }
+    return { blocks, src: src.join('; '), related, places };
+  },
+  context(q) {
+    const places = LMA.findPlaces(q).map((p) => { const f = LMA.placeFacts(p); return f.title + ':\n- ' + f.lines.join('\n- '); }).join('\n\n');
+    const st = LMA.statusFacts();
+    return { places: places.slice(0, 4000), status: st.lines.join('\n').slice(0, 2000) };
+  }
+};
+
+dash.draw('assistant', {
+  mount(el) {
+    const remote = window.LM_ASK_REMOTE && window.LM_ASK_REMOTE.enabled ? window.LM_ASK_REMOTE : null;
+    const log = document.createElement('div'); log.className = 'lm-ask-log'; log.setAttribute('aria-live', 'polite');
+    const chips = document.createElement('div'); chips.className = 'lm-ask-chips';
+    const opts = document.createElement('div'); opts.className = 'lm-ask-opts';
+    const mode = document.createElement('span'); mode.className = 'lm-ask-mode'; mode.textContent = remote ? 'AI answers' : 'Approved answers';
+    mode.title = remote ? 'An AI writes each answer from EPA-approved information and this platform’s data.' : 'Answers come straight from EPA’s approved list and this platform’s data.';
+    const lr = document.createElement('label'); const cb = document.createElement('input'); cb.type = 'checkbox'; lr.append(cb, document.createTextNode('Answer in Liberian English')); lr.hidden = !remote;
+    opts.append(lr, mode);
+    const form = document.createElement('form'); form.className = 'lm-ask-form';
+    const input = document.createElement('input'); input.className = 'lm-ask-in'; input.type = 'text'; input.maxLength = 400; input.placeholder = 'Ask a question, or type your county or clan'; input.setAttribute('aria-label', 'Your question');
+    const send = document.createElement('button'); send.className = 'lm-ask-send'; send.type = 'submit'; send.textContent = 'Ask';
+    form.append(input, send);
+    el.append(log, chips, opts, form);
+    const history = [];
+    const scroll = () => { log.scrollTop = log.scrollHeight; };
+    const addMe = (text) => { const m = document.createElement('div'); m.className = 'lm-ask-msg lm-ask-me'; m.textContent = text; log.appendChild(m); scroll(); };
+    const addBot = (blocks, src) => {
+      const m = document.createElement('div'); m.className = 'lm-ask-msg lm-ask-bot';
+      blocks.forEach((b) => {
+        if (b.title) { const h = document.createElement('h4'); h.textContent = b.title; m.appendChild(h); }
+        if (b.lines.length > 1) { const ul = document.createElement('ul'); b.lines.forEach((l) => { const li = document.createElement('li'); li.textContent = l; ul.appendChild(li); }); m.appendChild(ul); }
+        else b.lines.forEach((l) => { const p = document.createElement('p'); p.textContent = l; m.appendChild(p); });
+      });
+      if (src) { const s = document.createElement('span'); s.className = 'lm-ask-src'; s.textContent = 'Source: ' + src; m.appendChild(s); }
+      log.appendChild(m); scroll();
+      return m;
+    };
+    const setChips = (list) => {
+      chips.replaceChildren();
+      list.forEach((t) => { const c = document.createElement('button'); c.type = 'button'; c.className = 'lm-ask-chip'; c.textContent = t; c.addEventListener('click', () => ask(t)); chips.appendChild(c); });
+      scroll();
+    };
+    let busy = false;
+    const ask = async (q) => {
+      q = String(q || '').trim().slice(0, 400);
+      if (!q || busy) return;
+      addMe(q); input.value = '';
+      const off = LMA.offline(q);
+      if (!remote) { addBot(off.blocks, off.src); setChips(off.related); history.push({ q, a: off.blocks.map((b) => b.lines.join(' ')).join(' ') }); return; }
+      busy = true; send.disabled = true; setChips([]);
+      const typing = document.createElement('div'); typing.className = 'lm-ask-typing'; typing.textContent = 'Writing an answer…'; log.appendChild(typing); scroll();
+      try {
+        const ctx = LMA.context(q);
+        const r = await remote.ask({ question: q, lang: cb.checked ? 'liberian-english' : 'english', places: ctx.places, status: ctx.status, history: history.slice(-3) });
+        typing.remove();
+        const paras = String(r.answer || '').split(/\n{2,}/).map((s) => s.trim()).filter(Boolean);
+        addBot([{ title: null, lines: paras.length ? [paras.join('\n\n')] : ['—'] }], 'AI answer from EPA-approved information and this platform’s data' + (off.places.length ? ' (' + off.places.map((p) => p.name).join(', ') + ')' : ''));
+        history.push({ q, a: String(r.answer || '').slice(0, 600) });
+        setChips(off.related);
+      } catch (e) {
+        typing.remove();
+        const why = e && e.code === 'limit' ? 'The AI assistant has reached its limit for now.' : 'The AI assistant could not be reached.';
+        addBot([{ title: null, lines: [why + ' Here is the approved answer instead.'] }].concat(off.blocks), off.src);
+        setChips(off.related);
+      } finally { busy = false; send.disabled = false; }
+    };
+    form.addEventListener('submit', (ev) => { ev.preventDefault(); ask(input.value); });
+    addBot([{ title: null, lines: ['Hello! Ask me about El Niño, or type the name of your county, district or clan to see its risks and what to do.'] }], null);
+    setChips(['Is El Niño happening now?', 'How does El Niño affect Liberia?', 'What is the risk in Bong?', 'How can I get ready for floods?', 'What can farmers do when dry spells are likely?']);
+    return { input };
+  },
+  update(el, made) {
+    // Read the sources here so they load when the assistant opens.
+    ['faq', 'enso_status', 'roni_latest', 'latest_hazard', 'hazard_watch', 'flood_areas', 'fao_map_areas', 'district_pop', 'clan_pop', 'county_pop', 'windstorm_by_county'].forEach((id) => dash.data(id));
+    const loading = ['faq', 'flood_areas', 'hazard_watch'].some((id) => dash.data(id).status === 'loading');
+    if (made && made.input) made.input.placeholder = loading ? 'Loading the platform’s data…' : 'Ask a question, or type your county or clan';
+  }
+});
+
+(function () {
+  const open = (on) => {
+    document.querySelectorAll('#lm-ask').forEach((p) => { p.hidden = !on; });
+    document.querySelectorAll('#lm-ask-fab').forEach((b) => b.setAttribute('aria-expanded', String(on)));
+    if (on) setTimeout(() => { const i = document.querySelector('#lm-ask .lm-ask-in'); if (i) i.focus(); }, 50);
+  };
+  document.querySelectorAll('#lm-ask-fab, [data-ask-open]').forEach((b) => b.addEventListener('click', () => open(true)));
+  document.querySelectorAll('#lm-ask-close').forEach((b) => b.addEventListener('click', () => open(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') open(false); });
+})();
 </script>
