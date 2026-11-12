@@ -5,6 +5,10 @@ import re, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 src = (root / "page" / "index.html").read_text(encoding="utf-8")
 src = src.replace('<meta name="dash-one-writer">', "")
+# Images stored as Claude artifact assets are served from docs/assets on the public site.
+ASSETS = {"/_blob/4eb17e335402b27d0e7debfd176f5a11": "assets/epa-logo.png", "/_blob/7053b1572da21a0b5e95e4aeda693159": "assets/liberia-seal.png"}
+for k, v in ASSETS.items(): src = src.replace(k, v)
+assert "/_blob/" not in src, "page uses an artifact asset with no public copy; add it to ASSETS"
 # Each page script runs in its own scope on claude.ai; keep that here.
 src = re.sub(r"<script>(.*?)</script>", lambda m: "<script>(function () {\n" + m.group(1) + "\n})();</script>", src, flags=re.S)
 head = """<!doctype html>
@@ -25,18 +29,6 @@ head = """<!doctype html>
 """
 foot = """
 </div>
-<details class="pub-sources" id="pub-sources"><summary>Data sources and when each was last updated</summary><table><thead><tr><th>Source</th><th>What it is</th><th>Updated (UTC)</th><th>Download</th></tr></thead><tbody></tbody></table></details>
-<script>
-dash.manifest().then(function (m) {
-  var tb = document.querySelector('#pub-sources tbody');
-  Object.keys(m).sort(function (a, b) { return (m[a].title || a).localeCompare(m[b].title || b); }).forEach(function (k) {
-    var e = m[k], tr = document.createElement('tr');
-    [e.title || k, e.description || '', (e.updated || '').replace('T', ' ').slice(0, 16)].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
-    var td = document.createElement('td'), a = document.createElement('a'); a.href = e.file; a.textContent = 'JSON'; a.setAttribute('download', ''); td.appendChild(a); tr.appendChild(td);
-    tb.appendChild(tr);
-  });
-});
-</script>
 </body>
 </html>
 """
