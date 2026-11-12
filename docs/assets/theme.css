@@ -25,7 +25,8 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); line-height: 1.45; }
-#dash-root { max-width: 1240px; margin: 0 auto; padding: 16px 16px 40px; }
+#dash-root { max-width: 1600px; margin: 0 auto; padding: 0 24px 40px; }
+@media (max-width: 640px) { #dash-root { padding: 0 12px 32px; } }
 .dash-select { appearance: none; font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background-color: var(--color-panel);
   border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 30px 6px 10px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a919e'/%3E%3C/svg%3E");
@@ -34,7 +35,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dash-skeleton::after { content: ""; position: absolute; inset: 15% 0; border-radius: 4px; background: linear-gradient(90deg, var(--color-border-line), var(--color-panel), var(--color-border-line)); background-size: 200% 100%; animation: dsk 1.4s infinite; }
 @keyframes dsk { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .dash-skeleton::after { animation: none; } }
-.pub-sources { max-width: 1240px; margin: 0 auto; padding: 0 16px 32px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pub-sources { max-width: 1600px; margin: 0 auto; padding: 0 24px 32px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
 .pub-sources summary { cursor: pointer; color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
 .pub-sources table { border-collapse: collapse; width: 100%; margin-top: 8px; }
 .pub-sources td, .pub-sources th { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
