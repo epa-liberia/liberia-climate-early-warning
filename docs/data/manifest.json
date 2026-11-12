@@ -23,9 +23,9 @@
  "district_pop": {
   "file": "data/district_pop.json",
   "title": "District population",
-  "description": "Population by district from the LISGIS 2008 census (people, households) and LISGIS 2014 projection, with area in km².",
-  "updated": "2026-11-11T23:30:00Z",
-  "sha": "13e4ddfb187538da"
+  "description": "LISGIS 2022 Liberia Population and Housing Census on the 2007 district map (estimates where districts were split or renamed), with 2008 census population and households and the earlier 2014 projection.",
+  "updated": "2026-11-12T12:28:02Z",
+  "sha": "6d383cc2263ceaad"
  },
  "districts": {
   "file": "data/districts.json",
@@ -163,8 +163,8 @@
  "flood_areas": {
   "file": "data/flood_areas.json",
   "title": "People and land in the flood zone",
-  "description": "Area and WorldPop 2025 population in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
-  "updated": "2026-11-12T12:12:10Z",
-  "sha": "1b7eb00dad8aebee"
+  "description": "Area and people (2022 census totals, placed within districts with WorldPop 2025) in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
+  "updated": "2026-11-12T12:28:02Z",
+  "sha": "71f9ea6e0828f65d"
  }
 }

@@ -127,7 +127,7 @@
 
   <!-- OVERVIEW -->
   <section class="lm-page" id="overview" role="tabpanel">
-    <p class="lm-lede" data-read lang="en">El Niño is <b data-draw="strength_word" data-source="roni_latest" data-field="category" data-row="0">—</b> and still strengthening. <b data-draw="warn_count" data-source="county_counts" data-field="counties" data-where="level=Warning">—</b> of Liberia's 15 counties are under a dryness warning, home to about <b data-draw="exposed_word" data-source="exposed_pop" data-field="pop2014" data-where="hazard=dryness&amp;level=Warning">—</b> people (2014 projection), and every county is on heat watch as the dry season begins.</p>
+    <p class="lm-lede" data-read lang="en">El Niño is <b data-draw="strength_word" data-source="roni_latest" data-field="category" data-row="0">—</b> and still strengthening. <b data-draw="warn_count" data-source="county_counts" data-field="counties" data-where="level=Warning">—</b> of Liberia's 15 counties are under a dryness warning, home to about <b data-draw="exposed_word" data-source="exposed_pop" data-field="pop2022" data-where="hazard=dryness&amp;level=Warning">—</b> people (2022 census), and every county is on heat watch as the dry season begins.</p>
     <div class="lm-tiles">
       <div class="lm-card lm-accent" id="tile-roni">
         <p class="lm-tile-label">El Niño strength (3-month RONI)</p>
@@ -146,8 +146,8 @@
       </div>
       <div class="lm-card lm-accent" id="tile-exposed">
         <p class="lm-tile-label">People in dryness-warning counties</p>
-        <span class="lm-big" style="font-size:1.9rem" data-draw="tile_exposed" data-source="exposed_pop" data-field="pop2014" data-where="hazard=dryness&amp;level=Warning">—</span>
-        <p class="lm-tile-foot"><span data-draw="tile_exposed_share" data-source="exposed_pop" data-field="share" data-where="hazard=dryness&amp;level=Warning">—</span> of Liberia · LISGIS 2014 projection</p>
+        <span class="lm-big" style="font-size:1.9rem" data-draw="tile_exposed" data-source="exposed_pop" data-field="pop2022" data-where="hazard=dryness&amp;level=Warning">—</span>
+        <p class="lm-tile-foot"><span data-draw="tile_exposed_share" data-source="exposed_pop" data-field="share" data-where="hazard=dryness&amp;level=Warning">—</span> of Liberia · 2022 census</p>
       </div>
       <div class="lm-card lm-accent" id="tile-lib">
         <p class="lm-tile-label">Latest bulletin for Liberia</p>
@@ -242,7 +242,7 @@
 
   <!-- HAZARD MAP -->
   <section class="lm-page" id="hazards" role="tabpanel" hidden>
-    <div class="lm-draft">Dryness levels come from FAO's satellite Agricultural Stress Index for each county (see the Drought &amp; Crops tab). Flood exposure levels come from the share of people living in the 1-in-100-year river flood zone (JRC Copernicus flood maps with WorldPop 2025 population), calculated for every county, district and clan. Heat levels are EPA's working reading of NOAA/FEWS NET and AGRHYMET regional bulletins. None of these is an official LiMet or NDMA warning. Click a county, then a district, to drill down to clan level; for heat, district and clan areas inherit their county's level until local data is added.</div>
+    <div class="lm-draft">Dryness levels come from FAO's satellite Agricultural Stress Index for each county (see the Drought &amp; Crops tab). Flood exposure levels come from the share of people living in the 1-in-100-year river flood zone (JRC Copernicus flood maps with 2022 census population), calculated for every county, district and clan. Heat levels are EPA's working reading of NOAA/FEWS NET and AGRHYMET regional bulletins. None of these is an official LiMet or NDMA warning. Click a county, then a district, to drill down to clan level; for heat, district and clan areas inherit their county's level until local data is added.</div>
     <div class="lm-controls">
       <label for="hz-select" style="font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)">Hazard</label>
       <select id="hz-select" class="dash-select" aria-label="Hazard">
@@ -295,22 +295,22 @@
     </div>
     <div class="lm-card lm-section" id="exposure">
       <h2 data-draw="exposure_title" data-source="exposed_pop flood_areas">—</h2>
-      <p class="lm-note" id="exposure-note-flood" hidden>People (WorldPop 2025) living where river floods of each size would reach, all of Liberia. Coastal city figures are upper bounds.</p>
-      <p class="lm-note" id="exposure-note">Population by hazard level of the county they live in, LISGIS 2014 projection from the 2008 census. A first exposure measure; farmland, health facilities and schools come next.</p>
+      <p class="lm-note" id="exposure-note-flood" hidden>People living where river floods of each size would reach, all of Liberia: 2022 census totals, placed within each district using WorldPop. Coastal city figures are upper bounds.</p>
+      <p class="lm-note" id="exposure-note">Population by hazard level of the county they live in, 2022 Liberia Population and Housing Census (LISGIS). A first exposure measure; farmland, health facilities and schools come next.</p>
       <div class="lm-chart" data-draw="exposure_chart" data-source="exposed_pop flood_areas" style="min-height:150px"></div>
     </div>
     <div class="lm-card lm-section" id="county-table">
       <h2>All counties</h2>
       <div class="lm-tablewrap">
         <table class="lm-table" data-source="hazard_watch" data-row-key="county">
-          <thead><tr><th data-field="county">County</th><th data-field="dryness">Dryness</th><th data-field="flood">Flood exposure</th><th data-field="heat">Heat</th><th data-field="confidence">Confidence</th><th data-field="pop2014" data-source="county_pop">Population (2014)</th></tr></thead>
+          <thead><tr><th data-field="county">County</th><th data-field="dryness">Dryness</th><th data-field="flood">Flood exposure</th><th data-field="heat">Heat</th><th data-field="confidence">Confidence</th><th data-field="pop2022" data-source="county_pop">Population (2022 census)</th></tr></thead>
           <tbody data-draw="county_rows"></tbody>
         </table>
       </div>
     </div>
     <div class="lm-card lm-section" id="flood-districts">
       <h2>Districts with the most people in the flood zone</h2>
-      <p class="lm-note">People (WorldPop 2025) living where the selected flood would reach. Coastal city figures are upper bounds; see the note above the map.</p>
+      <p class="lm-note">People (2022 census, placed within districts using WorldPop) living where the selected flood would reach. Coastal city figures are upper bounds; see the note above the map.</p>
       <div class="lm-tablewrap">
         <table class="lm-table" data-source="flood_areas" data-row-key="key">
           <thead><tr><th data-field="district">District</th><th data-field="county">County</th><th data-field="rp100_pop">People in the flood zone</th><th data-field="rp100_pop_pct">Share of the district's people</th><th data-field="rp100_pop_1m">Of them, in water over 1 m</th><th data-field="rp100_km2">Flood zone area</th><th data-field="flood_level">Flood exposure</th></tr></thead>
@@ -520,8 +520,8 @@
       <ul class="lm-note" style="padding-left:18px">
         <li>El Niño indices and outlooks: NOAA Climate Prediction Center data files (RONI table, weekly and monthly Niño indices, official ENSO probability and strength tables, monthly ENSO discussion), checked daily by a scheduled task.</li>
         <li>Liberia hazards: NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026); AGRHYMET seasonal update (30 Jul 2026).</li>
-        <li>Boundaries: LISGIS 2007 district (136) and clan (816) boundaries, edition 14; counties are formed from the districts. Clan names are pending the clan attribute table.</li><li>Population: LISGIS 2008 National Population and Housing Census, with LISGIS 2014 projections, by district.</li><li>Ocean and rain monitor: NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task.</li><li>Crop stress map: FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map.</li><li>Drought and crops: FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates.</li><li>Windstorm events: NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026).</li><li>Wind: Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan.</li>
-        <li>Flood exposure: JRC Copernicus Emergency Management Service Global River Flood Hazard Maps, version 2.1 (Baugh et al. 2024), flood depth for 1-in-10, 1-in-100 and 1-in-500-year river floods at about 90 m, free to reuse; combined with WorldPop 2025 constrained population at 100 m (CC BY 4.0) to count people and area in the flood zone of every county, district and clan. River floods only; coastal surge and urban drainage flooding are not included.</li>
+        <li>Boundaries: LISGIS 2007 district (136) and clan (816) boundaries, edition 14; counties are formed from the districts. Clan names are pending the clan attribute table.</li><li>Population: LISGIS 2022 Liberia Population and Housing Census, final results (June 2023), Appendix B district tables; households from the 2008 census. The 2022 census lists 172 districts, the 2007 map 136. Where a 2007 district keeps its name, it gets its 2022 figure; people in new 2022 districts (for example Montserrado's townships, four new Lofa districts, Tehr, Penicess, Kabah Administrative) are shared among their county's 2007 districts using WorldPop's settlement pattern, so county totals are exact and some district figures are estimates. Three table errors were corrected: Gounwolaila (17,986) belongs to Gbarpolu, not Grand Cape Mount or Margibi; Owensgrove (14,422) is missing from the Grand Bassa table and is the county total minus the listed districts; Sinoe's listed districts fall 17,478 short of its total.</li><li>Ocean and rain monitor: NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task.</li><li>Crop stress map: FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map.</li><li>Drought and crops: FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates.</li><li>Windstorm events: NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026).</li><li>Wind: Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan.</li>
+        <li>Flood exposure: JRC Copernicus Emergency Management Service Global River Flood Hazard Maps, version 2.1 (Baugh et al. 2024), flood depth for 1-in-10, 1-in-100 and 1-in-500-year river floods at about 90 m, free to reuse; combined with WorldPop 2025 constrained population at 100 m (CC BY 4.0), scaled to 2022 census district totals, to count people and area in the flood zone of every county, district and clan. River floods only; coastal surge and urban drainage flooding are not included.</li>
         <li>Updates: NOAA's monthly ENSO discussion comes out on the second Thursday of each month; the hazards outlook weekly. The platform updates itself automatically: NASA maps daily, NOAA El Niño data daily, FAO drought data weekly.</li>
       </ul>
     </div>
@@ -604,7 +604,7 @@ dash.calc('latest_hazard', {
 
 dash.calc('hazard_watch', {
   title: 'County hazard levels',
-  description: 'County hazard watch with flood exposure levels from the share of people in the 1-in-100-year river flood zone (JRC flood maps, WorldPop 2025); dryness and heat as in the county hazard watch.',
+  description: 'County hazard watch with flood exposure levels from the share of people in the 1-in-100-year river flood zone (JRC flood maps; 2022 census people placed with WorldPop); dryness and heat as in the county hazard watch.',
   inputs: ['county_watch', 'flood_areas'],
   fn: (counties, flood) => {
     const by = new Map(flood.filter((r) => r.level === 'county').map((r) => [r.county, r]));
@@ -614,7 +614,7 @@ dash.calc('hazard_watch', {
       if (!f) return r;
       return Object.assign({}, r, {
         flood: f.flood_level,
-        flood_basis: `${fmt(f.rp100_pop)} people (${f.rp100_pop_pct}% of the county) live in the 1-in-100-year river flood zone, which covers ${f.rp100_area_pct}% of its land (JRC flood maps, WorldPop 2025). Warning at 10% of people or more, Watch at 3–10%. This season: ${r.flood_basis}`,
+        flood_basis: `${fmt(f.rp100_pop)} people (${f.rp100_pop_pct}% of the county) live in the 1-in-100-year river flood zone, which covers ${f.rp100_area_pct}% of its land (JRC flood maps; 2022 census people placed with WorldPop). Warning at 10% of people or more, Watch at 3–10%. This season: ${r.flood_basis}`,
         flood_pop: f.rp100_pop, flood_pop_pct: f.rp100_pop_pct,
         confidence: String(r.confidence).replace('flood and heat low', 'flood exposure medium (global model); heat low')
       });
@@ -631,13 +631,13 @@ dash.calc('county_counts', {
 
 dash.calc('county_pop', {
   title: 'Population by county',
-  description: 'District populations (LISGIS 2008 census and 2014 projection) summed to counties.',
+  description: 'District populations (LISGIS 2022 census, with 2008 census households) summed to counties.',
   inputs: ['district_pop'],
   fn: (districts) => {
     const by = new Map();
     districts.forEach((d) => {
-      const c = by.get(d.county) || { county: d.county, pop2014: 0, pop2008: 0, households2008: 0, districts: 0 };
-      c.pop2014 += Number(d.pop2014); c.pop2008 += Number(d.pop2008); c.households2008 += Number(d.households2008); c.districts += 1;
+      const c = by.get(d.county) || { county: d.county, pop2022: 0, pop2008: 0, households2008: 0, districts: 0 };
+      c.pop2022 += Number(d.pop2022); c.pop2008 += Number(d.pop2008); c.households2008 += Number(d.households2008); c.districts += 1;
       by.set(d.county, c);
     });
     return Array.from(by.values()).sort((a, b) => a.county.localeCompare(b.county));
@@ -662,15 +662,15 @@ dash.calc('windstorm_by_county', {
 
 dash.calc('exposed_pop', {
   title: 'People by hazard level',
-  description: 'Population (LISGIS 2014 projection) living in counties at each level of each hazard, and its share of Liberia.',
+  description: 'Population (LISGIS 2022 census) living in counties at each level of each hazard, and its share of Liberia.',
   inputs: ['hazard_watch', 'district_pop'],
   fn: (counties, districts) => {
-    const total = districts.reduce((s, d) => s + Number(d.pop2014), 0);
+    const total = districts.reduce((s, d) => s + Number(d.pop2022), 0);
     const level = new Map(counties.map((c) => [c.county, c]));
     const out = [];
     ['dryness', 'flood', 'heat'].forEach((hazard) => ['Warning', 'Watch', 'Low'].forEach((lv) => {
-      const pop = districts.filter((d) => level.get(d.county) && level.get(d.county)[hazard] === lv).reduce((s, d) => s + Number(d.pop2014), 0);
-      out.push({ hazard, level: lv, pop2014: Math.round(pop), share: total ? Math.round(pop / total * 100) : 0 });
+      const pop = districts.filter((d) => level.get(d.county) && level.get(d.county)[hazard] === lv).reduce((s, d) => s + Number(d.pop2022), 0);
+      out.push({ hazard, level: lv, pop2022: Math.round(pop), share: total ? Math.round(pop / total * 100) : 0 });
     }));
     return out;
   }
@@ -725,8 +725,8 @@ dash.draw('tile_roni_change', (el) => { const { s, r } = rl(); LM.setText(el, s,
 dash.draw('tile_roni_season', (el) => { const { s, r } = rl(); LM.setText(el, s, r && r.season); });
 dash.draw('tile_warn', (el) => { const { s, r } = warnN(); LM.setText(el, s, r && String(r.counties), r && r.counties > 0 ? 'lm-bad' : 'lm-good'); });
 const exp = () => { const d = dash.data('exposed_pop'); return { s: d.status, r: (d.data || []).find((x) => x.hazard === 'dryness' && x.level === 'Warning') }; };
-dash.draw('exposed_word', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2014)); });
-dash.draw('tile_exposed', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2014), r && r.pop2014 > 0 ? 'lm-bad' : null); });
+dash.draw('exposed_word', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2022)); });
+dash.draw('tile_exposed', (el) => { const { s, r } = exp(); LM.setText(el, s, r && d3.format(',')(r.pop2022), r && r.pop2022 > 0 ? 'lm-bad' : null); });
 dash.draw('tile_exposed_share', (el) => { const { s, r } = exp(); LM.setText(el, s, r && r.share + '%'); });
 dash.draw('tile_lib', (el) => { const { s, r } = lh(); LM.setText(el, s, r && r.hazard, r && LM.lvlCls(r.level)); });
 dash.draw('tile_lib_area', (el) => { const { s, r } = lh(); LM.setText(el, s, r && r.area); });
@@ -810,7 +810,7 @@ function lmMap(el, opts) {
       .style('fill', (f) => isF ? fFill(f.properties, 'district') : isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'district') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
       .style('fill-opacity', (f) => dSel ? (f.properties.district === LM.state.district ? 0.35 : 0.15) : (isW || isF ? 1 : isEv ? (evDist(sel, f.properties.district) ? 1 : 0.45) : 0.75))
       .style('stroke-width', (f) => isEv && evDist(sel, f.properties.district) ? 3 : null)
-      .on('pointermove', (ev, f) => showTip(ev, isF ? `${f.properties.district} District · Flood exposure: ${fTxt(f.properties, 'district')}` : isEv ? `${f.properties.district} District` + (evDist(sel, f.properties.district) ? ' · named in a windstorm report' : '') : isW ? `${f.properties.district} District · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'district'))}` : `${f.properties.district} District · ${d3.format(',')(f.properties.pop2014)} people (2014)`))
+      .on('pointermove', (ev, f) => showTip(ev, isF ? `${f.properties.district} District · Flood exposure: ${fTxt(f.properties, 'district')}` : isEv ? `${f.properties.district} District` + (evDist(sel, f.properties.district) ? ' · named in a windstorm report' : '') : isW ? `${f.properties.district} District · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'district'))}` : `${f.properties.district} District · ${d3.format(',')(f.properties.pop2022)} people (2022 census)`))
       .on('pointerleave', hideTip)
       .on('click', (ev, f) => { ev.stopPropagation(); LM.state.district = f.properties.district; dash.draw('hazard_map'); dash.draw('county_panel'); });
   }
@@ -890,7 +890,8 @@ dash.draw('county_panel', (el) => {
     if (d) {
       const dw = 'district=' + encodeURIComponent(dsel) + '&county=' + encodeURIComponent(sel);
       const dl = add('dl');
-      add('dt', 'People (2014 projection)', dl); mark(add('dd', fmt(Number(d.pop2014)), dl), 'district_pop', 'pop2014', dw);
+      add('dt', 'People (2022 census)', dl); mark(add('dd', fmt(Number(d.pop2022)) + (d.pop2022_method && d.pop2022_method !== '2022 census' ? ' (estimate)' : ''), dl), 'district_pop', 'pop2022', dw);
+      if (d.pop2022_method && d.pop2022_method !== '2022 census') { add('dt', '', dl); add('dd', d.pop2022_method.includes('renamed') ? 'This district was renamed or split in 2022; its figure is estimated from the county\'s 2022 total.' : 'Includes an estimated share of people counted in new 2022 districts carved from this area.', dl).className = 'lm-note'; }
       add('dt', 'People (2008 census)', dl); mark(add('dd', fmt(Number(d.pop2008)), dl), 'district_pop', 'pop2008', dw);
       add('dt', 'Households (2008)', dl); mark(add('dd', fmt(Number(d.households2008)), dl), 'district_pop', 'households2008', dw);
       add('dt', 'Area', dl); mark(add('dd', fmt(Number(d.area_km2)) + ' km²', dl), 'district_pop', 'area_km2', dw);
@@ -902,7 +903,7 @@ dash.draw('county_panel', (el) => {
         const h = add('p', 'Flood exposure (this district)'); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-sm)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
         const fl = add('dl');
         const dt = add('dt', 'Level ', fl); const pill = mark(add('span', fr.flood_level, dt), 'flood_areas', 'flood_level', fw); pill.className = 'lm-level'; pill.style.background = LM.levelColor[fr.flood_level];
-        add('dd', `${fmt(fr.rp100_pop)} of ${fmt(fr.pop2025)} people (${fr.rp100_pop_pct}%) in the 1-in-100-year flood zone; ${fmt(fr.rp100_pop_1m)} of them where water would be over 1 m deep.`, fl);
+        add('dd', `${fmt(fr.rp100_pop)} of ${fmt(fr.pop2022)} people (${fr.rp100_pop_pct}%) in the 1-in-100-year flood zone; ${fmt(fr.rp100_pop_1m)} of them where water would be over 1 m deep.`, fl);
         add('dt', 'Flood zone area', fl); mark(add('dd', `${fmt(fr.rp100_km2)} km² (${fr.rp100_area_pct}% of the district)`, fl), 'flood_areas', 'rp100_km2', fw);
         add('dt', 'Smaller and larger floods', fl); add('dd', `1-in-10-year: ${fmt(fr.rp10_pop)} people · 1-in-500-year: ${fmt(fr.rp500_pop)} people`, fl);
       }
@@ -960,7 +961,7 @@ dash.draw('county_panel', (el) => {
   if (!dsel && cp.status === 'ok') {
     const c = (cp.data || []).find((x) => x.county === sel);
     if (c) {
-      add('dt', 'People (2014 projection)', dl); mark(add('dd', fmt(c.pop2014), dl), 'county_pop', 'pop2014', cw);
+      add('dt', 'People (2022 census)', dl); mark(add('dd', fmt(c.pop2022), dl), 'county_pop', 'pop2022', cw);
       add('dt', 'Households (2008)', dl); mark(add('dd', fmt(c.households2008), dl), 'county_pop', 'households2008', cw);
     }
   }
@@ -969,7 +970,7 @@ dash.draw('county_panel', (el) => {
     const h = add('p', `${ds.length} districts · click one to see its clans`); h.style.margin = 'var(--cds-gap-md) 0 0'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
     const chips = add('div'); chips.className = 'lm-chips';
     ds.forEach((d) => {
-      const s = add('span', `${d.district} · ${fmt(Number(d.pop2014))}`, chips);
+      const s = add('span', `${d.district} · ${fmt(Number(d.pop2022))}`, chips);
       s.style.cursor = 'pointer'; s.setAttribute('role', 'button'); s.tabIndex = 0;
       const go = () => { LM.state.district = d.district; dash.draw('hazard_map'); dash.draw('county_panel'); };
       s.addEventListener('click', go); s.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
@@ -981,7 +982,7 @@ dash.draw('county_rows', (tb) => {
   const d = dash.data('hazard_watch'), cp = dash.data('county_pop');
   tb.replaceChildren();
   if (d.status !== 'ok') return;
-  const pop = new Map(((cp.status === 'ok' && cp.data) || []).map((x) => [x.county, x.pop2014]));
+  const pop = new Map(((cp.status === 'ok' && cp.data) || []).map((x) => [x.county, x.pop2022]));
   const order = { Warning: 0, Watch: 1, Low: 2 };
   d.data.slice().sort((a, b) => (order[a.dryness] - order[b.dryness]) || a.county.localeCompare(b.county)).forEach((r) => {
     const tr = document.createElement('tr');
@@ -1003,14 +1004,14 @@ dash.draw('exposure_title', (el) => {
     const F = dash.data('flood_areas');
     if (F.status !== 'ok') { el.textContent = '—'; return; }
     const cs = F.data.filter((x) => x.level === 'county');
-    const p = d3.sum(cs, (x) => x.rp100_pop), t = d3.sum(cs, (x) => x.pop2025);
+    const p = d3.sum(cs, (x) => x.rp100_pop), t = d3.sum(cs, (x) => x.pop2022);
     el.textContent = `About ${d3.format(',')(Math.round(p / 1000) * 1000)} people (${Math.round(p / t * 100)}% of Liberia) live in the 1-in-100-year river flood zone`;
     return;
   }
   const d = dash.data('exposed_pop');
   const r = d.status === 'ok' ? d.data.find((x) => x.hazard === LM.state.hazard && x.level === 'Warning') : null;
   const h = LM.hazardName[LM.state.hazard].toLowerCase();
-  el.textContent = d.status !== 'ok' ? '—' : r && r.pop2014 > 0 ? `${d3.format(',')(r.pop2014)} people live in counties under a ${h} warning` : `No county is under a ${h} warning`;
+  el.textContent = d.status !== 'ok' ? '—' : r && r.pop2022 > 0 ? `${d3.format(',')(r.pop2022)} people live in counties under a ${h} warning` : `No county is under a ${h} warning`;
 });
 
 dash.draw('exposure_chart', (el) => {
@@ -1020,9 +1021,9 @@ dash.draw('exposure_chart', (el) => {
   if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 140);
   let rows;
   if (isF) {
-    const cs = d.data.filter((x) => x.level === 'county'), t = d3.sum(cs, (x) => x.pop2025);
-    rows = [[10, '#9ecae1'], [100, '#4292c6'], [500, '#08519c']].map(([rp, col]) => { const v = d3.sum(cs, (x) => x['rp' + rp + '_pop']); return { level: `1-in-${rp}-year`, pop2014: v, share: Math.round(v / t * 100), color: col }; });
-  } else rows = ['Warning', 'Watch', 'Low'].map((lv) => d.data.find((x) => x.hazard === LM.state.hazard && x.level === lv) || { level: lv, pop2014: 0, share: 0 });
+    const cs = d.data.filter((x) => x.level === 'county'), t = d3.sum(cs, (x) => x.pop2022);
+    rows = [[10, '#9ecae1'], [100, '#4292c6'], [500, '#08519c']].map(([rp, col]) => { const v = d3.sum(cs, (x) => x['rp' + rp + '_pop']); return { level: `1-in-${rp}-year`, pop2022: v, share: Math.round(v / t * 100), color: col }; });
+  } else rows = ['Warning', 'Watch', 'Low'].map((lv) => d.data.find((x) => x.hazard === LM.state.hazard && x.level === lv) || { level: lv, pop2022: 0, share: 0 });
   const W = el.clientWidth, bh = 28, gap = 10, H = rows.length * (bh + gap);
   el.replaceChildren();
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
@@ -1030,16 +1031,16 @@ dash.draw('exposure_chart', (el) => {
   const labels = svg.append('g');
   rows.forEach((r, i) => labels.append('text').attr('x', 0).attr('y', i * (bh + gap) + bh / 2 + 4).text(r.level));
   const lw = d3.max(labels.selectAll('text').nodes(), (n) => n.getComputedTextLength()) + 10;
-  const vals = rows.map((r) => `${d3.format(',')(r.pop2014)} (${r.share}%)`);
+  const vals = rows.map((r) => `${d3.format(',')(r.pop2022)} (${r.share}%)`);
   const vw = Math.min(150, W * 0.4);
-  const x = d3.scaleLinear().domain([0, Math.max(1, d3.max(rows, (r) => r.pop2014))]).range([lw, W - vw]);
+  const x = d3.scaleLinear().domain([0, Math.max(1, d3.max(rows, (r) => r.pop2022))]).range([lw, W - vw]);
   const tip = LM.tip(el);
   rows.forEach((r, i) => {
     const yy = i * (bh + gap);
-    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.pop2014 > 0 ? 2 : 0, x(r.pop2014) - x(0))).style('fill', r.color || LM.levelColor[r.level])
+    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.pop2022 > 0 ? 2 : 0, x(r.pop2022) - x(0))).style('fill', r.color || LM.levelColor[r.level])
       .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = isF ? `${r.level} flood zone: ${vals[i]} of Liberia's people` : `${r.level}: ${vals[i]} of Liberia's people`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
       .on('pointerleave', () => { tip.hidden = true; });
-    svg.append('text').attr('class', 'lm-val').attr('x', x(r.pop2014) + 6).attr('y', yy + bh / 2 + 4).text(vals[i]);
+    svg.append('text').attr('class', 'lm-val').attr('x', x(r.pop2022) + 6).attr('y', yy + bh / 2 + 4).text(vals[i]);
   });
 });
 
@@ -1864,7 +1865,7 @@ dash.draw('floodmap_info', (el) => {
     const mk = (e, f) => { e.setAttribute('data-source', 'flood_areas'); e.setAttribute('data-field', f); e.setAttribute('data-where', wk); return e; };
     const dt = add('dt', 'Flood exposure ', dl); const pill = mk(add('span', r.flood_level, dt), 'flood_level'); pill.className = 'lm-level'; pill.style.background = LM.levelColor[r.flood_level];
     add('dd', 'based on the 1-in-100-year flood zone', dl);
-    add('dt', 'People in the flood zone', dl); mk(add('dd', `${fmt(r['rp' + rp + '_pop'])} of ${fmt(r.pop2025)} (${r['rp' + rp + '_pop_pct']}%)`, dl), 'rp' + rp + '_pop');
+    add('dt', 'People in the flood zone', dl); mk(add('dd', `${fmt(r['rp' + rp + '_pop'])} of ${fmt(r.pop2022)} (${r['rp' + rp + '_pop_pct']}%)`, dl), 'rp' + rp + '_pop');
     add('dt', 'Of them, in water over 1 m', dl); mk(add('dd', fmt(r['rp' + rp + '_pop_1m']), dl), 'rp' + rp + '_pop_1m');
     add('dt', 'Flood zone area', dl); mk(add('dd', `${fmt(r['rp' + rp + '_km2'])} km² (${r['rp' + rp + '_area_pct']}% of the land)`, dl), 'rp' + rp + '_km2');
   };
@@ -1874,7 +1875,7 @@ dash.draw('floodmap_info', (el) => {
     const clan = cl.data.features.find((f) => f.properties.district === p.district && f.properties.county === p.county && d3.geoContains(f, pt));
     if (clan) block(`Clan #${clan.properties.clan_id} (name pending)`, `clan:${p.county}:${p.district}:${clan.properties.clan_id}`);
   } else if (cl.status === 'loading') add('p', 'Loading clan boundaries…').className = 'lm-note';
-  const n = add('p', 'People from WorldPop 2025 (100 m). Figures for Greater Monrovia and river mouths are upper bounds.'); n.className = 'lm-note'; n.style.marginTop = 'var(--cds-gap-sm)';
+  const n = add('p', 'People: 2022 census totals, placed within districts using WorldPop (100 m). Figures for Greater Monrovia and river mouths are upper bounds.'); n.className = 'lm-note'; n.style.marginTop = 'var(--cds-gap-sm)';
 });
 
 dash.draw('flood_rows', (tb) => {
