@@ -38,8 +38,8 @@
   "file": "data/enso_status.json",
   "title": "NOAA ENSO status",
   "description": "ENSO alert status, synopsis and dates from CPC's latest monthly ENSO Diagnostic Discussion, with the latest RONI season and weekly reading dates.",
-  "updated": "2026-11-12T02:45:00Z",
-  "sha": "5824c4fa75ba6182"
+  "updated": "2026-11-12T18:37:13Z",
+  "sha": "0b418ea2d71ea255"
  },
  "fao_asi_annual": {
   "file": "data/fao_asi_annual.json",
@@ -115,8 +115,8 @@
   "file": "data/outlook.json",
   "title": "NOAA official ENSO outlook",
   "description": "Chance of El Niño, neutral and La Niña, and of strong and very strong El Niño, for the next nine 3-month seasons, from CPC's official probability and strength tables.",
-  "updated": "2026-11-12T02:45:00Z",
-  "sha": "e2708454bf51b0ee"
+  "updated": "2026-11-12T18:37:13Z",
+  "sha": "a00dda31857eeeba"
  },
  "rain_wafrica": {
   "file": "data/rain_wafrica.json",
