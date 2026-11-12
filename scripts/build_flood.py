@@ -69,6 +69,7 @@ for lvl, fn in [("county", "counties.json"), ("district", "districts.json"), ("c
     for f in json.load(open(f"{BD}/{fn}"))["features"]:
         p = f["properties"]
         row = {"level": lvl, "county": p["county"], "district": p.get("district", ""), "clan_id": p.get("clan_id", "")}
+        if lvl == "clan": row["clan"] = p.get("clan", "")
         row["key"] = lvl + ":" + row["county"] + (":" + row["district"] if row["district"] else "") + (":" + str(row["clan_id"]) if row["clan_id"] != "" else "")
         row.update(stats(f["geometry"])); row["flood_level"] = level(row); areas.append(row)
 json.dump(areas, open(f"{OUT}/flood_areas.json", "w"), ensure_ascii=False)

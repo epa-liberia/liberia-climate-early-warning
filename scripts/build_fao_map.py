@@ -69,9 +69,10 @@ def stats(geom):
             "hdf_pct": round(float(np.mean([HDF_MID[int(x)] for x in hc])), 1) if len(hc) else None}
 areas = []
 for lvl, fn in [("county", "counties.json"), ("district", "districts.json"), ("clan", "clans.json")]:
-    for f in json.load(open(f"{BD}/{fn}"))["features"]:
+    for f in json.load(open(f"{BD}/{fn}", encoding="utf-8"))["features"]:
         p = f["properties"]
         row = {"level": lvl, "county": p["county"], "district": p.get("district", ""), "clan_id": p.get("clan_id", ""), "date": dates[-1]}
+        if lvl == "clan": row["clan"] = p.get("clan", "")
         row["key"] = lvl + ":" + row["county"] + (":" + row["district"] if row["district"] else "") + (":" + str(row["clan_id"]) if row["clan_id"] != "" else "")
         row.update(stats(f["geometry"])); areas.append(row)
 out = {"bbox": [LON0, LAT0, LON1, LAT1], "width": W, "height": H, "latest": dates[-1], "season": "Season 1", "landcover": "Cropland",

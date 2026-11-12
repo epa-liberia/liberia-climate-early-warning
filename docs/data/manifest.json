@@ -2,16 +2,16 @@
  "clans": {
   "file": "data/clans.json",
   "title": "Liberia clan boundaries",
-  "description": "LISGIS 2007 clan boundaries (edition 14, 816 clans), reprojected and simplified; each tagged with its district by location. Names pending the clan attribute table.",
-  "updated": "2026-11-11T23:30:00Z",
-  "sha": "466b2dc9148f3a66"
+  "description": "LISGIS 2022 clan boundaries (902) with names and codes, simplified for the web.",
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "c54138c3d4ccf6c4"
  },
  "counties": {
   "file": "data/counties.json",
   "title": "Liberia county boundaries",
-  "description": "Liberia's 15 counties, formed by merging LISGIS 2007 district boundaries (edition 14), simplified for web maps.",
-  "updated": "2026-11-11T23:30:00Z",
-  "sha": "bb20742fa7678f87"
+  "description": "LISGIS 2022 county boundaries (15), simplified for the web.",
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "907c1650a26b8233"
  },
  "county_watch": {
   "file": "data/county_watch.json",
@@ -23,16 +23,16 @@
  "district_pop": {
   "file": "data/district_pop.json",
   "title": "District population",
-  "description": "LISGIS 2022 Liberia Population and Housing Census on the 2007 district map (estimates where districts were split or renamed), with 2008 census population and households and the earlier 2014 projection.",
-  "updated": "2026-11-12T12:28:02Z",
-  "sha": "6d383cc2263ceaad"
+  "description": "LISGIS 2022 Population and Housing Census by district (160), with area in km²; four Sinoe districts not listed in the census tables are estimated.",
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "699ff827711d160f"
  },
  "districts": {
   "file": "data/districts.json",
   "title": "Liberia district boundaries",
-  "description": "LISGIS 2007 district boundaries (edition 14, 136 districts), reprojected from UTM 29N and simplified, with 2008 census and 2014 projected population.",
-  "updated": "2026-11-11T23:30:00Z",
-  "sha": "4f5771e4c44f8c82"
+  "description": "LISGIS 2022 district boundaries (160) with codes, simplified for the web; they match the 2022 census district tables.",
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "24c783fbefb81e81"
  },
  "enso_status": {
   "file": "data/enso_status.json",
@@ -59,15 +59,15 @@
   "file": "data/fao_map.json",
   "title": "FAO crop stress map (1 km)",
   "description": "FAO ASIS Agricultural Stress Index for Liberia's cropland at 1 km, last 12 ten-day periods, plus Historic Agricultural Drought Frequency (1984–2025), as images built from FAO's map service.",
-  "updated": "2026-11-12T10:53:38Z",
-  "sha": "327602be249a2efd"
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "9f618589b01f97c1"
  },
  "fao_map_areas": {
   "file": "data/fao_map_areas.json",
   "title": "Crop stress by county, district and clan (estimated)",
   "description": "Estimated from FAO's 1 km map for the latest 10 days: cropland in season, share stressed (25%+ class), average stress class, and drought frequency since 1984, per LISGIS county, district and clan.",
-  "updated": "2026-11-12T03:10:00Z",
-  "sha": "3bbbc1c1f7cf4b13"
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "514fe4d0e5444400"
  },
  "fao_rain": {
   "file": "data/fao_rain.json",
@@ -135,9 +135,9 @@
  "wind_zones": {
   "file": "data/wind_zones.json",
   "title": "Average wind by county, district and clan",
-  "description": "Global Wind Atlas 3 mean wind speed and power density at 10, 50 and 100 m, averaged by Claude over each LISGIS county, district and clan; long-term averages, not storm gusts.",
-  "updated": "2026-11-11T23:58:00Z",
-  "sha": "d415ae145fb1a9f3"
+  "description": "Global Wind Atlas 3 mean wind speed and power density at 10, 50 and 100 m, averaged over each LISGIS 2022 county, district and clan.",
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "c60b758d533f50b7"
  },
  "windstorm_event_counties": {
   "file": "data/windstorm_event_counties.json",
@@ -157,14 +157,14 @@
   "file": "data/flood_map.json",
   "title": "River flood zones map",
   "description": "JRC Copernicus Global River Flood Hazard Maps v2.1, flood depth classes for 1-in-10, 100 and 500-year floods, Liberia.",
-  "updated": "2026-11-12T12:12:10Z",
-  "sha": "425b79ddb3435a3b"
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "b0b1332012a06e2a"
  },
  "flood_areas": {
   "file": "data/flood_areas.json",
   "title": "People and land in the flood zone",
   "description": "Area and people (2022 census totals, placed within districts with WorldPop 2025) in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
-  "updated": "2026-11-12T12:28:02Z",
-  "sha": "71f9ea6e0828f65d"
+  "updated": "2026-11-12T15:38:58Z",
+  "sha": "66a4b58c2b79b588"
  }
 }
