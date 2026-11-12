@@ -56,4 +56,4 @@ Edit `page/index.html`, then run `python3 scripts/build_site.py` to regenerate `
 
 ## Sources and licences
 
-NOAA and NASA data are US Government works and free to reuse. FAO ASIS data are published by FAO GIEWS. County, district and clan boundaries and population are from LISGIS. Wind data: Global Wind Atlas 3 (DTU, World Bank/ESMAP), CC BY 4.0. Windstorm events: NDMA (via allAfrica), IFRC DREF MDRLR010, allAfrica. Flood and heat levels are EPA's reading of NOAA/FEWS NET and AGRHYMET bulletins and are not official LiMet or NDMA warnings.
+NOAA and NASA data are US Government works and free to reuse. FAO ASIS data are published by FAO GIEWS. County, district and clan boundaries and population are from LISGIS. Wind data: Global Wind Atlas 3 (DTU, World Bank/ESMAP), CC BY 4.0. Windstorm events: NDMA (via allAfrica), IFRC DREF MDRLR010, allAfrica. Flood exposure: JRC Copernicus Global River Flood Hazard Maps v2.1 (free to reuse) with WorldPop 2025 constrained population (CC BY 4.0), built once by `scripts/build_flood.py`. Heat levels are EPA's reading of NOAA/FEWS NET and AGRHYMET bulletins. None of the levels is an official LiMet or NDMA warning.

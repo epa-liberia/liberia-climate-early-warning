@@ -152,5 +152,19 @@
   "description": "Damaging windstorms in Liberia since 2024, compiled by Claude from NDMA (via allAfrica), IFRC DREF MDRLR010 and news reports; a partial record.",
   "updated": "2026-11-12T00:20:00Z",
   "sha": "0c4142474009cef2"
+ },
+ "flood_map": {
+  "file": "data/flood_map.json",
+  "title": "River flood zones map",
+  "description": "JRC Copernicus Global River Flood Hazard Maps v2.1, flood depth classes for 1-in-10, 100 and 500-year floods, Liberia.",
+  "updated": "2026-11-12T12:12:10Z",
+  "sha": "425b79ddb3435a3b"
+ },
+ "flood_areas": {
+  "file": "data/flood_areas.json",
+  "title": "People and land in the flood zone",
+  "description": "Area and WorldPop 2025 population in the 1-in-10, 100 and 500-year river flood zones for every county, district and clan, with flood exposure level.",
+  "updated": "2026-11-12T12:12:10Z",
+  "sha": "1b7eb00dad8aebee"
  }
 }

@@ -46,6 +46,7 @@
 @media (max-width: 760px) { .lm-mapgrid { grid-template-columns: 1fr; } }
 .lm-chart { position: relative; min-height: 240px; }
 .lm-chart svg { display: block; overflow: visible; }
+.lm-chart.lm-map svg { overflow: hidden; }
 .lm-chart text { font-size: var(--cds-font-size-caption); fill: var(--cds-text-secondary); font-family: var(--font-anthropic-sans); }
 .lm-chart .tick text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
 .lm-chart .lm-val { fill: var(--color-fg); font-variant-numeric: tabular-nums; }
@@ -241,12 +242,12 @@
 
   <!-- HAZARD MAP -->
   <section class="lm-page" id="hazards" role="tabpanel" hidden>
-    <div class="lm-draft">Dryness levels come from FAO's satellite Agricultural Stress Index for each county (see the Drought &amp; Crops tab). Flood and heat levels are EPA's working reading of NOAA/FEWS NET and AGRHYMET regional bulletins. None of these is an official LiMet or NDMA warning. Click a county, then a district, to drill down to clan level; district and clan areas inherit their county's level until local data is added.</div>
+    <div class="lm-draft">Dryness levels come from FAO's satellite Agricultural Stress Index for each county (see the Drought &amp; Crops tab). Flood exposure levels come from the share of people living in the 1-in-100-year river flood zone (JRC Copernicus flood maps with WorldPop 2025 population), calculated for every county, district and clan. Heat levels are EPA's working reading of NOAA/FEWS NET and AGRHYMET regional bulletins. None of these is an official LiMet or NDMA warning. Click a county, then a district, to drill down to clan level; for heat, district and clan areas inherit their county's level until local data is added.</div>
     <div class="lm-controls">
       <label for="hz-select" style="font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)">Hazard</label>
       <select id="hz-select" class="dash-select" aria-label="Hazard">
         <option value="dryness">Dryness / drought</option>
-        <option value="flood">Flooding</option>
+        <option value="flood">Flood exposure (1-in-100-year flood zone)</option>
         <option value="heat">Heat</option>
         <option value="windstorm">Windstorm (recorded events)</option>
         <optgroup label="Context layers (not hazard levels)">
@@ -264,23 +265,56 @@
     </div>
     <div class="lm-mapgrid">
       <div class="lm-card">
-        <div class="lm-chart lm-map" data-draw="hazard_map" data-source="counties districts clans county_watch wind_zones windstorm_by_county" style="min-height:420px"></div>
+        <div class="lm-chart lm-map" data-draw="hazard_map" data-source="counties districts clans hazard_watch flood_areas wind_zones windstorm_by_county" style="min-height:420px"></div>
       </div>
-      <div class="lm-card lm-panel" id="county-panel" data-draw="county_panel" data-source="county_watch district_pop county_pop districts clans wind_zones windstorm_events windstorm_event_counties" style="min-height:300px">—</div>
+      <div class="lm-card lm-panel" id="county-panel" data-draw="county_panel" data-source="hazard_watch flood_areas district_pop county_pop districts clans wind_zones windstorm_events windstorm_event_counties" style="min-height:300px">—</div>
     </div>
     <div class="lm-draft" id="ws-note" hidden>Windstorm shows recorded damaging events since 2024, not a forecast: darker counties have had more events. The record is partial (three events from NDMA, IFRC and news reports); NDMA's full incident records would complete it. Where a source names a town, the matching district is outlined.</div>
     <div class="lm-draft" id="wind-note" hidden>Average wind is long-term mean wind from the Global Wind Atlas, not a windstorm hazard. Damaging windstorms in Liberia are short thunderstorm gusts that these averages do not capture: NDMA recorded storms in Bong, Gbarpolu and Nimba, which show low average wind. Values at 10 m are very low over forest because of how the model treats tall canopy; 100 m is more reliable for comparing areas.</div>
+    <div class="lm-draft" id="flood-note" hidden>Flood exposure shows where people live in places a large river flood would reach, not a flood happening now. Warning: 10% or more of the area's people live in the 1-in-100-year flood zone; Watch: 3–10%; Low: under 3%. The global model is coarse on the coast: in Greater Monrovia and the river mouths (Mesurado, St. Paul, Farmington, Cestos) it likely overstates depth and reach, so treat coastal city figures as upper bounds. Flash flooding from blocked drains in Monrovia is not in this model. Current-season rain signals are listed under each county.</div>
+    <div class="lm-card lm-section" id="flood-map">
+      <h2>River flood zones, 90 m detail</h2>
+      <p class="lm-note">Where river floods of different sizes would reach and how deep the water would be (JRC Copernicus Global River Flood Hazard Maps). A 1-in-100-year flood has a 1% chance of happening in any year. Click any spot for its depth and the people in the flood zone of its district and clan. Scroll or pinch to zoom.</p>
+      <div class="lm-controls">
+        <div class="lm-seg" role="group" aria-label="Flood size">
+          <button type="button" class="lm-btn" data-flood-rp="10" aria-pressed="false">1-in-10-year</button>
+          <button type="button" class="lm-btn" data-flood-rp="100" aria-pressed="true">1-in-100-year</button>
+          <button type="button" class="lm-btn" data-flood-rp="500" aria-pressed="false">1-in-500-year</button>
+        </div>
+        <label class="lm-check"><input type="checkbox" id="floodmap-districts" checked> District boundaries</label>
+      </div>
+      <div class="lm-mapgrid">
+        <div class="lm-chart" data-draw="floodmap" data-source="flood_map counties districts" style="min-height:300px"></div>
+        <div>
+          <ul class="lm-legend" style="flex-direction:column;gap:4px" aria-label="Legend: flood depth">
+            <li><span style="background:rgb(158,202,225)"></span>Under 1 m deep</li><li><span style="background:rgb(66,146,198)"></span>1–3 m</li><li><span style="background:rgb(8,81,156)"></span>3–10 m</li><li><span style="background:rgb(8,48,107)"></span>Over 10 m</li><li><span style="background:rgb(120,120,120)"></span>River or lake (permanent water)</li><li><span style="background:var(--color-panel);border:1px solid var(--color-border-line)"></span>Outside the flood zone</li>
+          </ul>
+          <div class="lm-panel" data-draw="floodmap_info" data-source="flood_areas districts clans" style="margin-top:var(--cds-gap-md)"></div>
+        </div>
+      </div>
+    </div>
     <div class="lm-card lm-section" id="exposure">
-      <h2 data-draw="exposure_title" data-source="exposed_pop">—</h2>
-      <p class="lm-note">Population by hazard level of the county they live in, LISGIS 2014 projection from the 2008 census. A first exposure measure; farmland, health facilities and schools come next.</p>
-      <div class="lm-chart" data-draw="exposure_chart" data-source="exposed_pop" style="min-height:150px"></div>
+      <h2 data-draw="exposure_title" data-source="exposed_pop flood_areas">—</h2>
+      <p class="lm-note" id="exposure-note-flood" hidden>People (WorldPop 2025) living where river floods of each size would reach, all of Liberia. Coastal city figures are upper bounds.</p>
+      <p class="lm-note" id="exposure-note">Population by hazard level of the county they live in, LISGIS 2014 projection from the 2008 census. A first exposure measure; farmland, health facilities and schools come next.</p>
+      <div class="lm-chart" data-draw="exposure_chart" data-source="exposed_pop flood_areas" style="min-height:150px"></div>
     </div>
     <div class="lm-card lm-section" id="county-table">
       <h2>All counties</h2>
       <div class="lm-tablewrap">
-        <table class="lm-table" data-source="county_watch" data-row-key="county">
-          <thead><tr><th data-field="county">County</th><th data-field="dryness">Dryness</th><th data-field="flood">Flooding</th><th data-field="heat">Heat</th><th data-field="confidence">Confidence</th><th data-field="pop2014" data-source="county_pop">Population (2014)</th></tr></thead>
+        <table class="lm-table" data-source="hazard_watch" data-row-key="county">
+          <thead><tr><th data-field="county">County</th><th data-field="dryness">Dryness</th><th data-field="flood">Flood exposure</th><th data-field="heat">Heat</th><th data-field="confidence">Confidence</th><th data-field="pop2014" data-source="county_pop">Population (2014)</th></tr></thead>
           <tbody data-draw="county_rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="lm-card lm-section" id="flood-districts">
+      <h2>Districts with the most people in the flood zone</h2>
+      <p class="lm-note">People (WorldPop 2025) living where the selected flood would reach. Coastal city figures are upper bounds; see the note above the map.</p>
+      <div class="lm-tablewrap">
+        <table class="lm-table" data-source="flood_areas" data-row-key="key">
+          <thead><tr><th data-field="district">District</th><th data-field="county">County</th><th data-field="rp100_pop">People in the flood zone</th><th data-field="rp100_pop_pct">Share of the district's people</th><th data-field="rp100_pop_1m">Of them, in water over 1 m</th><th data-field="rp100_km2">Flood zone area</th><th data-field="flood_level">Flood exposure</th></tr></thead>
+          <tbody data-draw="flood_rows" data-source="flood_areas"></tbody>
         </table>
       </div>
     </div>
@@ -478,7 +512,7 @@
       <div class="lm-cards">
         <div><h3>Niño 3.4</h3><p>Sea temperature anomaly in the central-east equatorial Pacific, the main region used to track El Niño.</p></div>
         <div><h3>RONI</h3><p>NOAA's official index since Feb 2026: Niño 3.4 minus tropical-average warming, as a 3-month mean. El Niño is +0.5 °C or more. Weak 0.5–0.9, moderate 1.0–1.4, strong 1.5–1.9, very strong 2.0+.</p></div>
-        <div><h3>Warning / Watch / Low</h3><p>Warning: the county is inside an area a regional bulletin flags for that hazard now. Watch: signals point to elevated risk. Low: no current signal.</p></div>
+        <div><h3>Warning / Watch / Low</h3><p>Dryness: share of cropland under drought stress (Warning 25% or more, Watch 10–25%). Flood exposure: share of people in the 1-in-100-year river flood zone (Warning 10% or more, Watch 3–10%). Heat: Warning when a regional bulletin flags the county now, Watch when signals point to elevated risk, Low when there is no current signal.</p></div>
       </div>
     </div>
     <div class="lm-card lm-section">
@@ -487,6 +521,7 @@
         <li>El Niño indices and outlooks: NOAA Climate Prediction Center data files (RONI table, weekly and monthly Niño indices, official ENSO probability and strength tables, monthly ENSO discussion), checked daily by a scheduled task.</li>
         <li>Liberia hazards: NOAA CPC / FEWS NET Africa and Global Weather Hazards (Oct–Nov 2026); AGRHYMET seasonal update (30 Jul 2026).</li>
         <li>Boundaries: LISGIS 2007 district (136) and clan (816) boundaries, edition 14; counties are formed from the districts. Clan names are pending the clan attribute table.</li><li>Population: LISGIS 2008 National Population and Housing Census, with LISGIS 2014 projections, by district.</li><li>Ocean and rain monitor: NASA GIBS imagery of GHRSST Level 4 MUR sea-surface temperature anomaly and GPM IMERG daily precipitation rate, last 30 days, with values read from NASA's published colour tables; NASA imagery is free to reuse. Rebuilt daily by a scheduled task.</li><li>Crop stress map: FAO ASIS 1 km Agricultural Stress Index (dekadal, Season 1, cropland) and Historic Agricultural Drought Frequency (30% threshold, 1984–2025), from FAO's map service; district and clan values are estimated from the map.</li><li>Drought and crops: FAO GIEWS Agricultural Stress Index System (ASIS), Liberia county files for the Agricultural Stress Index, Vegetation Health Index and satellite rainfall estimate (FEWS NET RFE), refreshed automatically when FAO updates.</li><li>Windstorm events: NDMA briefing via allAfrica (Mar 2024); IFRC DREF Operation MDRLR010 (Apr 2026); allAfrica (Apr 2026).</li><li>Wind: Global Wind Atlas 3 (DTU, with the World Bank / ESMAP), mean wind speed and power density at 10, 50 and 100 m, 250 m grid, CC BY 4.0; averaged over each county, district and clan.</li>
+        <li>Flood exposure: JRC Copernicus Emergency Management Service Global River Flood Hazard Maps, version 2.1 (Baugh et al. 2024), flood depth for 1-in-10, 1-in-100 and 1-in-500-year river floods at about 90 m, free to reuse; combined with WorldPop 2025 constrained population at 100 m (CC BY 4.0) to count people and area in the flood zone of every county, district and clan. River floods only; coastal surge and urban drainage flooding are not included.</li>
         <li>Updates: NOAA's monthly ENSO discussion comes out on the second Thursday of each month; the hazards outlook weekly. The platform updates itself automatically: NASA maps daily, NOAA El Niño data daily, FAO drought data weekly.</li>
       </ul>
     </div>
@@ -510,7 +545,7 @@ window.LM = {
   levelColor: { Warning: 'var(--lv-warn)', Watch: 'var(--lv-watch)', Low: 'var(--lv-low)' },
   isEvents: (h) => h === 'windstorm',
   evColor: (n) => !n ? 'var(--color-border-line)' : n === 1 ? '#f2a3b0' : n === 2 ? '#df5871' : '#BF0A30',
-  hazardName: { dryness: 'Dryness / drought', flood: 'Flooding', heat: 'Heat', windstorm: 'Windstorm (recorded events)', ws100: 'Average wind speed, 100 m', ws50: 'Average wind speed, 50 m', ws10: 'Average wind speed, 10 m', pd100: 'Average wind power, 100 m', pd50: 'Average wind power, 50 m', pd10: 'Average wind power, 10 m' },
+  hazardName: { dryness: 'Dryness / drought', flood: 'Flood exposure', heat: 'Heat', windstorm: 'Windstorm (recorded events)', ws100: 'Average wind speed, 100 m', ws50: 'Average wind speed, 50 m', ws10: 'Average wind speed, 10 m', pd100: 'Average wind power, 100 m', pd50: 'Average wind power, 50 m', pd10: 'Average wind power, 10 m' },
   isWind: (h) => /^(ws|pd)(10|50|100)$/.test(h),
   windFmt: (h, v) => v == null ? 'no data' : h.startsWith('pd') ? (Number(v) < 10 ? Number(v).toFixed(1) : Math.round(v)) + ' W/m²' : Number(v).toFixed(2) + ' m/s',
   windKey: (p, level) => level === 'county' ? 'county:' + p.county : level === 'district' ? 'district:' + p.county + ':' + p.district : 'clan:' + p.county + ':' + p.district + ':' + p.clan_id,
@@ -567,6 +602,26 @@ dash.calc('latest_hazard', {
   fn: (hazards) => hazards.slice().sort((a, b) => String(b.issued).localeCompare(String(a.issued))).slice(0, 1)
 });
 
+dash.calc('hazard_watch', {
+  title: 'County hazard levels',
+  description: 'County hazard watch with flood exposure levels from the share of people in the 1-in-100-year river flood zone (JRC flood maps, WorldPop 2025); dryness and heat as in the county hazard watch.',
+  inputs: ['county_watch', 'flood_areas'],
+  fn: (counties, flood) => {
+    const by = new Map(flood.filter((r) => r.level === 'county').map((r) => [r.county, r]));
+    const fmt = d3.format(',');
+    return counties.map((r) => {
+      const f = by.get(r.county);
+      if (!f) return r;
+      return Object.assign({}, r, {
+        flood: f.flood_level,
+        flood_basis: `${fmt(f.rp100_pop)} people (${f.rp100_pop_pct}% of the county) live in the 1-in-100-year river flood zone, which covers ${f.rp100_area_pct}% of its land (JRC flood maps, WorldPop 2025). Warning at 10% of people or more, Watch at 3–10%. This season: ${r.flood_basis}`,
+        flood_pop: f.rp100_pop, flood_pop_pct: f.rp100_pop_pct,
+        confidence: String(r.confidence).replace('flood and heat low', 'flood exposure medium (global model); heat low')
+      });
+    });
+  }
+});
+
 dash.calc('county_counts', {
   title: 'Counties by dryness level',
   description: 'Number of counties at each dryness level in the county hazard watch.',
@@ -608,7 +663,7 @@ dash.calc('windstorm_by_county', {
 dash.calc('exposed_pop', {
   title: 'People by hazard level',
   description: 'Population (LISGIS 2014 projection) living in counties at each level of each hazard, and its share of Liberia.',
-  inputs: ['county_watch', 'district_pop'],
+  inputs: ['hazard_watch', 'district_pop'],
   fn: (counties, districts) => {
     const total = districts.reduce((s, d) => s + Number(d.pop2014), 0);
     const level = new Map(counties.map((c) => [c.county, c]));
@@ -631,6 +686,8 @@ dash.calc('exposed_pop', {
     document.querySelectorAll('#hz-legend').forEach((e) => { e.hidden = w || ev; });
     document.querySelectorAll('#wind-note').forEach((e) => { e.hidden = !w; });
     document.querySelectorAll('#ws-note').forEach((e) => { e.hidden = !ev; });
+    document.querySelectorAll('#flood-note, #exposure-note-flood').forEach((e) => { e.hidden = s.value !== 'flood'; });
+    document.querySelectorAll('#exposure-note').forEach((e) => { e.hidden = s.value === 'flood'; });
     document.querySelectorAll('#exposure').forEach((e) => { e.hidden = w || ev; });
     ['hazard_map', 'county_panel', 'exposure_title', 'exposure_chart'].forEach((n) => dash.draw(n));
   }));
@@ -696,14 +753,16 @@ function lmEmpty(el, status, h) {
 window.lmEmpty = lmEmpty;
 
 function lmMap(el, opts) {
-  const c = dash.data('counties'), w = dash.data('county_watch'), dd = opts.districts ? dash.data('districts') : { status: 'ok', data: null };
+  const c = dash.data('counties'), w = dash.data('hazard_watch'), dd = opts.districts ? dash.data('districts') : { status: 'ok', data: null };
   const wantClans = !!(opts.districts && opts.selected && LM.state.district);
   const cl = wantClans ? dash.data('clans') : { status: 'ok', data: null };
   const isW = LM.isWind(opts.hazard);
   const wz = isW ? dash.data('wind_zones') : { status: 'ok', data: [] };
   const isEv = LM.isEvents(opts.hazard);
   const ev = isEv ? dash.data('windstorm_by_county') : { status: 'ok', data: [] };
-  const st = [c.status, w.status, dd.status, cl.status, wz.status, ev.status];
+  const isF = opts.hazard === 'flood';
+  const fa = isF ? dash.data('flood_areas') : { status: 'ok', data: [] };
+  const st = [c.status, w.status, dd.status, cl.status, wz.status, ev.status, fa.status];
   if (st.some((s) => s !== 'ok') || !c.data || !c.data.features) return lmEmpty(el, st.find((s) => s !== 'ok') || 'error', opts.minH);
   const watch = new Map(w.data.map((r) => [r.county, r]));
   const hz = opts.hazard;
@@ -725,11 +784,15 @@ function lmMap(el, opts) {
   const wvals = (wz.data || []).filter((r) => r.level === activeLevel && (!sel || r.county === sel) && (!wantClans || r.district === LM.state.district)).map((r) => r[hz + '_mean']).filter((v) => v != null);
   const wscale = d3.scaleSequential(d3.interpolateBlues).domain(wvals.length ? [d3.min(wvals) * 0.9, d3.max(wvals)] : [0, 1]);
   const wfill = (p, level) => { const v = wval(p, level); return v == null ? 'var(--color-border-line)' : wscale(v); };
+  const fmap = new Map((fa.data || []).map((r) => [r.key, r]));
+  const frow = (p, level) => fmap.get(LM.windKey(p, level));
+  const fFill = (p, level) => { const r = frow(p, level); return r ? LM.levelColor[r.flood_level] : 'var(--color-border-line)'; };
+  const fTxt = (p, level) => { const r = frow(p, level); return r ? `${r.flood_level} · ${d3.format(',')(r.rp100_pop)} people (${r.rp100_pop_pct}%) in the 1-in-100-year flood zone` : 'no data'; };
   const evMap = new Map((ev.data || []).map((r) => [r.county, r]));
   const evN = (cty) => { const r = evMap.get(cty); return r ? r.events : 0; };
   const evDist = (cty, d) => { const r = evMap.get(cty); return !!(r && r.districts && r.districts.split(', ').includes(d)); };
   const cFill = (f) => isEv ? LM.evColor(evN(f.properties.county)) : isW ? wfill(f.properties, 'county') : (LM.levelColor[lvl(f.properties.county)] || 'var(--color-border-line)');
-  const cTip = (f) => isEv ? `${f.properties.county} County · ${evN(f.properties.county)} recorded windstorm event${evN(f.properties.county) === 1 ? '' : 's'} since 2024` : isW ? `${f.properties.county} County · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'county'))}` : `${f.properties.county} County · ${LM.hazardName[hz]}: ${lvl(f.properties.county) || 'no data'}`;
+  const cTip = (f) => isF ? `${f.properties.county} County · Flood exposure: ${fTxt(f.properties, 'county')}` : isEv ? `${f.properties.county} County · ${evN(f.properties.county)} recorded windstorm event${evN(f.properties.county) === 1 ? '' : 's'} since 2024` : isW ? `${f.properties.county} County · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'county'))}` : `${f.properties.county} County · ${LM.hazardName[hz]}: ${lvl(f.properties.county) || 'no data'}`;
   const showTip = (ev, text) => { const [px, py] = d3.pointer(ev, el); tip.textContent = text; tip.hidden = false; LM.placeTip(el, tip, px, py); };
   const hideTip = () => { tip.hidden = true; };
   svg.append('g').selectAll('path').data(c.data.features).join('path')
@@ -744,10 +807,10 @@ function lmMap(el, opts) {
     svg.append('g').selectAll('path').data(dFeats).join('path')
       .attr('class', (f) => 'lm-area' + (dSel && f.properties.district === LM.state.district ? ' lm-sel' : ''))
       .attr('d', path)
-      .style('fill', (f) => isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'district') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
-      .style('fill-opacity', (f) => dSel ? (f.properties.district === LM.state.district ? 0.35 : 0.15) : (isW ? 1 : isEv ? (evDist(sel, f.properties.district) ? 1 : 0.45) : 0.75))
+      .style('fill', (f) => isF ? fFill(f.properties, 'district') : isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'district') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
+      .style('fill-opacity', (f) => dSel ? (f.properties.district === LM.state.district ? 0.35 : 0.15) : (isW || isF ? 1 : isEv ? (evDist(sel, f.properties.district) ? 1 : 0.45) : 0.75))
       .style('stroke-width', (f) => isEv && evDist(sel, f.properties.district) ? 3 : null)
-      .on('pointermove', (ev, f) => showTip(ev, isEv ? `${f.properties.district} District` + (evDist(sel, f.properties.district) ? ' · named in a windstorm report' : '') : isW ? `${f.properties.district} District · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'district'))}` : `${f.properties.district} District · ${d3.format(',')(f.properties.pop2014)} people (2014)`))
+      .on('pointermove', (ev, f) => showTip(ev, isF ? `${f.properties.district} District · Flood exposure: ${fTxt(f.properties, 'district')}` : isEv ? `${f.properties.district} District` + (evDist(sel, f.properties.district) ? ' · named in a windstorm report' : '') : isW ? `${f.properties.district} District · ${LM.hazardName[hz]}: ${LM.windFmt(hz, wval(f.properties, 'district'))}` : `${f.properties.district} District · ${d3.format(',')(f.properties.pop2014)} people (2014)`))
       .on('pointerleave', hideTip)
       .on('click', (ev, f) => { ev.stopPropagation(); LM.state.district = f.properties.district; dash.draw('hazard_map'); dash.draw('county_panel'); });
   }
@@ -756,9 +819,9 @@ function lmMap(el, opts) {
     svg.append('g').selectAll('path').data(cs).join('path')
       .attr('class', 'lm-area')
       .attr('d', path)
-      .style('fill', (f) => isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'clan') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
-      .style('fill-opacity', isW ? 1 : 0.8)
-      .on('pointermove', (ev, f) => showTip(ev, `Clan #${f.properties.clan_id} · ${f.properties.area_km2} km² · ${isEv ? 'windstorm events recorded in ' + sel + ' County: ' + evN(sel) : LM.hazardName[hz] + ': ' + (isW ? LM.windFmt(hz, wval(f.properties, 'clan')) : lvl(sel))}`))
+      .style('fill', (f) => isF ? fFill(f.properties, 'clan') : isEv ? LM.evColor(evN(sel)) : isW ? wfill(f.properties, 'clan') : (LM.levelColor[lvl(sel)] || 'var(--color-border-line)'))
+      .style('fill-opacity', isW || isF ? 1 : 0.8)
+      .on('pointermove', (ev, f) => showTip(ev, `Clan #${f.properties.clan_id} · ${f.properties.area_km2} km² · ${isF ? 'Flood exposure: ' + fTxt(f.properties, 'clan') : isEv ? 'windstorm events recorded in ' + sel + ' County: ' + evN(sel) : LM.hazardName[hz] + ': ' + (isW ? LM.windFmt(hz, wval(f.properties, 'clan')) : lvl(sel))}`))
       .on('pointerleave', hideTip)
       .on('click', (ev) => ev.stopPropagation());
   }
@@ -800,7 +863,7 @@ dash.draw('overview_map', (el) => lmMap(el, { hazard: 'dryness', selected: null,
 dash.draw('hazard_map', (el) => lmMap(el, { hazard: LM.state.hazard, selected: LM.state.county, minH: 380, maxH: 580, districts: true, onCounty: (name) => LM.selectCounty(name) }));
 
 dash.draw('county_panel', (el) => {
-  const w = dash.data('county_watch'), dp = dash.data('district_pop'), cp = dash.data('county_pop');
+  const w = dash.data('hazard_watch'), dp = dash.data('district_pop'), cp = dash.data('county_pop'), FA = dash.data('flood_areas');
   el.replaceChildren();
   if (w.status !== 'ok') { el.textContent = w.status === 'error' ? 'Failed to load' : '—'; return; }
   const sel = LM.state.county, dsel = LM.state.district;
@@ -832,10 +895,22 @@ dash.draw('county_panel', (el) => {
       add('dt', 'Households (2008)', dl); mark(add('dd', fmt(Number(d.households2008)), dl), 'district_pop', 'households2008', dw);
       add('dt', 'Area', dl); mark(add('dd', fmt(Number(d.area_km2)) + ' km²', dl), 'district_pop', 'area_km2', dw);
     }
+    if (FA.status === 'ok') {
+      const fk = 'district:' + sel + ':' + dsel, fr = FA.data.find((x) => x.key === fk);
+      if (fr) {
+        const fw = 'key=' + encodeURIComponent(fk);
+        const h = add('p', 'Flood exposure (this district)'); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-sm)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+        const fl = add('dl');
+        const dt = add('dt', 'Level ', fl); const pill = mark(add('span', fr.flood_level, dt), 'flood_areas', 'flood_level', fw); pill.className = 'lm-level'; pill.style.background = LM.levelColor[fr.flood_level];
+        add('dd', `${fmt(fr.rp100_pop)} of ${fmt(fr.pop2025)} people (${fr.rp100_pop_pct}%) in the 1-in-100-year flood zone; ${fmt(fr.rp100_pop_1m)} of them where water would be over 1 m deep.`, fl);
+        add('dt', 'Flood zone area', fl); mark(add('dd', `${fmt(fr.rp100_km2)} km² (${fr.rp100_area_pct}% of the district)`, fl), 'flood_areas', 'rp100_km2', fw);
+        add('dt', 'Smaller and larger floods', fl); add('dd', `1-in-10-year: ${fmt(fr.rp10_pop)} people · 1-in-500-year: ${fmt(fr.rp500_pop)} people`, fl);
+      }
+    }
     const cl = dash.data('clans');
     if (cl.status === 'ok' && cl.data && cl.data.features) {
       const n = cl.data.features.filter((f) => f.properties.district === dsel && f.properties.county === sel).length;
-      const p = add('p', `${n} clans shown on the map. Hover a clan for its size. Clan names will appear once the clan attribute table (.dbf) is loaded; clans use ${sel} County's hazard levels for now.`);
+      const p = add('p', `${n} clans shown on the map. Hover a clan for its size. Clan names will appear once the clan attribute table (.dbf) is loaded; flood exposure is calculated for each clan (hover a clan with Flood exposure selected); dryness and heat use ${sel} County's levels for now.`);
       p.className = 'lm-note'; p.style.marginTop = 'var(--cds-gap-md)';
     }
     const b = add('button', `Back to ${sel} County`); b.type = 'button'; b.className = 'lm-btn'; b.style.marginTop = 'var(--cds-gap-sm)';
@@ -863,7 +938,7 @@ dash.draw('county_panel', (el) => {
   const dl = add('dl');
   [['dryness', 'dryness_basis'], ['flood', 'flood_basis'], ['heat', 'heat_basis']].forEach(([k, b]) => {
     const dt = add('dt', LM.hazardName[k] + ' ', dl);
-    const pill = mark(add('span', r[k], dt), 'county_watch', k, cw); pill.className = 'lm-level'; pill.style.background = LM.levelColor[r[k]];
+    const pill = k === 'flood' ? mark(add('span', r[k], dt), 'flood_areas', 'flood_level', 'key=' + encodeURIComponent('county:' + sel)) : mark(add('span', r[k], dt), 'county_watch', k, cw); pill.className = 'lm-level'; pill.style.background = LM.levelColor[r[k]];
     add('dd', r[b], dl);
   });
   add('dt', 'Confidence', dl); mark(add('dd', r.confidence, dl), 'county_watch', 'confidence', cw);
@@ -903,7 +978,7 @@ dash.draw('county_panel', (el) => {
 });
 
 dash.draw('county_rows', (tb) => {
-  const d = dash.data('county_watch'), cp = dash.data('county_pop');
+  const d = dash.data('hazard_watch'), cp = dash.data('county_pop');
   tb.replaceChildren();
   if (d.status !== 'ok') return;
   const pop = new Map(((cp.status === 'ok' && cp.data) || []).map((x) => [x.county, x.pop2014]));
@@ -924,6 +999,14 @@ dash.draw('county_rows', (tb) => {
 
 dash.draw('exposure_title', (el) => {
   if (LM.isWind(LM.state.hazard)) { el.textContent = 'People by hazard level'; return; }
+  if (LM.state.hazard === 'flood') {
+    const F = dash.data('flood_areas');
+    if (F.status !== 'ok') { el.textContent = '—'; return; }
+    const cs = F.data.filter((x) => x.level === 'county');
+    const p = d3.sum(cs, (x) => x.rp100_pop), t = d3.sum(cs, (x) => x.pop2025);
+    el.textContent = `About ${d3.format(',')(Math.round(p / 1000) * 1000)} people (${Math.round(p / t * 100)}% of Liberia) live in the 1-in-100-year river flood zone`;
+    return;
+  }
   const d = dash.data('exposed_pop');
   const r = d.status === 'ok' ? d.data.find((x) => x.hazard === LM.state.hazard && x.level === 'Warning') : null;
   const h = LM.hazardName[LM.state.hazard].toLowerCase();
@@ -932,9 +1015,14 @@ dash.draw('exposure_title', (el) => {
 
 dash.draw('exposure_chart', (el) => {
   if (LM.isWind(LM.state.hazard)) { el.replaceChildren(); return; }
-  const d = dash.data('exposed_pop');
+  const isF = LM.state.hazard === 'flood';
+  const d = dash.data(isF ? 'flood_areas' : 'exposed_pop');
   if (d.status !== 'ok' || !d.data.length) return lmEmpty(el, d.status, 140);
-  const rows = ['Warning', 'Watch', 'Low'].map((lv) => d.data.find((x) => x.hazard === LM.state.hazard && x.level === lv) || { level: lv, pop2014: 0, share: 0 });
+  let rows;
+  if (isF) {
+    const cs = d.data.filter((x) => x.level === 'county'), t = d3.sum(cs, (x) => x.pop2025);
+    rows = [[10, '#9ecae1'], [100, '#4292c6'], [500, '#08519c']].map(([rp, col]) => { const v = d3.sum(cs, (x) => x['rp' + rp + '_pop']); return { level: `1-in-${rp}-year`, pop2014: v, share: Math.round(v / t * 100), color: col }; });
+  } else rows = ['Warning', 'Watch', 'Low'].map((lv) => d.data.find((x) => x.hazard === LM.state.hazard && x.level === lv) || { level: lv, pop2014: 0, share: 0 });
   const W = el.clientWidth, bh = 28, gap = 10, H = rows.length * (bh + gap);
   el.replaceChildren();
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', H).attr('viewBox', `0 0 ${W} ${H}`)
@@ -948,8 +1036,8 @@ dash.draw('exposure_chart', (el) => {
   const tip = LM.tip(el);
   rows.forEach((r, i) => {
     const yy = i * (bh + gap);
-    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.pop2014 > 0 ? 2 : 0, x(r.pop2014) - x(0))).style('fill', LM.levelColor[r.level])
-      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = `${r.level}: ${vals[i]} of Liberia's people`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
+    svg.append('rect').attr('x', x(0)).attr('y', yy).attr('height', bh).attr('rx', 3).attr('width', Math.max(r.pop2014 > 0 ? 2 : 0, x(r.pop2014) - x(0))).style('fill', r.color || LM.levelColor[r.level])
+      .on('pointermove', (ev) => { const [px, py] = d3.pointer(ev, el); tip.textContent = isF ? `${r.level} flood zone: ${vals[i]} of Liberia's people` : `${r.level}: ${vals[i]} of Liberia's people`; tip.hidden = false; LM.placeTip(el, tip, px, py); })
       .on('pointerleave', () => { tip.hidden = true; });
     svg.append('text').attr('class', 'lm-val').attr('x', x(r.pop2014) + 6).attr('y', yy + bh / 2 + 4).text(vals[i]);
   });
@@ -1656,6 +1744,150 @@ dash.draw('faomap_rows', (tb) => {
     cell(r.district).style.fontWeight = 'var(--cds-font-weight-medium)'; cell(r.county);
     const s = cell(String(r.index_est)); s.style.color = r.index_est >= 55 ? 'var(--color-bad)' : r.index_est >= 25 ? 'var(--color-warn)' : '';
     cell(r.stressed_pct + '%'); cell(d3.format(',')(Math.round(r.crop_px * LMM.PXKM2))); cell(r.hdf_pct == null ? '—' : `about ${r.hdf_pct}%`);
+    tb.appendChild(tr);
+  });
+});
+
+})();</script>
+<script>(function () {
+
+window.LMFL = {
+  rp: 100, districts: true, t: null, click: null,
+  DEPTH: { 1: 'Under 1 m of water', 2: '1–3 m of water', 3: '3–10 m of water', 4: 'Over 10 m of water', 5: 'River or lake (permanent water)', 0: 'Outside the flood zone' },
+  PAL: [[158, 202, 225, 1], [66, 146, 198, 2], [8, 81, 156, 3], [8, 48, 107, 4], [120, 120, 120, 5]],
+  canvases: new Map(),
+  classAt(src, w, h, px, py, done) {
+    const read = (cv) => {
+      if (px < 0 || py < 0 || px >= w || py >= h) return done(0);
+      const d = cv.getContext('2d').getImageData(px, py, 1, 1).data;
+      if (d[3] < 128) return done(0);
+      let best = 0, bd = 1e9; LMFL.PAL.forEach(([r, g, b, k]) => { const e = (r - d[0]) ** 2 + (g - d[1]) ** 2 + (b - d[2]) ** 2; if (e < bd) { bd = e; best = k; } });
+      done(bd < 300 ? best : 0);
+    };
+    const c = LMFL.canvases.get(src);
+    if (c) return read(c);
+    const img = new Image(); img.onload = () => { const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d', { willReadFrequently: true }).drawImage(img, 0, 0); LMFL.canvases.set(src, cv); read(cv); }; img.src = src;
+  },
+  sync() {
+    document.querySelectorAll('[data-flood-rp]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-flood-rp')) === LMFL.rp)));
+    ['floodmap', 'floodmap_info', 'flood_rows'].forEach((n) => dash.draw(n));
+  }
+};
+(function initFloodMap() {
+  document.querySelectorAll('[data-flood-rp]').forEach((b) => b.addEventListener('click', () => { LMFL.rp = Number(b.getAttribute('data-flood-rp')); if (LMFL.click) LMFL.click = null; LMFL.sync(); }));
+  document.querySelectorAll('#floodmap-districts').forEach((c) => c.addEventListener('change', () => { LMFL.districts = c.checked; dash.draw('floodmap'); }));
+})();
+
+dash.draw('floodmap', {
+  mount(el) {
+    el.replaceChildren(); el.style.position = 'relative';
+    const svg = d3.select(el).append('svg').attr('role', 'img').style('width', '100%').style('display', 'block').style('touch-action', 'none').style('cursor', 'crosshair').style('background', 'var(--color-panel)').style('border-radius', 'var(--cds-radius)');
+    const g = svg.append('g'); const image = g.append('image').attr('preserveAspectRatio', 'none').style('image-rendering', 'pixelated');
+    const over = g.append('g');
+    const msg = d3.select(el).append('p').attr('class', 'lm-note').style('min-height', '280px').style('margin', '0');
+    const tip = document.createElement('div'); tip.className = 'lm-tip'; tip.hidden = true; el.appendChild(tip);
+    const btns = d3.select(el).append('div').style('position', 'absolute').style('top', '8px').style('left', '8px').style('display', 'flex').style('flex-direction', 'column').style('gap', '4px');
+    const made = { svg, g, image, over, msg, tip, btns, zoom: null, m: null };
+    [['+', 1.6], ['−', 1 / 1.6], ['⤢', 0]].forEach(([t, f]) => {
+      btns.append('button').attr('type', 'button').attr('class', 'lm-btn').attr('aria-label', f === 0 ? 'Reset zoom' : f > 1 ? 'Zoom in' : 'Zoom out')
+        .style('width', '30px').style('padding', '2px 0').style('background', 'var(--color-panel)').text(t)
+        .on('click', () => { if (!made.zoom) return; if (f === 0) svg.transition().duration(300).call(made.zoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(made.zoom.scaleBy, f); });
+    });
+    const where = (ev) => {
+      const m = made.m; if (!m) return null;
+      const [ux, uy] = d3.pointer(ev, svg.node()); const [x, y] = (LMFL.t || d3.zoomIdentity).invert([ux, uy]);
+      const spanX = m.bbox[2] - m.bbox[0], spanY = m.bbox[3] - m.bbox[1];
+      if (x < 0 || y < 0 || x > spanX || y > spanY) return null;
+      return { lon: m.bbox[0] + x, lat: m.bbox[3] - y, px: Math.floor(x / spanX * m.width), py: Math.floor(y / spanY * m.height) };
+    };
+    const src = () => made.m ? made.m.images[String(LMFL.rp)] : null;
+    svg.on('pointermove', (ev) => {
+      const p = where(ev); if (!p) { tip.hidden = true; return; }
+      LMFL.classAt(src(), made.m.width, made.m.height, p.px, p.py, (k) => { tip.textContent = LMFL.DEPTH[k] || '—'; tip.hidden = false; const [qx, qy] = d3.pointer(ev, el); LM.placeTip(el, tip, qx, qy + 14); });
+    }).on('pointerleave', () => { tip.hidden = true; })
+      .on('click', (ev) => {
+        const p = where(ev); if (!p) return;
+        LMFL.classAt(src(), made.m.width, made.m.height, p.px, p.py, (k) => { LMFL.click = { lon: p.lon, lat: p.lat, cls: k, rp: LMFL.rp }; dash.draw('floodmap'); dash.draw('floodmap_info'); });
+      });
+    return made;
+  },
+  update(el, made) {
+    const d = dash.data('flood_map');
+    if (d.status !== 'ok' || !d.data || !d.data.images) {
+      made.svg.style('display', 'none'); made.btns.style('display', 'none');
+      made.msg.style('display', null).classed('dash-skeleton', d.status === 'loading').text(d.status === 'error' ? 'Failed to load' : d.status === 'loading' ? '' : '—');
+      return;
+    }
+    made.msg.style('display', 'none'); made.svg.style('display', null); made.btns.style('display', 'flex');
+    const m = d.data; made.m = m;
+    const spanX = m.bbox[2] - m.bbox[0], spanY = m.bbox[3] - m.bbox[1];
+    const W = el.clientWidth || 500, H = W * spanY / spanX, k0 = W / spanX;
+    made.svg.attr('viewBox', `0 0 ${spanX} ${spanY}`).style('height', H + 'px')
+      .attr('aria-label', `Map of where a 1-in-${LMFL.rp}-year river flood would reach in Liberia and how deep it would be`);
+    made.image.attr('href', m.images[String(LMFL.rp)]).attr('width', spanX).attr('height', spanY);
+    const proj = d3.geoTransform({ point(lon, lat) { this.stream.point(lon - m.bbox[0], m.bbox[3] - lat); } });
+    const path = d3.geoPath(proj);
+    made.over.selectAll('*').remove();
+    const dd = dash.data('districts'), cc = dash.data('counties');
+    if (LMFL.districts && dd.status === 'ok' && dd.data && dd.data.features)
+      made.over.append('g').selectAll('path').data(dd.data.features).join('path').attr('d', path).attr('fill', 'none').style('stroke', 'var(--color-fg)').style('stroke-opacity', 0.35).attr('stroke-width', 0.6).attr('vector-effect', 'non-scaling-stroke');
+    if (cc.status === 'ok' && cc.data && cc.data.features)
+      made.over.append('g').selectAll('path').data(cc.data.features).join('path').attr('d', path).attr('fill', 'none').style('stroke', 'var(--color-fg)').style('stroke-opacity', 0.8).attr('stroke-width', 1.4).attr('vector-effect', 'non-scaling-stroke');
+    if (LMFL.click) made.over.append('circle').attr('class', 'lm-fm-dot').attr('cx', LMFL.click.lon - m.bbox[0]).attr('cy', m.bbox[3] - LMFL.click.lat).attr('r', 6 / k0).style('fill', 'none').style('stroke', '#BF0A30').attr('stroke-width', 3).attr('vector-effect', 'non-scaling-stroke');
+    const apply = (t) => { LMFL.t = t; made.g.attr('transform', t); made.over.selectAll('circle.lm-fm-dot').attr('r', 6 / k0 / t.k); };
+    if (!made.zoom) {
+      made.zoom = d3.zoom().scaleExtent([1, 24]).extent([[0, 0], [spanX, spanY]]).translateExtent([[0, 0], [spanX, spanY]]).on('zoom', (ev) => apply(ev.transform));
+      made.svg.call(made.zoom).on('dblclick.zoom', null);
+      made.svg.call(made.zoom.transform, LMFL.t || d3.zoomIdentity);
+    } else apply(LMFL.t || d3.zoomIdentity);
+  }
+});
+
+dash.draw('floodmap_info', (el) => {
+  el.replaceChildren();
+  const add = (tag, text, parent) => { const e = document.createElement(tag); if (text != null) e.textContent = text; (parent || el).appendChild(e); return e; };
+  const c = LMFL.click;
+  if (!c) { add('p', 'Click the map to see the flood depth at a spot and how many people live in the flood zone of its district and clan.').className = 'lm-note'; return; }
+  add('h3', LMFL.DEPTH[c.cls] || '—').style.fontSize = '1.2rem';
+  add('p', `${Math.abs(c.lat).toFixed(3)}°N, ${Math.abs(c.lon).toFixed(3)}°W · in a 1-in-${c.rp}-year river flood`).className = 'lm-note';
+  const dd = dash.data('districts'), cl = dash.data('clans'), A = dash.data('flood_areas');
+  if (dd.status !== 'ok' || !dd.data || A.status !== 'ok') return;
+  const pt = [c.lon, c.lat];
+  const dist = dd.data.features.find((f) => d3.geoContains(f, pt));
+  if (!dist) { add('p', 'Outside Liberia\'s districts.').className = 'lm-note'; return; }
+  const rows = new Map(A.data.map((r) => [r.key, r]));
+  const fmt = d3.format(','), rp = c.rp;
+  const block = (title, key) => {
+    const r = rows.get(key); if (!r) return;
+    const h = add('p', title); h.style.margin = 'var(--cds-gap-md) 0 var(--cds-gap-xs)'; h.style.fontWeight = 'var(--cds-font-weight-medium)';
+    const dl = add('dl'); const wk = 'key=' + encodeURIComponent(key);
+    const mk = (e, f) => { e.setAttribute('data-source', 'flood_areas'); e.setAttribute('data-field', f); e.setAttribute('data-where', wk); return e; };
+    const dt = add('dt', 'Flood exposure ', dl); const pill = mk(add('span', r.flood_level, dt), 'flood_level'); pill.className = 'lm-level'; pill.style.background = LM.levelColor[r.flood_level];
+    add('dd', 'based on the 1-in-100-year flood zone', dl);
+    add('dt', 'People in the flood zone', dl); mk(add('dd', `${fmt(r['rp' + rp + '_pop'])} of ${fmt(r.pop2025)} (${r['rp' + rp + '_pop_pct']}%)`, dl), 'rp' + rp + '_pop');
+    add('dt', 'Of them, in water over 1 m', dl); mk(add('dd', fmt(r['rp' + rp + '_pop_1m']), dl), 'rp' + rp + '_pop_1m');
+    add('dt', 'Flood zone area', dl); mk(add('dd', `${fmt(r['rp' + rp + '_km2'])} km² (${r['rp' + rp + '_area_pct']}% of the land)`, dl), 'rp' + rp + '_km2');
+  };
+  const p = dist.properties;
+  block(`${p.district} District, ${p.county} County`, `district:${p.county}:${p.district}`);
+  if (cl.status === 'ok' && cl.data && cl.data.features) {
+    const clan = cl.data.features.find((f) => f.properties.district === p.district && f.properties.county === p.county && d3.geoContains(f, pt));
+    if (clan) block(`Clan #${clan.properties.clan_id} (name pending)`, `clan:${p.county}:${p.district}:${clan.properties.clan_id}`);
+  } else if (cl.status === 'loading') add('p', 'Loading clan boundaries…').className = 'lm-note';
+  const n = add('p', 'People from WorldPop 2025 (100 m). Figures for Greater Monrovia and river mouths are upper bounds.'); n.className = 'lm-note'; n.style.marginTop = 'var(--cds-gap-sm)';
+});
+
+dash.draw('flood_rows', (tb) => {
+  const A = dash.data('flood_areas');
+  tb.replaceChildren();
+  if (A.status !== 'ok') return;
+  const rp = LMFL.rp, fmt = d3.format(',');
+  A.data.filter((r) => r.level === 'district').sort((a, b) => b['rp' + rp + '_pop'] - a['rp' + rp + '_pop']).slice(0, 15).forEach((r) => {
+    const tr = document.createElement('tr'); tr.setAttribute('data-key', encodeURIComponent(r.key));
+    const cell = (t) => { const td = document.createElement('td'); td.textContent = t; td.style.fontVariantNumeric = 'tabular-nums'; tr.appendChild(td); return td; };
+    cell(r.district).style.fontWeight = 'var(--cds-font-weight-medium)'; cell(r.county);
+    cell(fmt(r['rp' + rp + '_pop'])); cell(r['rp' + rp + '_pop_pct'] + '%'); cell(fmt(r['rp' + rp + '_pop_1m'])); cell(fmt(r['rp' + rp + '_km2']) + ' km²');
+    const td = cell(''); const s = document.createElement('span'); s.className = 'lm-level'; s.style.background = LM.levelColor[r.flood_level]; s.textContent = r.flood_level; td.appendChild(s);
     tb.appendChild(tr);
   });
 });
