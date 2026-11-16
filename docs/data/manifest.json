@@ -17,8 +17,8 @@
   "file": "data/county_watch.json",
   "title": "County hazard watch",
   "description": "Dryness level per county from FAO's Agricultural Stress Index (Warning at 25%+ of cropland stressed, Watch at 10–25%); flood and heat levels are Claude's reading of NOAA/FEWS NET and AGRHYMET bulletins.",
-  "updated": "2026-11-12T02:25:00Z",
-  "sha": "33dc20e3276a250b"
+  "updated": "2026-11-16T09:59:34Z",
+  "sha": "8747851715bea48f"
  },
  "district_pop": {
   "file": "data/district_pop.json",
@@ -52,29 +52,29 @@
   "file": "data/fao_county.json",
   "title": "FAO drought indicators by county",
   "description": "Latest FAO ASIS Agricultural Stress Index, Vegetation Health Index and satellite rainfall (since 1 March and last 30 days, vs long-term average) for each county.",
-  "updated": "2026-11-12T02:25:00Z",
-  "sha": "affb73e3acae5f1e"
+  "updated": "2026-11-16T09:59:34Z",
+  "sha": "192ed079b15bc9c7"
  },
  "fao_map": {
   "file": "data/fao_map.json",
   "title": "FAO crop stress map (1 km)",
   "description": "FAO ASIS Agricultural Stress Index for Liberia's cropland at 1 km, last 12 ten-day periods, plus Historic Agricultural Drought Frequency (1984–2025), as images built from FAO's map service.",
-  "updated": "2026-11-12T15:38:58Z",
-  "sha": "9f618589b01f97c1"
+  "updated": "2026-11-16T09:59:34Z",
+  "sha": "c7dabc7e6362a357"
  },
  "fao_map_areas": {
   "file": "data/fao_map_areas.json",
   "title": "Crop stress by county, district and clan (estimated)",
   "description": "Estimated from FAO's 1 km map for the latest 10 days: cropland in season, share stressed (25%+ class), average stress class, and drought frequency since 1984, per LISGIS county, district and clan.",
-  "updated": "2026-11-12T15:38:58Z",
-  "sha": "514fe4d0e5444400"
+  "updated": "2026-11-16T09:59:34Z",
+  "sha": "624ebe84b3217c4c"
  },
  "fao_rain": {
   "file": "data/fao_rain.json",
   "title": "FAO rainfall every 10 days, 2026",
   "description": "Satellite rainfall estimate per county for each 10-day period of the current year, with the long-term average, from FAO ASIS.",
-  "updated": "2026-11-12T02:25:00Z",
-  "sha": "f7f61ec9e56562d6"
+  "updated": "2026-11-16T09:59:34Z",
+  "sha": "e5e27a0ba2827e4d"
  },
  "liberia_hazards": {
   "file": "data/liberia_hazards.json",
