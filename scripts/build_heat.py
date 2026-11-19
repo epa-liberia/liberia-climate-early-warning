@@ -8,9 +8,9 @@ the daily figure is the day's highest hour (UTC, which is Liberia's time).
 
 Normal for each place: the 90th percentile of the daily maximum heat index in the same calendar month, 2011-2025,
 from ERA5 reanalysis (Open-Meteo historical API), at the same district point. Worked out once per month and kept in
-heat_baseline.json. Each run compares the forecast models with ERA5 on the same recent days (ERA5 arrives about
-5 days late) and shifts each district's normal by the difference, so a model running warmer than ERA5 does not show
-as unusual heat. Liberia is humid, so a heat index of 38-40 °C is ordinary on the coast in the dry season: the
+heat_baseline.json. The normal is then shifted by the average difference between the forecast models and ERA5 in the
+same month of 2023-2025 (Open-Meteo historical forecast API), so a model that runs warmer than ERA5 does not show as
+unusual heat. Liberia is humid, so a heat index of 38-40 °C is ordinary on the coast in the dry season: the
 levels therefore ask for heat that is both unusual for the place and dangerous.
 
 Levels (provisional, for agreement with LiMet and the Ministry of Health):
@@ -98,31 +98,42 @@ for m in need:
     print("baseline month", key_m, "built from", len(BASE_YEARS), "years")
 bp.write_text(json.dumps(base, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
-# Model bias: the forecast models and ERA5 differ (resolution, humidity). Compare them on the same recent days
-# (ERA5 arrives about 5 days late) and shift each district's normal by the difference, so "unusual" is not an artefact.
-recent = {}
-bstart, bend = today - datetime.timedelta(days=14), today - datetime.timedelta(days=6)
-for i in range(0, len(pts), B):
-    chunk = pts[i:i + B]
-    q = urllib.parse.urlencode({"latitude": ",".join(str(p["lat"]) for p in chunk), "longitude": ",".join(str(p["lon"]) for p in chunk),
-                                "hourly": "temperature_2m,relative_humidity_2m", "start_date": bstart.isoformat(), "end_date": bend.isoformat(), "timezone": "GMT"})
-    res = get("https://archive-api.open-meteo.com/v1/archive?" + q)
-    if isinstance(res, dict): res = [res]
-    for p, r in zip(chunk, res): recent[f"{p['county']}:{p['district']}"] = {d: v[0] for d, v in daily_max(r["hourly"]).items()}
-    time.sleep(1)
+# Model bias: today's forecast models and ERA5 differ (resolution, humidity). Open-Meteo keeps past forecasts
+# (historical forecast API, from 2022), so for the same month of 2023-2025 we compare the forecast models with ERA5
+# day by day at each district point, and shift each district's normal by the average difference. Kept per month.
+for m in need:
+    key_b = f"bias_{m:02d}"
+    if key_b in base and len(base[key_b]) >= 150: continue
+    diffs = {f"{p['county']}:{p['district']}": [] for p in pts}
+    for y in (2023, 2024, 2025):
+        start = datetime.date(y, m, 1); end = (datetime.date(y + (m == 12), m % 12 + 1, 1) - datetime.timedelta(days=1))
+        for i in range(0, len(pts), B):
+            chunk = pts[i:i + B]
+            q = urllib.parse.urlencode({"latitude": ",".join(str(p["lat"]) for p in chunk), "longitude": ",".join(str(p["lon"]) for p in chunk),
+                                        "hourly": "temperature_2m,relative_humidity_2m", "start_date": start.isoformat(), "end_date": end.isoformat(), "timezone": "GMT"})
+            fc = get("https://historical-forecast-api.open-meteo.com/v1/forecast?" + q); time.sleep(1)
+            er = get("https://archive-api.open-meteo.com/v1/archive?" + q); time.sleep(1)
+            if isinstance(fc, dict): fc = [fc]
+            if isinstance(er, dict): er = [er]
+            for p, f1, e1 in zip(chunk, fc, er):
+                a1, b1 = daily_max(f1["hourly"]), daily_max(e1["hourly"])
+                diffs[f"{p['county']}:{p['district']}"] += [a1[d][0] - b1[d][0] for d in a1 if d in b1]
+    base[key_b] = {k: {"bias": round(sum(v) / len(v), 2) if v else 0.0, "n": len(v)} for k, v in diffs.items()}
+    print("bias month", f"{m:02d}", "from 2023-2025")
+bp.write_text(json.dumps(base, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 daily, rows = [], []
 for i in range(0, len(pts), B):
     chunk = pts[i:i + B]
     q = urllib.parse.urlencode({"latitude": ",".join(str(p["lat"]) for p in chunk), "longitude": ",".join(str(p["lon"]) for p in chunk),
-                                "hourly": "temperature_2m,relative_humidity_2m", "past_days": 14, "forecast_days": 8, "timezone": "GMT"})
+                                "hourly": "temperature_2m,relative_humidity_2m", "past_days": 7, "forecast_days": 8, "timezone": "GMT"})
     res = get("https://api.open-meteo.com/v1/forecast?" + q)
     if isinstance(res, dict): res = [res]
     for p, r in zip(chunk, res):
         byday = daily_max(r["hourly"]); kd = f"{p['county']}:{p['district']}"
-        pairs = [(byday[d][0], v) for d, v in recent.get(kd, {}).items() if d in byday]
-        bias = round(sum(a - b for a, b in pairs) / len(pairs), 1) if len(pairs) >= 5 else 0.0
-        def p90(d): b = base.get(d[5:7], {}).get(kd); return round(b["p90"] + bias, 1) if b else None
+        def bias_for(d): return base.get("bias_" + d[5:7], {}).get(kd, {}).get("bias", 0.0)
+        def p90(d): b = base.get(d[5:7], {}).get(kd); return round(b["p90"] + bias_for(d), 1) if b else None
+        bias = round(bias_for(today.isoformat()), 1); nb = base.get("bias_" + today.strftime("%m"), {}).get(kd, {}).get("n", 0)
         past = [(d, v) for d, v in sorted(byday.items()) if d < today.isoformat()][-7:]
         fut = [(d, v) for d, v in sorted(byday.items()) if d >= today.isoformat()][:7]
         for d, (hi, tc, rh) in past + fut:
@@ -139,7 +150,7 @@ for i in range(0, len(pts), B):
                      "lat": p["lat"], "lon": p["lon"], "pop2022": pop.get((p["county"], p["district"])),
                      "hi_max_past7": round(pmax, 1) if pmax is not None else None, "hi_max_next7": round(fmax, 1) if fmax is not None else None,
                      "peak_date": peak[0] if peak else None, "normal_p90_month": round(b0["p90"] + bias, 1) if b0.get("p90") is not None else None,
-                     "normal_p50_month": round(b0["p50"] + bias, 1) if b0.get("p50") is not None else None, "model_bias_c": bias, "bias_days": len(pairs),
+                     "normal_p50_month": round(b0["p50"] + bias, 1) if b0.get("p50") is not None else None, "model_bias_c": bias, "bias_days": nb,
                      "days_unusual_next7": len(unusual), "days_ge41_next7": n41, "days_unusual_and_ge41_next7": len(both),
                      "category_next7": category(fmax), "heat_level": level})
     time.sleep(1)
