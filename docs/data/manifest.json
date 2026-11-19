@@ -185,15 +185,15 @@
   "file": "data/heat_baseline.json",
   "title": "Normal heat index by district and month",
   "description": "90th and 50th percentile of each district's daily maximum heat index in each calendar month, 2011-2025 (ERA5 reanalysis via Open-Meteo).",
-  "updated": "2026-11-19T09:37Z",
-  "sha": "5fcfcbab29964c55"
+  "updated": "2026-11-19T09:52:20Z",
+  "sha": "dc33518134f58251"
  },
  "heat_areas": {
   "file": "data/heat_areas.json",
   "title": "Heat index by county and district",
   "description": "Highest heat index (temperature and humidity together) in the past 7 and next 7 days for every district, with provisional heat levels; counties by the share of residents in districts at each level. Open-Meteo weather models, NOAA heat index.",
-  "updated": "2026-11-19T09:40:30Z",
-  "sha": "a89713959fb5c32e"
+  "updated": "2026-11-19T09:52:20Z",
+  "sha": "1a3141640c46fece"
  },
  "heat_daily": {
   "file": "data/heat_daily.json",
