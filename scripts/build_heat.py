@@ -6,7 +6,7 @@ available weather models (ECMWF, GFS and others, about 10 km), at one point insi
 Heat index: NOAA formula (Rothfusz regression with NOAA's adjustments), from each hour's temperature and humidity;
 the daily figure is the day's highest hour (UTC, which is Liberia's time).
 
-Normal for each place: the 90th percentile of the daily maximum heat index in the same calendar month, 2011-2025,
+Normal for each place: the 90th percentile of the daily maximum heat index in the same half month (days 1-15 or 16-end), 2011-2025,
 from ERA5 reanalysis (Open-Meteo historical API), at the same district point. Worked out once per month and kept in
 heat_baseline.json. The normal is then shifted by the average difference between the forecast models and ERA5 in the
 same month of 2023-2025 (Open-Meteo historical forecast API), so a model that runs warmer than ERA5 does not show as
@@ -76,11 +76,13 @@ def daily_max(h):
 # Normal for each district and month (ERA5, 2011-2025), kept between runs.
 bp = OUT / "heat_baseline.json"
 base = json.loads(bp.read_text(encoding="utf-8")) if bp.exists() else {}
+# Late November is hotter than early November, so the normal is kept per half month (days 1-15 and 16-end).
+def half(d): return f"{d[5:7]}{'a' if int(d[8:10]) <= 15 else 'b'}"
 need = sorted({(today + datetime.timedelta(days=k)).month for k in range(8)})
 for m in need:
     key_m = f"{m:02d}"
-    if key_m in base and len(base[key_m]) >= 150: continue
-    vals = {f"{p['county']}:{p['district']}": [] for p in pts}
+    if f"{key_m}a" in base and len(base[f"{key_m}a"]) >= 150: continue
+    vals = {f"{p['county']}:{p['district']}": {"a": [], "b": []} for p in pts}
     for y in BASE_YEARS:
         start = datetime.date(y, m, 1); end = (datetime.date(y + (m == 12), m % 12 + 1, 1) - datetime.timedelta(days=1))
         for i in range(0, len(pts), B):
@@ -90,11 +92,12 @@ for m in need:
             res = get("https://archive-api.open-meteo.com/v1/archive?" + q)
             if isinstance(res, dict): res = [res]
             for p, r in zip(chunk, res):
-                vals[f"{p['county']}:{p['district']}"] += [v[0] for v in daily_max(r["hourly"]).values()]
+                for d, v in daily_max(r["hourly"]).items(): vals[f"{p['county']}:{p['district']}"][half(d)[-1]].append(v[0])
             time.sleep(1)
     def pct(a, q):
         a = sorted(a); return round(a[min(len(a) - 1, int(q * (len(a) - 1) + 0.5))], 1) if a else None
-    base[key_m] = {k: {"p50": pct(v, 0.5), "p90": pct(v, 0.9), "n": len(v)} for k, v in vals.items()}
+    for hh in "ab": base[key_m + hh] = {k: {"p50": pct(v[hh], 0.5), "p90": pct(v[hh], 0.9), "n": len(v[hh])} for k, v in vals.items()}
+    base.pop(key_m, None)
     print("baseline month", key_m, "built from", len(BASE_YEARS), "years")
 bp.write_text(json.dumps(base, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -132,7 +135,7 @@ for i in range(0, len(pts), B):
     for p, r in zip(chunk, res):
         byday = daily_max(r["hourly"]); kd = f"{p['county']}:{p['district']}"
         def bias_for(d): return base.get("bias_" + d[5:7], {}).get(kd, {}).get("bias", 0.0)
-        def p90(d): b = base.get(d[5:7], {}).get(kd); return round(b["p90"] + bias_for(d), 1) if b else None
+        def p90(d): b = base.get(half(d), {}).get(kd); return round(b["p90"] + bias_for(d), 1) if b else None
         bias = round(bias_for(today.isoformat()), 1); nb = base.get("bias_" + today.strftime("%m"), {}).get(kd, {}).get("n", 0)
         past = [(d, v) for d, v in sorted(byday.items()) if d < today.isoformat()][-7:]
         fut = [(d, v) for d, v in sorted(byday.items()) if d >= today.isoformat()][:7]
@@ -144,7 +147,7 @@ for i in range(0, len(pts), B):
         both = [d for d, v in fut if p90(d) is not None and v[0] > p90(d) and v[0] >= DANGER]
         n41 = sum(1 for _, v in fut if v[0] >= DANGER)
         level = "Warning" if len(both) >= DAYS else "Watch" if (len(unusual) >= DAYS or n41 >= 1) else "Low"
-        b0 = base.get(today.strftime("%m"), {}).get(kd, {})
+        b0 = base.get(half(today.isoformat()), {}).get(kd, {})
         peak = max(fut, key=lambda x: x[1][0]) if fut else None
         rows.append({"key": f"district:{p['county']}:{p['district']}", "level": "district", "county": p["county"], "district": p["district"],
                      "lat": p["lat"], "lon": p["lon"], "pop2022": pop.get((p["county"], p["district"])),
