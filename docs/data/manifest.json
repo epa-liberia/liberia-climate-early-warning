@@ -192,14 +192,14 @@
   "file": "data/heat_areas.json",
   "title": "Heat index by county and district",
   "description": "Highest heat index (temperature and humidity together) in the past 7 and next 7 days for every district, with provisional heat levels; counties by the share of residents in districts at each level. Open-Meteo weather models, NOAA heat index.",
-  "updated": "2026-11-19T10:19:48Z",
-  "sha": "8a35506013e5b148"
+  "updated": "2026-11-20T07:33:50Z",
+  "sha": "8168925bf4eca15f"
  },
  "heat_daily": {
   "file": "data/heat_daily.json",
   "title": "Daily heat index by district",
   "description": "Each district's highest hourly heat index for each of the past 7 and next 7 days (Open-Meteo weather models, NOAA heat index).",
-  "updated": "2026-11-19T10:19:48Z",
-  "sha": "ab7c2d2d1c17f7c3"
+  "updated": "2026-11-20T07:33:50Z",
+  "sha": "ac27383198a71ba2"
  }
 }
