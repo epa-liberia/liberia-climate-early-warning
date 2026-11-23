@@ -38,8 +38,8 @@
   "file": "data/enso_status.json",
   "title": "NOAA ENSO status",
   "description": "ENSO alert status, synopsis and dates from CPC's latest monthly ENSO Diagnostic Discussion, with the latest RONI season and weekly reading dates.",
-  "updated": "2026-11-16T18:38:40Z",
-  "sha": "c3f59a9382b67f8c"
+  "updated": "2026-11-23T18:42:03Z",
+  "sha": "469fb5da6c88c8f1"
  },
  "fao_asi_annual": {
   "file": "data/fao_asi_annual.json",
@@ -94,8 +94,8 @@
   "file": "data/nino_regions.json",
   "title": "Weekly Niño region anomalies",
   "description": "Latest weekly sea-surface temperature anomaly per Niño region (OISST v2.1, 1991–2020 base), from CPC's wksst9120.for.",
-  "updated": "2026-11-16T18:38:40Z",
-  "sha": "84975e131b5cbc65"
+  "updated": "2026-11-23T18:42:03Z",
+  "sha": "6c3f767017b7eda6"
  },
  "ocean_pacific": {
   "file": "data/ocean_pacific.json",
