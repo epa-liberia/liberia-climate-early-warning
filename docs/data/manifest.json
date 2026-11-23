@@ -59,8 +59,8 @@
   "file": "data/fao_map.json",
   "title": "FAO crop stress map (1 km)",
   "description": "FAO ASIS Agricultural Stress Index for Liberia's cropland at 1 km, last 12 ten-day periods, plus Historic Agricultural Drought Frequency (1984–2025), as images built from FAO's map service.",
-  "updated": "2026-11-16T09:59:34Z",
-  "sha": "c7dabc7e6362a357"
+  "updated": "2026-11-23T08:55:16Z",
+  "sha": "d3ca725e58999a7c"
  },
  "fao_map_areas": {
   "file": "data/fao_map_areas.json",
