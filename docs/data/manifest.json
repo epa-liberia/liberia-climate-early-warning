@@ -101,15 +101,15 @@
   "file": "data/ocean_pacific.json",
   "title": "Ocean warmth, Pacific to Gulf of Guinea",
   "description": "Last 30 days of NASA GHRSST MUR sea-surface temperature anomaly images (120°E–20°E, 25°S–25°N) with a 1° grid of values decoded from NASA's colour table.",
-  "updated": "2026-11-24T06:25:50Z",
-  "sha": "f1c6e20b20c2aefe"
+  "updated": "2026-11-25T06:26:04Z",
+  "sha": "08ae7aac8962aee2"
  },
  "ocean_wafrica": {
   "file": "data/ocean_wafrica.json",
   "title": "Ocean warmth, Liberia and Gulf of Guinea",
   "description": "Last 30 days of NASA GHRSST MUR sea-surface temperature anomaly images (25°W–15°E, 5°S–20°N) with a 0.25° grid of values decoded from NASA's colour table.",
-  "updated": "2026-11-24T06:25:50Z",
-  "sha": "5a391f7c78db63f6"
+  "updated": "2026-11-25T06:26:04Z",
+  "sha": "c9a2340f6e57cbb8"
  },
  "outlook": {
   "file": "data/outlook.json",
@@ -122,8 +122,8 @@
   "file": "data/rain_wafrica.json",
   "title": "Rainfall, Liberia and Gulf of Guinea",
   "description": "Last 30 days of NASA GPM IMERG daily precipitation-rate images (25°W–15°E, 5°S–20°N) with a 0.25° grid of values decoded from NASA's colour table.",
-  "updated": "2026-11-24T06:25:50Z",
-  "sha": "77d46ed1fbe20104"
+  "updated": "2026-11-25T06:26:04Z",
+  "sha": "af06f587f6e0a624"
  },
  "roni": {
   "file": "data/roni.json",
