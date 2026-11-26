@@ -6,7 +6,7 @@ root = pathlib.Path(__file__).resolve().parent.parent
 src = (root / "page" / "index.html").read_text(encoding="utf-8")
 src = src.replace('<meta name="dash-one-writer">', "")
 # Images stored as Claude artifact assets are served from docs/assets on the public site.
-ASSETS = {"/_blob/4eb17e335402b27d0e7debfd176f5a11": "assets/epa-logo.png", "/_blob/7053b1572da21a0b5e95e4aeda693159": "assets/liberia-seal.png", "/_blob/79bb115782b4a4767c3613105922c1b8": "assets/video/elnino-liberian-english.mp4", "/_blob/1b2e9ea28f0e6843dea6fe87df7f6406": "assets/video/elnino-liberian-english.jpg"}
+ASSETS = {"/_blob/4eb17e335402b27d0e7debfd176f5a11": "assets/epa-logo.png", "/_blob/7053b1572da21a0b5e95e4aeda693159": "assets/liberia-seal.png", "/_blob/79bb115782b4a4767c3613105922c1b8": "assets/video/elnino-liberian-english.mp4", "/_blob/1b2e9ea28f0e6843dea6fe87df7f6406": "assets/video/elnino-liberian-english.jpg", "/_blob/62a43659ddaa995fa740569a193d51fc": "assets/video/elnino-interview-urey-yarkpawolo.mp4", "/_blob/a26d6b4b0e521eff99ca5ebe5de04357": "assets/video/elnino-interview-urey-yarkpawolo.jpg"}
 for k, v in ASSETS.items(): src = src.replace(k, v)
 assert "/_blob/" not in src, "page uses an artifact asset with no public copy; add it to ASSETS"
 # Each page script runs in its own scope on claude.ai; keep that here.
